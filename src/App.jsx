@@ -10,11 +10,7 @@ function App() {
       <button>Click me</button>
       <button>Click me</button>
       <button>Click me</button>
-<<<<<<< HEAD
       <button>Click me</button>
-      <button>Click me</button>
-=======
->>>>>>> bc6edde54d7079542b7ff5f0e399d4334f66018d
     </>
   )
 }
