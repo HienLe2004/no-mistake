@@ -1,5 +1,10 @@
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
+
 export default function MyCourses() {
     return <>
-        <p>MyCourses</p>
+        <Header />
+            <p>MyCourses</p>
+        <Footer />
     </>
 }
