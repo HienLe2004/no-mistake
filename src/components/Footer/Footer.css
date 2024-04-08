@@ -1,0 +1,79 @@
+.footer {
+    background-color: aliceblue;
+    color: black;
+    display: flex;
+    font-size: 1rem;
+    padding: 1% 0 2% 0;
+    position: fixed;
+    bottom: 0;
+    height: 20%;
+    width: 100%;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+
+.footer .about .university {
+    display: flex;
+    justify-content: center;
+}
+
+.footer .about .university .logo {
+    height: 80px;
+}
+
+.footer .about .university .university-name {
+    align-content: center;
+}
+
+.footer .about .campus {
+    padding: 5px 0 5px 50px;
+}
+
+.footer .support {
+    margin: 0;
+    padding: 1rem;
+    width: 18%;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer .social-media {
+    padding: 1rem;
+    justify-content: left;
+    text-align: center;
+}
+
+.footer .social-media ul{
+    gap:1rem;
+    padding: 10px 0;
+    list-style: none;
+    display: flex;
+}
+
+.footer .social-media li{
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.footer .social-media .logo {
+    margin: 0;
+    width: 50px;
+    border-radius: 16px;
+}
+
+.footer .copyright {
+    height: 2%;
+    padding: 10px;
+    display: flex;
+    background-color: gray;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    justify-content: center;
+}
+
+.footer .copyright p {
+    text-align: center;
+}
