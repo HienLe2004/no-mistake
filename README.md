@@ -15,7 +15,7 @@ Người làm cấu trúc và chức năng phải biết sử dụng cloud fires
 
 Note:
 code xong cần check local: npm run dev
-tải lên git:
+,tải lên git:
 + git init
 + git add .
 + git commit -m "message"
