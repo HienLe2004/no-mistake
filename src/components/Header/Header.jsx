@@ -11,6 +11,7 @@ export default function Header() {
                 <CustomLink to="/">Trang chủ</CustomLink>
                 <CustomLink to="/my">Bảng điều khiển</CustomLink>
                 <CustomLink to="/my/courses">Các khóa học của tôi</CustomLink>
+                <CustomLink to="/my/courses">Các khóa học của tôi</CustomLink>
                 <CustomLink to="/course">Khóa học</CustomLink>
             </ul>
         </nav>
