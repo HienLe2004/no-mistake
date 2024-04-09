@@ -11,3 +11,13 @@ Làm class user -> class giảng viên + class sinh viên + class admin - Mạnh
 
 Database: Cloud firestore
 Người làm cấu trúc và chức năng phải biết sử dụng cloud firestore để lấy dữ liệu xuống và xử lý
+
+
+Note:
+code xong cần check local: npm run dev
+tải lên git:
++ git init
++ git add .
++ git commit -m "message"
+  (git pull nếu có conflict)
++ git push -u origin main
