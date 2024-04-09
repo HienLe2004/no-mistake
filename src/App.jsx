@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import MyCourses from './pages/MyCourses'
-import Dashboard from './pages/Dashboard'
-import Course from './pages/Course'
-import Home from './pages/Home'
+import MyCourses from './pages/MyCourses/MyCourses'
+import Dashboard from './pages/Dashboard/Dashboard'
+import Course from './pages/Course/Course'
+import Home from './pages/Home/Home'
 import Login from './pages/LoginPage/Login'
 
 function App() {
