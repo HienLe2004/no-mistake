@@ -11,6 +11,7 @@ export default function Header() {
                 <CustomLink to="/">Trang chủ</CustomLink>
                 <CustomLink to="/my">Bảng điều khiển</CustomLink>
                 <CustomLink to="/my/courses">Các khóa học của tôi</CustomLink>
+                <CustomLink to="/my/courses">Các khóa học của tôi</CustomLink>
                 <CustomLink to="/course">Khóa học</CustomLink>
             </ul>
         </nav>
@@ -22,9 +23,9 @@ export default function Header() {
     </div>
 }
 
-function CustomLink({to, children, ...props}) {
+function CustomLink({ to, children, ...props }) {
     const resolvedPath = useResolvedPath(to);
-    const isActive = useMatch({path: resolvedPath.pathname, end: true});
+    const isActive = useMatch({ path: resolvedPath.pathname, end: true });
     return (
         <li className={isActive ? "active" : ""}>
             <Link to={to} {...props}>
