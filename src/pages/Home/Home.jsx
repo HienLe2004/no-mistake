@@ -3,6 +3,7 @@ import Header from "../../components/Header/Header";
 import ImageSlider from "./ImageSlider/ImageSlide"
 import './Home.css'
 import Introduce from "./Introduce/Introduce";
+import ExploSlider from "./ExploSlider/ExploSlider";
 
 const slides = [
     { url: "/src/assets/bg-1.jpg" },
@@ -23,6 +24,7 @@ export default function Home() {
         </div>
         <Introduce />
         <h2>Khám phá Bách Khoa</h2>
+        <ExploSlider />
         {/* <Footer /> */}
     </>
 }
