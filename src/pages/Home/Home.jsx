@@ -25,6 +25,6 @@ export default function Home() {
         <Introduce />
         <h2>Khám phá Bách Khoa</h2>
         <ExploSlider />
-        {/* <Footer /> */}
+        <Footer />
     </>
 }

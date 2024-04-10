@@ -3,13 +3,15 @@
     color: black;
     display: flex;
     font-size: 1rem;
-    padding: 1% 0 2% 0;
-    position: fixed;
+    padding: 1% 0 1% 0;
     bottom: 0;
+    right: 0;
+    left: 0;
     height: 16%;
     width: 100%;
     align-items: stretch;
     justify-content: space-around;
+    margin-top: auto;
 }
 
 
@@ -63,17 +65,19 @@
     border-radius: 16px;
 }
 
-.footer .copyright {
+.copyright {
     height: 2%;
+    color: black;
+    font-size: 1rem;
+    align-items: stretch;
     padding: 10px;
     display: flex;
     background-color: gray;
-    position: fixed;
     width: 100%;
     bottom: 0;
     justify-content: center;
+    margin-top: auto;
 }
-
-.footer .copyright p {
+.copyright p {
     text-align: center;
 }

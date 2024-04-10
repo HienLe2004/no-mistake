@@ -8,16 +8,6 @@ import LogoLI from '../../assets/logoLI.png'
 import './Footer.css'
 
 export default function Footer() {
-    // const [showFooter, setShowFooter] = useState(false);
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //         const isBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
-    //         setShowFooter(isBottom);
-    //     };
-    // window.addEventListener('scroll', handleScroll);
-    // return () => window.removeEventListener('scroll', handleScroll);
-    // }, []);
-    // style={{ display: showFooter ? 'block' : 'none' }}
     return <>
     <div className='footer'>
         <div className='about'>
@@ -74,9 +64,10 @@ export default function Footer() {
                 </li>
             </ul>
         </nav>
-        <div className='copyright'>
+        
+    </div>
+    <div className='copyright'>
             <p>Copyright 2024-2025 LMS DEF - Phát triển bởi No Mistake</p>
-        </div>
     </div>
     </>
 }
