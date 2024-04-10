@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/logoBK.png'
 import LogoFB from '../../assets/logoFB.png'
 import LogoIG from '../../assets/logoIG.png'
@@ -5,8 +6,20 @@ import LogoYT from '../../assets/logoYT.png'
 import LogoTT from '../../assets/logoTT.png'
 import LogoLI from '../../assets/logoLI.png'
 import './Footer.css'
+
 export default function Footer() {
-    return <div className='footer'>
+    // const [showFooter, setShowFooter] = useState(false);
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         const isBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+    //         setShowFooter(isBottom);
+    //     };
+    // window.addEventListener('scroll', handleScroll);
+    // return () => window.removeEventListener('scroll', handleScroll);
+    // }, []);
+    // style={{ display: showFooter ? 'block' : 'none' }}
+    return <>
+    <div className='footer'>
         <div className='about'>
             <div className='university'>
                 <img src={Logo} alt='logo' className='logo'></img>
@@ -65,4 +78,5 @@ export default function Footer() {
             <p>Copyright 2024-2025 LMS DEF - Phát triển bởi No Mistake</p>
         </div>
     </div>
+    </>
 }

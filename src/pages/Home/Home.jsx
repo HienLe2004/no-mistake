@@ -2,6 +2,7 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import ImageSlider from "./ImageSlider/ImageSlide"
 import './Home.css'
+import Introduce from "./Introduce/Introduce";
 
 const slides = [
     { url: "/src/assets/bg-1.jpg" },
@@ -10,7 +11,7 @@ const slides = [
 ];
 const containerStyles = {
     width: "1924px",
-    height: "648px",
+    height: "872px",
     margin: "0 auto",
 };
 
@@ -20,6 +21,8 @@ export default function Home() {
         <div style={containerStyles}>
             <ImageSlider slides={slides} />
         </div>
-        <Footer />
+        <Introduce />
+        <h2>Khám phá Bách Khoa</h2>
+        {/* <Footer /> */}
     </>
 }
