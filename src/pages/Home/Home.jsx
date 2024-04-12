@@ -11,8 +11,8 @@ const slides = [
     { url: "/src/assets/bg-3.jpg" },
 ];
 const containerStyles = {
-    width: "1924px",
-    height: "872px",
+    width: "100%",
+    height: "100vh",
     margin: "0 auto",
 };
 
@@ -26,5 +26,6 @@ export default function Home() {
         <h2>Khám phá Bách Khoa</h2>
         <ExploSlider />
         <Footer />
+        
     </>
 }

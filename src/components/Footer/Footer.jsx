@@ -64,10 +64,10 @@ export default function Footer() {
                 </li>
             </ul>
         </nav>
-        
+         
     </div>
     <div className='copyright'>
             <p>Copyright 2024-2025 LMS DEF - Phát triển bởi No Mistake</p>
-    </div>
+    </div> 
     </>
 }
