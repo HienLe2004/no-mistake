@@ -1,5 +1,5 @@
 import './ExploSlider.css'
-import { Helmet } from "react-helmet"
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import explo_img1 from "/src/assets/explore1.jpg"
 import explo_img2 from "/src/assets/explore2.jpg"
 import explo_img3 from "/src/assets/explore3.jpg"
@@ -12,9 +12,10 @@ import explo_img6 from "/src/assets/explore6.jpg"
 export default function ExploSlider() {
 
     return <>
+    <HelmetProvider>
     <Helmet>
         <script
-            src="./src/pages/Home/ExploSlider/app.jsx"
+            src="./src/pages/Home/ExploSlider/app.js"
             crossorigin="anonymous"
             async
         ></script>
@@ -97,7 +98,8 @@ export default function ExploSlider() {
         <div className="time"></div>
     </div>
 
-    <script src='./app.jsx'></script>
+    <script src='./app.js'></script>
+    </HelmetProvider>
     </>
 }
 
