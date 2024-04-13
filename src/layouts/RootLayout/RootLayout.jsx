@@ -7,9 +7,9 @@ import "./RootLayout.css";
 import LogoBK from '../../assets/logoBK.png'
 import { useEffect, useRef } from 'react'
 const slides = [
-    { url: "/src/assets/bg-1.jpg" },
-    { url: "/src/assets/bg-2.jpg" },
-    { url: "/src/assets/bg-3.jpg" },
+    { url: "src/bg-1.jpg" },
+    { url: "src/bg-2.jpg" },
+    { url: "src/bg-3.jpg" },
 ];
 const containerStyles = {
     width: "100%",
