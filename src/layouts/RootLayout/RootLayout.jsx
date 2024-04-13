@@ -41,7 +41,8 @@ export default function RootLayOut() {
             </nav>
             <div ref={homeInfo}>
                 <div style={containerStyles}>
-                    <ImageSlider slides={slides} />
+                    {/*<ImageSlider slides={slides} />*/}
+                    <img src='src/assets/bg-1.jpg' style={{width:"100%"}}></img>
                 </div>
                 <Introduce />
                 <h2>Khám phá Bách Khoa</h2>
