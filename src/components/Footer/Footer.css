@@ -12,8 +12,8 @@
     align-items: stretch;
     justify-content: space-around;
     margin-top: auto;
+    margin-bottom: 0;
 }
-
 
 .footer .about .university {
     display: flex;
