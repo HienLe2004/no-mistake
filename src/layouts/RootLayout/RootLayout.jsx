@@ -6,6 +6,7 @@ import Introduce from '../../pages/Home/Introduce/Introduce';
 import "./RootLayout.css";
 import LogoBK from '../../assets/logoBK.png'
 import { useEffect, useRef } from 'react'
+import backgroundPic from '../../assets/bg-1.jpg'
 const slides = [
     { url: "src/bg-1.jpg" },
     { url: "src/bg-2.jpg" },
@@ -42,11 +43,11 @@ export default function RootLayOut() {
             <div ref={homeInfo}>
                 <div style={containerStyles}>
                     {/*<ImageSlider slides={slides} />*/}
-                    <img src='src/assets/bg-1.jpg' style={{width:"100%"}}></img>
+                    <img src={backgroundPic} style={{width:"100%"}}></img>
                 </div>
                 <Introduce />
                 <h2>Khám phá Bách Khoa</h2>
-                <ExploSlider />
+                {/**/}<ExploSlider />
             </div>       
             <Outlet />
             <Footer className='root-footer'/>

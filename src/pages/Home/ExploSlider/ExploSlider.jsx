@@ -12,6 +12,7 @@ import explo_img6 from "/src/assets/explore6.jpg"
 export default function ExploSlider() {
 
     return <>
+    {/* */}
     <HelmetProvider>
     <Helmet>
         <script
@@ -100,6 +101,7 @@ export default function ExploSlider() {
 
     <script src='./app.js'></script>
     </HelmetProvider>
+    
     </>
 }
 
