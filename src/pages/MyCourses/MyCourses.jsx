@@ -1,12 +1,32 @@
-import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
-
+import {Helmet} from 'react-helmet-async'
 export default function MyCourses() {
     return <>
-        <Header />
-        <p>MyCourses</p>
-        <p>MyCourses</p>
-        <p>MyCourses</p>
-        <Footer />
+        <Helmet>
+            <title>Khóa học của tôi | LMS-DEF-NM</title>
+        </Helmet>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
+        <h1>My Course</h1>
     </>
 }

@@ -1,11 +1,32 @@
-import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
 import './Dashboard.css'
-
+import { Helmet } from 'react-helmet-async'
 export default function Dashboard() {
     return <>
-        <Header />
-            <p>Dashboard</p>
-        <Footer />
+        <Helmet>
+            <title>Bảng điều khiển | LMS-DEF-NM</title>
+        </Helmet>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
     </>
 }

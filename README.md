@@ -24,3 +24,19 @@ code xong cần check local: npm run dev
 + git commit -m "message"
   (git pull nếu có conflict)
 + git push -u origin main
+
+Nhiệm vụ:
++ Phân quyền hệ thống khi đăng nhập
++ Tùy chỉnh web tương ứng với quyền đăng nhập
++ Trang thông tin sinh viên
++ Trang thông tin giảng viên
++ Trang đăng ký lớp học cho sinh viên và giảng viên
++ Trang hiển thị lịch giảng dạy của giảng viên
++ Trang hiển thị khóa học hiện tại của sinh viên
++ Trang hiển thị thông tin khóa học
++ Chức năng thêm xóa sửa file, thông tin khóa học của giảng viên
++ Chức năng tạo chỗ nộp bài + deadline của giảng viên cho sinh viên
++ Chức năng chấm điểm và cập nhật thông tin điểm của giảng viên cho sinh viên
++ Chức năng lên lịch thi của giảng viên cho khóa học
++ Trang hiển thị lịch thi của sinh viên
++ Trang hiển thị điểm các khóa học của sinh viên
