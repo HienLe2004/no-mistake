@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../../firebase.config'
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Helmet } from "react-helmet-async"
 export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -28,6 +29,9 @@ export default function Login() {
         }
     }
     return <>
+        <Helmet>
+            <title>Đăng nhập | LMS-DEF-NM</title>
+        </Helmet>
         <div className="login-page">
             <section>
                 <form onSubmit={handleSubmit} className="add-form-login">

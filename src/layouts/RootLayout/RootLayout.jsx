@@ -1,4 +1,5 @@
 import { NavLink, Outlet, Link, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/Footer/Footer';
 import ImageSlider from '../../pages/Home/ImageSlider/ImageSlider';
 import ExploSlider from '../../pages/Home/ExploSlider/ExploSlider';
@@ -26,6 +27,9 @@ export default function RootLayOut() {
     }, [location])
     return(
         <div className='root-layout'>
+            <Helmet>
+                <title>Trang chủ | LMS-DEF-NM</title>
+            </Helmet>
             <nav className='root-nav'>
                 <div className='left-nav'>
                     <Link to="/">

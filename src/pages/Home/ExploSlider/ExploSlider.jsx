@@ -1,5 +1,6 @@
 import './ExploSlider.css'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { useEffect } from 'react'
 import explo_img1 from "/src/assets/explore1.jpg"
 import explo_img2 from "/src/assets/explore2.jpg"
 import explo_img3 from "/src/assets/explore3.jpg"
@@ -7,20 +8,21 @@ import explo_img4 from "/src/assets/explore4.jpg"
 import explo_img5 from "/src/assets/explore5.jpg"
 import explo_img6 from "/src/assets/explore6.jpg"
 
-
-
 export default function ExploSlider() {
-
+    useEffect(() => {
+        import('./app').catch(err => {
+            console.log(err);
+        })
+    }, [])
     return <>
-    {/* */}
-    <HelmetProvider>
+    {/** 
     <Helmet>
         <script
-            src="./src/pages/Home/ExploSlider/app.js"
-            crossorigin="anonymous"
+            src='/src/pages/Home/ExploSlider/app.js'
+            crossOrigin="anonymous"
             async
         ></script>
-    </Helmet>
+    </Helmet>*/}
     <div className="carousel">
         <div className="list">
             <div className="item">
@@ -98,10 +100,6 @@ export default function ExploSlider() {
         </div>
         <div className="time"></div>
     </div>
-
-    <script src='./app.js'></script>
-    </HelmetProvider>
-    
     </>
 }
 
