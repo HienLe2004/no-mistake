@@ -15,7 +15,7 @@ const slides = [
 ];
 const containerStyles = {
     width: "100%",
-    height: "100vh",
+    height: "94vh",
     margin: "0 auto",
 };
 
