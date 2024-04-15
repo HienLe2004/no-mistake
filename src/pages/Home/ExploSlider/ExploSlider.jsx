@@ -1,5 +1,4 @@
 import './ExploSlider.css'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { useEffect } from 'react'
 import explo_img1 from "/src/assets/explore1.jpg"
 import explo_img2 from "/src/assets/explore2.jpg"
