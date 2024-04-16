@@ -9,6 +9,8 @@ import Courses from './pages/Courses/Courses.jsx'
 import MyCourses from './pages/MyCourses/MyCourses.jsx'
 import Dashboard from './pages/Dashboard/Dashboard.jsx'
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx'
+import Profile from './pages/Profile/Profile.jsx'
+import Teaching from './pages/Teaching/Teaching.jsx'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <Dashboard />
+      },
+      {
+        path: 'profile',
+        element: <Profile />
+      },
+      {
+        path: 'teaching',
+        element: <Teaching />
       }
     ]
   }
