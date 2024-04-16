@@ -6,6 +6,7 @@ auth.onAuthStateChanged(user => {
     let hideUser = document.querySelectorAll('.hideUser');
     let showStudent = document.querySelectorAll('.showStudent');
     let showTeacher = document.querySelectorAll('.showTeacher');
+    let showAddP = document.querySelectorAll('.showAddP');
     if (user) {
         showUser.forEach(el => {
             el.style.display = "flex";
@@ -21,6 +22,9 @@ auth.onAuthStateChanged(user => {
             }
             else if (role == "teacher") {
                 showTeacher.forEach(el => {
+                    el.style.display = "flex";
+                })
+                showAddP.forEach(el => {
                     el.style.display = "flex";
                 })
             }

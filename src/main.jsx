@@ -11,7 +11,7 @@ import Dashboard from './pages/Dashboard/Dashboard.jsx'
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx'
 import Profile from './pages/Profile/Profile.jsx'
 import Teaching from './pages/Teaching/Teaching.jsx'
-import Add_points from './pages/Add_points/Add_points.jsx'
+import AddP from './pages/AddP/AddP.jsx'
 
 const router = createBrowserRouter([
   {
@@ -44,8 +44,8 @@ const router = createBrowserRouter([
         element: <Teaching />
       },
       {
-        path: 'Add_points',
-        element: <Add_points />
+        path: 'AddP',
+        element: <AddP />
       }
     ]
   }
