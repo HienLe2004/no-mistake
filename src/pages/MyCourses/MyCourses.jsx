@@ -1,14 +1,34 @@
+import { useState, useEffect } from "react";
 import {Helmet} from 'react-helmet-async'
 import CourseList from './CourseList/CourseList'
+import {db} from '../../../firebase.config'
+import { getDoc, doc, } from 'firebase/firestore'
+import { auth } from '../../../firebase.config'
 
-// Data for test UI
-const courses = [
-    { key: 100101, name: "Giải tích 1", teacher: "Nguyễn Văn A"},
-    { key: 100102, name: "Cấu trúc dữ liệu và giải thuật", teacher: "Nguyễn Văn B" },
-    { key: 100103, name: "Lập trình nâng cao", teacher: "Nguyễn Văn C" },
-]
-
+let nextid = 0;
 export default function MyCourses() {
+    const [courses, setCourse] = useState([]);
+    useEffect(() => {
+        const unsub = auth.onAuthStateChanged((authObj) => {
+            unsub();
+            if (authObj) {
+                const fetchdata = async() => {
+                    const docRef = doc(db, "users", authObj.uid);
+                    const docSnap = await getDoc(docRef);
+                    let data = docSnap.data();
+                    data.courses.forEach(ref => {
+                        const fetchcoure = async() => {
+                            const files = await getDoc(ref);
+                            let course = files.data();
+                            setCourse([...courses, { id: nextid++, name: course.name }]);
+                        }
+                        fetchcoure();
+                    });
+                }
+                fetchdata();
+            } else {console.log("User not logged in")}
+        });
+    }, []);
     return <>
         <Helmet>
             <title>Khóa học của tôi | LMS-DEF-NM</title>
@@ -16,3 +36,4 @@ export default function MyCourses() {
         {courses?<CourseList courses={courses} />:null}
     </>
 }
+
