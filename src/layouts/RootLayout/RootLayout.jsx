@@ -1,4 +1,4 @@
-import { NavLink, Outlet, Link, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, Link, useLocation, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/Footer/Footer';
 //import ImageSlider from '../../pages/Home/ImageSlider/ImageSlider';
@@ -35,16 +35,14 @@ export default function RootLayOut() {
         })
     }, [])
     //Handle logout
-    const handleLogout = async (e) => {
-        e.preventDefault();
+    const handleLogout = async (e) => { 
         try {
             await auth.signOut();
             console.log("logout successed");
-            navigate("/");
         }
         catch(err) {
             console.log("logout failed");
-            console.error(err);
+            console.log(err.message);
         }
     }
     return(
@@ -63,11 +61,11 @@ export default function RootLayOut() {
                     <NavLink to="courses" className="showUser" style={{display:"none"}}>Khóa học</NavLink>
                     <NavLink to="profile" className="showUser" style={{display:"none"}}>Cá nhân</NavLink>
                     <NavLink to="teaching" className="showTeacher" style={{display:"none"}}>Giảng dạy</NavLink>
-                    <NavLink to="AddP" className="showAddP" style={{display:"none"}}>Nhập Điểm</NavLink>
+                    <NavLink to="admin" className="showAdmin" style={{display:"none"}}>Quản lý</NavLink>
                 </div>
                 <div className="right-nav">
                     <NavLink to="login" className="hideUser" style={{display:"none"}}>Đăng nhập</NavLink>
-                    <NavLink to="login" onClick={handleLogout} className="showUser" style={{display:"none"}}>Đăng xuất</NavLink>
+                    <NavLink to="/" onClick={handleLogout} className="showUser" style={{display:"none"}}>Đăng xuất</NavLink>
                 </div>
             </nav>
             <div ref={homeInfo}>
