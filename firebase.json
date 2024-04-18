@@ -5,7 +5,7 @@
     "rewrites": [
       {
         "source": "/**", 
-        "dynamicLinks": true
+        "destination": "/index.html"
       }
     ],
     "ignore": [
