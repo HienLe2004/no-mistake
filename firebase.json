@@ -1,10 +1,11 @@
 {
   "hosting": {
     "public": "./dist",
+    "cleanUrls": true,
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/**", 
+        "dynamicLinks": true
       }
     ]
     "ignore": [
