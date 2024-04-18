@@ -7,7 +7,7 @@
         "source": "/**", 
         "dynamicLinks": true
       }
-    ]
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
