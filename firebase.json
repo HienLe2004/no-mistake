@@ -12,8 +12,7 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "predeploy": ["npm run build"],
-    "cleanUrls": true
+    "predeploy": ["npm run build"]
   },
   "firestore": {
     "rules": "firestore.rules",
