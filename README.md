@@ -31,7 +31,7 @@ Nhiệm vụ:
 + Trang thông tin sinh viên
 + Trang thông tin giảng viên
 + Trang đăng ký lớp học cho sinh viên và giảng viên
-+ Trang hiển thị lịch giảng dạy của giảng viên
++ Trang hiển thị lịch giảng dạy của giảng viên (page-Teaching - K.Hao - started 16th April)
 + Trang hiển thị khóa học hiện tại của sinh viên
 + Trang hiển thị thông tin khóa học
 + Chức năng thêm xóa sửa file, thông tin khóa học của giảng viên
