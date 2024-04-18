@@ -37,7 +37,7 @@ const Schedule = ({ subjects, subjectColors }) => {
                               backgroundColor: lesson ? subjectColors[lesson.name] || '#f8f9fa' : '#f8f9fa', // Use light gray color for cells without a lesson
                             }}
                           >
-                            {lesson ? `${lesson.name} (${lesson.classStart}-${lesson.classStart + lesson.classNum - 1})` : ''}
+                            {lesson ? `${lesson.name} (${lesson.room})` : ''}
                           </td>
                         );
                       })}
