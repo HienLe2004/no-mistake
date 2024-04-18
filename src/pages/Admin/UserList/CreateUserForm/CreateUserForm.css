@@ -1,0 +1,88 @@
+.createUserForm {
+    display: flex;
+    justify-content: center;
+}
+.createUserForm form {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(0, 70, 120);
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 10px;
+}
+.createUserForm .commonInfo{
+    width: 400px;
+}
+.createUserForm .commonInfo label{
+    width: 100%;
+}
+.createUserForm .commonInfo input {
+    box-sizing: border-box;
+    margin: 5px 0 20px;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+.createUserForm .commonInfo .dateOfBirth {
+    box-sizing: border-box;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+.createUserForm .commonInfo .dateOfBirth label{
+    align-items: center;
+}
+.createUserForm .commonInfo .dateOfBirth input{
+    width: 80px;
+    align-items: center;
+}
+.createUserForm .role{
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0;
+}
+.createUserForm .gender{
+    display: flex;
+    flex-direction: row;
+    margin-bottom:5px;
+}
+.createUserForm ul{
+    margin-left: 10px;
+}
+.createUserForm ul li{
+    list-style: none;
+    display: inline;
+    flex-direction: row;
+    padding: 10px;
+}
+.createUserForm .roleInfo{
+    margin: 5px 0;
+    display: flex;
+}
+.createUserForm .roleInfo label{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.createUserForm .roleInfo input {
+    box-sizing: border-box;
+    margin: 5px 0 20px;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+.createUserForm button{
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid rgb(0, 70, 120);
+    background-color: rgb(0, 70, 120);
+    color: rgba(255, 255, 255, 0.9);
+}
+.createUserForm button:hover{
+    background-color: rgb(1, 125, 213);
+}
