@@ -76,7 +76,7 @@ export default function RootLayOut() {
                 <div className="right-nav">
                     <NavLink to="login" className="hideUser" style={{ display: "none" }}>Đăng nhập</NavLink>
                     <NavLink to="admin" className="showAdmin" style={{ display: "none" }}>Quản lý</NavLink>
-                    <NavLink to="login" onClick={handleLogout} className="showUser" style={{ display: "none" }}>Đăng xuất</NavLink>
+                    <NavLink to="/" onClick={handleLogout} className="showUser" style={{ display: "none" }}>Đăng xuất</NavLink>
                 </div>
             </nav>
             <div ref={homeInfo}>
