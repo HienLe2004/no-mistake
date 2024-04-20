@@ -1,4 +1,11 @@
 .footer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+}
+.footer .information{
     background-color: aliceblue;
     color: black;
     display: flex;
@@ -78,6 +85,6 @@
     right: 0;
     justify-content: center;
 }
-.copyright p {
+.footer .copyright p {
     text-align: center;
 }

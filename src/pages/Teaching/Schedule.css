@@ -1,0 +1,21 @@
+.schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .week {
+    border: 1px solid #007bff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th,
+  td {
+    border: 1px solid #007bff;
+    padding: 5px;
+    width: 8%;
+  }

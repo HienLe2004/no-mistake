@@ -6,6 +6,7 @@ auth.onAuthStateChanged(user => {
     let hideUser = document.querySelectorAll('.hideUser');
     let showStudent = document.querySelectorAll('.showStudent');
     let showTeacher = document.querySelectorAll('.showTeacher');
+    let showAdmin = document.querySelectorAll('.showAdmin');
     if (user) {
         showUser.forEach(el => {
             el.style.display = "flex";
@@ -24,6 +25,11 @@ auth.onAuthStateChanged(user => {
                     el.style.display = "flex";
                 })
             }
+            else if (role == "admin") {
+                showAdmin.forEach(el => {
+                    el.style.display = "flex";
+                })
+            }
             console.log('user ' + user.email + ' role ' + role);
         })
     }
@@ -37,10 +43,16 @@ auth.onAuthStateChanged(user => {
         showTeacher.forEach(el => {
             el.style.display = "none";
         })
+        showAdmin.forEach(el => {
+            el.style.display = "none";
+        })
         hideUser.forEach(el => {
             el.style.display = "flex";
         })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 98c2716b4f048e9e69c14c808f3e46e34686acfe
     }
 })
 
