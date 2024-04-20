@@ -49,10 +49,6 @@ auth.onAuthStateChanged(user => {
         hideUser.forEach(el => {
             el.style.display = "flex";
         })
-<<<<<<< HEAD
-
-=======
->>>>>>> 98c2716b4f048e9e69c14c808f3e46e34686acfe
     }
 })
 

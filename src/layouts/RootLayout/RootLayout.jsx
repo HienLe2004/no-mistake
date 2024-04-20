@@ -35,7 +35,7 @@ export default function RootLayOut() {
         })
     }, [])
     //Handle logout
-    const handleLogout = async (e) => { 
+    const handleLogout = async (e) => {
         try {
             await auth.signOut();
             console.log("logout successed");
@@ -56,28 +56,27 @@ export default function RootLayOut() {
                         <img src={LogoBK} alt='logo' className="logo"></img>
                     </Link>
                     <NavLink to="/">Trang chủ</NavLink>
-<<<<<<< HEAD
+
                     <NavLink to="myCourses" className="showStudent" style={{ display: "none" }}>Khóa học của tôi</NavLink>
                     <NavLink to="dashboard" className="showUser" style={{ display: "none" }}>Bảng điều khiển</NavLink>
                     <NavLink to="courses" className="showUser" style={{ display: "none" }}>Khóa học</NavLink>
                     <NavLink to="profile" className="showUser" style={{ display: "none" }}>Cá nhân</NavLink>
                     <NavLink to="teaching" className="showTeacher" style={{ display: "none" }}>Giảng dạy</NavLink>
                 </div>
+                {/* <div className="right-nav"> */}
+                {/* <NavLink to="login" className="hideUser" style={{ display: "none" }}>Đăng nhập</NavLink> */}
+                {/* <NavLink to="login" onClick={handleLogout} className="showUser" style={{ display: "none" }}>Đăng xuất</NavLink> */}
+                {/* <NavLink to="myCourses" className="showStudent" style={{ display: "none" }}>Khóa học của tôi</NavLink> */}
+                {/* <NavLink to="dashboard" className="showUser" style={{ display: "none" }}>Bảng điều khiển</NavLink> */}
+                {/* <NavLink to="courses" className="showUser" style={{ display: "none" }}>Khóa học</NavLink> */}
+                {/* <NavLink to="profile" className="showUser" style={{ display: "none" }}>Cá nhân</NavLink> */}
+                {/* <NavLink to="teaching" className="showTeacher" style={{ display: "none" }}>Giảng dạy</NavLink> */}
+
+                {/* </div> */}
                 <div className="right-nav">
                     <NavLink to="login" className="hideUser" style={{ display: "none" }}>Đăng nhập</NavLink>
+                    <NavLink to="admin" className="showAdmin" style={{ display: "none" }}>Quản lý</NavLink>
                     <NavLink to="login" onClick={handleLogout} className="showUser" style={{ display: "none" }}>Đăng xuất</NavLink>
-=======
-                    <NavLink to="myCourses" className="showStudent" style={{display:"none"}}>Khóa học của tôi</NavLink>
-                    <NavLink to="dashboard" className="showUser" style={{display:"none"}}>Bảng điều khiển</NavLink>
-                    <NavLink to="courses" className="showUser" style={{display:"none"}}>Khóa học</NavLink>
-                    <NavLink to="profile" className="showUser" style={{display:"none"}}>Cá nhân</NavLink>
-                    <NavLink to="teaching" className="showTeacher" style={{display:"none"}}>Giảng dạy</NavLink>
-                    <NavLink to="admin" className="showAdmin" style={{display:"none"}}>Quản lý</NavLink>
-                </div>
-                <div className="right-nav">
-                    <NavLink to="login" className="hideUser" style={{display:"none"}}>Đăng nhập</NavLink>
-                    <NavLink to="/" onClick={handleLogout} className="showUser" style={{display:"none"}}>Đăng xuất</NavLink>
->>>>>>> 98c2716b4f048e9e69c14c808f3e46e34686acfe
                 </div>
             </nav>
             <div ref={homeInfo}>
