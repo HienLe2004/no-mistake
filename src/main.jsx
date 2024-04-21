@@ -14,6 +14,8 @@ import Teaching from './pages/Teaching/Teaching.jsx'
 import ManagementLayout from './layouts/ManagementLayout/ManagementLayout.jsx'
 import UserList from './pages/Admin/UserList/UserList.jsx'
 import Schedule from './pages/Admin/Schedule/Schedule.jsx'
+import AddP from './pages/AddP/AddP.jsx'
+import ScoringPage from './pages/ScoringPage/ScoringPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
       {
         path: 'teaching',
         element: <Teaching />
+      },
+      {
+        path: 'AddP',
+        element: <AddP />
+      },
+      {
+        path: 'ScoringPage',
+        element: <ScoringPage />
       },
       {
         path: 'admin',
