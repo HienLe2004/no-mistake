@@ -38,12 +38,13 @@ function GetData({ path, rol }) {
 
          //? student input | info | ref ?
         const [student, setStudent] = useState([]);
-       
         useEffect(() =>
             onSnapshot(SelectedCourses, (snapshot) => {
                 setStudent(snapshot.docs.map(doc => ({ ...doc.data().students, id: doc.id })));
-            }), [])
-        console.log(student);
+            }), []);
+
+        
+        
 
         //get information about the current user for check course
         const [information, setInformation] = useState(null)

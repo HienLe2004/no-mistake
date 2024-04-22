@@ -34,7 +34,6 @@ export default function MyCourses() {
             <title>Khóa học của tôi | LMS-DEF-NM</title>
         </Helmet>
         {courses ? <CourseList courses={courses} /> : null}
-        {courses?<CourseList courses={courses}/>:null}
     </>
 }
 
