@@ -21,7 +21,7 @@ export default function Login() {
             passwordRef.current.value = '';
             navigate("/");
         }
-        catch(err) {
+        catch (err) {
             console.log("login failed");
             emailRef.current.value = '';
             passwordRef.current.value = '';
@@ -37,10 +37,10 @@ export default function Login() {
                 <form onSubmit={handleSubmit} className="add-form-login">
                     <h1>Đăng nhập tài khoản DEF LMS</h1>
                     <label>Tên tài khoản
-                        <input type="text" name="email" ref={emailRef} required/>
+                        <input type="text" name="email" ref={emailRef} required />
                     </label>
                     <label>Mật khẩu
-                        <input type="password" name="password" ref={passwordRef} required/>
+                        <input type="password" name="password" ref={passwordRef} required />
                     </label>
                     <button type="submit" className="login-button">Đăng nhập</button>
                     <a href="#" target="_blank" className="forgot-password">Quên mật khẩu?</a>

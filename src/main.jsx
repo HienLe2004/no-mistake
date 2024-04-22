@@ -11,14 +11,16 @@ import Dashboard from './pages/Dashboard/Dashboard.jsx'
 import ErrorPage from './pages/ErrorPage/ErrorPage.jsx'
 import Profile from './pages/Profile/Profile.jsx'
 import Teaching from './pages/Teaching/Teaching.jsx'
-import AddP from './pages/AddP/AddP.jsx'
+import ManagementLayout from './layouts/ManagementLayout/ManagementLayout.jsx'
+import UserList from './pages/Admin/UserList/UserList.jsx'
+import Schedule from './pages/Admin/Schedule/Schedule.jsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayOut/>,
+    element: <RootLayOut />,
     errorElement: <ErrorPage />,
-    children:[
+    children: [
       {
         path: 'login',
         element: <Login />
@@ -44,8 +46,18 @@ const router = createBrowserRouter([
         element: <Teaching />
       },
       {
-        path: 'AddP',
-        element: <AddP />
+        path: 'admin',
+        element: <ManagementLayout />,
+        children:[
+          {
+            path: 'userlist/*',
+            element: <UserList />
+          },
+          {
+            path: 'schedule',
+            element: <Schedule />
+          }
+        ]
       }
     ]
   }
@@ -54,7 +66,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </HelmetProvider>
   </React.StrictMode>
 )
