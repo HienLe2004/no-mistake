@@ -82,6 +82,7 @@ export default function CreateUserForm() {
         if (form.day === 0 || form.month === 0 || form.year === 0) notiList.push("Vui lòng điền đầy đủ ngày tháng năm sinh!");
         if (form.gender === "") notiList.push("Vui lòng chọn giới tính người dùng!");
         if (form.role === "") notiList.push("Vui lòng chọn vai trò của người dùng!");
+        if (form.roleID == "") notiList.push("Vui lòng nhập mã số người dùng!");
         else {
             if (! await checkRoleID(form.roleID, form.role)) notiList.push("Mã số đã được sử dụng!");
         }
