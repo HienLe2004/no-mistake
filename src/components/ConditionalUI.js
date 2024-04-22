@@ -62,3 +62,4 @@ async function readUserDoc(uid) {
     }
     return null;
 }
+export default readUserDoc

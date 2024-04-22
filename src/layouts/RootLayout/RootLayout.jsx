@@ -17,8 +17,9 @@ const slides = [
 ];*/
 const containerStyles = {
     width: "100%",
-    height: "94vh",
+    height: "90vh",
     margin: "0 auto",
+    display: "flex"
 };
 
 export default function RootLayOut() {
@@ -37,8 +38,9 @@ export default function RootLayOut() {
     //Handle logout
     const handleLogout = async (e) => { 
         try {
+            const uid = auth.currentUser.email;
             await auth.signOut();
-            console.log("logout successed");
+            console.log("logout successed " + uid);
         }
         catch(err) {
             console.log("logout failed");
@@ -65,7 +67,7 @@ export default function RootLayOut() {
                 </div>
                 <div className="right-nav">
                     <NavLink to="login" className="hideUser" style={{display:"none"}}>Đăng nhập</NavLink>
-                    <NavLink to="/" onClick={handleLogout} className="showUser" style={{display:"none"}}>Đăng xuất</NavLink>
+                    <NavLink to="/" onClick={handleLogout} className="showUser logout" style={{display:"none"}}>Đăng xuất</NavLink>
                 </div>
             </nav>
             <div ref={homeInfo}>
