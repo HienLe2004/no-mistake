@@ -16,7 +16,8 @@ export default function ManagementLayout() {
                 <title>Trang quản lý | LMS-DEF-NM</title>
             </Helmet>
             <nav className='admin-nav'>
-                <NavLink to='userlist/1' className='showAdmin start'>Người dùng</NavLink>
+                <NavLink to='userlist' className='showAdmin start'>Người dùng</NavLink>
+                <NavLink to='courselist' className='showAdmin'>Khóa học</NavLink>
                 <NavLink to='schedule' className='showAdmin end'>Lịch thi</NavLink>
             </nav>   
             <Outlet/>

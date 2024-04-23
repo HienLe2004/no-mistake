@@ -8,7 +8,7 @@ export default function UserList() {
     function UserCard({ data }) {
         return <>
             <div className='userCard'>
-                {data.name} - {data.role} - {data.email}
+                <a href='/'>{data.name} - {data.role} - {data.email}</a>
             </div>
         </>
     }

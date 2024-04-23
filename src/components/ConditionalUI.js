@@ -1,6 +1,6 @@
 import { auth, db } from '../../firebase.config'
 import { getDoc, doc } from 'firebase/firestore'
-
+export const currentUser = {role: ""};
 auth.onAuthStateChanged(user => {
     let showUser = document.querySelectorAll('.showUser');
     let hideUser = document.querySelectorAll('.hideUser');
@@ -15,6 +15,7 @@ auth.onAuthStateChanged(user => {
             el.style.display = "none";
         })
         readUserDoc(user.uid).then(role => {
+            currentUser.role = role;
             if (role == "student") {
                 showStudent.forEach(el => {
                     el.style.display = "flex";
@@ -34,6 +35,7 @@ auth.onAuthStateChanged(user => {
         })
     }
     else {
+        currentUser.role = "";
         showUser.forEach(el => {
             el.style.display = "none";
         })
