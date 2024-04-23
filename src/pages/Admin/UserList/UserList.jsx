@@ -1,11 +1,11 @@
-import {db} from '../../../../firebase.config'
-import {collection,getDocs} from 'firebase/firestore'
-import {useEffect, useState} from 'react'
+import { db } from '../../../../firebase.config'
+import { collection, getDocs } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
 import './UserList.css'
 import CreateUserForm from './CreateUserForm/CreateUserForm'
 
 export default function UserList() {
-    function UserCard({data}) {
+    function UserCard({ data }) {
         return <>
             <div className='userCard'>
                 {data.name} - {data.role} - {data.email}
@@ -26,15 +26,15 @@ export default function UserList() {
             <h1>Danh sách người dùng</h1>
             <div className="userlist">
                 {listUserData.map((user) => {
-                    return <UserCard key={user.id} data={user.data()}/>
+                    return <UserCard key={user.id} data={user.data()} />
                 })}
             </div>
             <button className='createUserButton'
-                    onClick={() => {setHitCreateUser(!hitCreateUser)}}
-                    style={{backgroundColor:(hitCreateUser)?"rgb(1, 125, 213)":"rgb(0, 70, 120)"}}>Tạo người dùng mới</button>
+                onClick={() => { setHitCreateUser(!hitCreateUser) }}
+                style={{ backgroundColor: (hitCreateUser) ? "rgb(1, 125, 213)" : "rgb(0, 70, 120)" }}>Tạo người dùng mới</button>
         </div>
-        <div className="formContainer" style={{display:(hitCreateUser)?"flex":"none"}}>
-            <CreateUserForm/>
+        <div className="formContainer" style={{ display: (hitCreateUser) ? "flex" : "none" }}>
+            <CreateUserForm />
         </div>
     </>
 }

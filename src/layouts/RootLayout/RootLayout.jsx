@@ -17,8 +17,9 @@ const slides = [
 ];*/
 const containerStyles = {
     width: "100%",
-    height: "94vh",
+    height: "90vh",
     margin: "0 auto",
+    display: "flex"
 };
 
 export default function RootLayOut() {
@@ -26,7 +27,7 @@ export default function RootLayOut() {
     const location = useLocation();
     const homeInfo = useRef();
     useEffect(() => {
-        homeInfo.current.style.display = (window.location.pathname==='/')?"block":"none";
+        homeInfo.current.style.display = (window.location.pathname === '/') ? "block" : "none";
     }, [location])
     //Handle comditional UI
     useEffect(() => {
@@ -35,17 +36,18 @@ export default function RootLayOut() {
         })
     }, [])
     //Handle logout
-    const handleLogout = async (e) => { 
+    const handleLogout = async (e) => {
         try {
+            const uid = auth.currentUser.email;
             await auth.signOut();
-            console.log("logout successed");
+            console.log("logout successed " + uid);
         }
-        catch(err) {
+        catch (err) {
             console.log("logout failed");
             console.log(err.message);
         }
     }
-    return(
+    return (
         <div className='root-layout'>
             <Helmet>
                 <title>Trang chủ | LMS-DEF-NM</title>
@@ -56,29 +58,30 @@ export default function RootLayOut() {
                         <img src={LogoBK} alt='logo' className="logo"></img>
                     </Link>
                     <NavLink to="/">Trang chủ</NavLink>
-                    <NavLink to="myCourses" className="showStudent" style={{display:"none"}}>Khóa học của tôi</NavLink>
-                    <NavLink to="dashboard" className="showUser" style={{display:"none"}}>Bảng điều khiển</NavLink>
-                    <NavLink to="courses" className="showUser" style={{display:"none"}}>Khóa học</NavLink>
-                    <NavLink to="profile" className="showUser" style={{display:"none"}}>Cá nhân</NavLink>
-                    <NavLink to="teaching" className="showTeacher" style={{display:"none"}}>Giảng dạy</NavLink>
-                    <NavLink to="admin" className="showAdmin" style={{display:"none"}}>Quản lý</NavLink>
+
+                    <NavLink to="myCourses" className="showStudent" style={{ display: "none" }}>Khóa học của tôi</NavLink>
+                    <NavLink to="dashboard" className="showUser" style={{ display: "none" }}>Bảng điều khiển</NavLink>
+                    <NavLink to="courses" className="showUser" style={{ display: "none" }}>Khóa học</NavLink>
+                    <NavLink to="profile" className="showUser" style={{ display: "none" }}>Cá nhân</NavLink>
+                    <NavLink to="teaching" className="showTeacher" style={{ display: "none" }}>Giảng dạy</NavLink>
+                    <NavLink to="admin" className="showAdmin" style={{ display: "none" }}>Quản lý</NavLink>
                 </div>
                 <div className="right-nav">
-                    <NavLink to="login" className="hideUser" style={{display:"none"}}>Đăng nhập</NavLink>
-                    <NavLink to="/" onClick={handleLogout} className="showUser" style={{display:"none"}}>Đăng xuất</NavLink>
+                    <NavLink to="login" className="hideUser" style={{ display: "none" }}>Đăng nhập</NavLink>
+                    <NavLink to="/" onClick={handleLogout} className="showUser" style={{ display: "none" }}>Đăng xuất</NavLink>
                 </div>
             </nav>
             <div ref={homeInfo}>
                 <div style={containerStyles}>
                     {/*<ImageSlider slides={slides} />*/}
-                    <img src={backgroundPic} style={{width:"100%"}}></img>
+                    <img src={backgroundPic} style={{ width: "100%" }}></img>
                 </div>
                 <Introduce />
                 <h2>Khám phá Bách Khoa</h2>
                 <ExploSlider />
-            </div>       
+            </div>
             <Outlet />
-            <Footer className='root-footer'/>
+            <Footer className='root-footer' />
         </div>
     )
 }

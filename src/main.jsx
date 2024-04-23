@@ -18,9 +18,9 @@ import Schedule from './pages/Admin/Schedule/Schedule.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayOut/>,
+    element: <RootLayOut />,
     errorElement: <ErrorPage />,
-    children:[
+    children: [
       {
         path: 'login',
         element: <Login />
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </HelmetProvider>
   </React.StrictMode>
 )
