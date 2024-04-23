@@ -1,4 +1,5 @@
 import './Courses.css'
+
 import { Helmet } from 'react-helmet-async'
 export default function Courses() {
     return <>
