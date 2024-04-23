@@ -25,27 +25,39 @@ function GetData({ path, rol }) {
 }
 
     let nextid = 0;
-    export default function MyCourses() {
+    export default function MyScoringCourses() {
 
         //infor about inside
-        const [course, setCourses] = useState([])
+        const [courses, setCourses] = useState([])
         const SelectedCourses = query(collection(db,'courses'),where('teacher','==',doc(db, `users/${auth.currentUser.uid}`)))
         useEffect(() =>
             onSnapshot(SelectedCourses, (snapshot) => {
-                setCourses(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+                setCourses(snapshot.docs.map(doc2 => ({ ...doc2.data(), id: doc2.id })));
             }), [])
         
+        console.log(courses);//Z1jHIReXAAremZ3ACDJL
 
-         //? student input | info | ref ?
-        const [student, setStudent] = useState([]);
-        useEffect(() =>
-            onSnapshot(SelectedCourses, (snapshot) => {
-                setStudent(snapshot.docs.map(doc => ({ ...doc.data().students, id: doc.id })));
-            }), []);
+       const [student, setStudent] = useState([]);
+        useEffect(() => {
+                const fetchdata = async () => {
+                    const docRef = doc(db, 'courses',);
+                    const docSnap = await getDoc(docRef);
+                    let data = docSnap.data();
+                    data.students.forEach(ref => {
+                        const fetchStudentData = async () => {
+                            const files = await getDoc(ref);
+                            let StudentData = files.data();
+                            setStudent([...student, { id: ref.id, name: StudentData.name, studentRef: StudentData }]);
+                        }
+                        fetchStudentData();
+                    });   
+                }
+                fetchdata();
+        }, []);
 
-        
-        
-
+        console.log(student);
+        console.log(courses);
+            
         //get information about the current user for check course
         const [information, setInformation] = useState(null)
         useEffect(() => {
@@ -55,6 +67,9 @@ function GetData({ path, rol }) {
             return () => unsubscribe();
         }, [])
         
+        
+        
+
         //get role of current user, 3 cases: student, teacher admin
         const [role, setRole] = useState(null)
         useEffect(() => {
@@ -70,46 +85,13 @@ function GetData({ path, rol }) {
     
     
         return (<>
-           <>
-                {course.map((courseEle, index) => {
-                    
-                        return (
-                            <>
-                                <Card
-                                    title={courseEle.name}
-                                    bordered={false}
-                                    style={{
-                                        width: '50%',
-                                        marginTop: '20px',
-                                        textAlign: 'center',
-                                        left: '25%',
-                                        right: '25%',
-                                        backgroundColor: '#CCE6FF',
-                                        fontSize: '1rem'
-                                    }}
-                                    hoverable
-                                    key={index}>
-                                    <p>Semester: {courseEle.semester}</p>
-                                    <p>Status: {courseEle.status}</p>
-                                    <p>Số lượng sinh viên đã đăng ký: {'students' in courseEle ? <>{courseEle.students.length}</> : <>0</>}</p>
-                                    <p>Sinh Viên: {'students' in courseEle ? <>{courseEle.students.length}</> : <>None</>}</p>
-                                    <p>{'teacher' in courseEle ? <> Giáo viên: <GetData path={`/users/${courseEle.teacher.id}`} rol='name' /></> : <>Chưa có giáo viên đăng ký dạy</>}</p>
-                                    <p>Tên của data: <GetData path={`course/${courseEle.id}/data/key`} rol='name' /></p>
-                                    <p>Mô tả: <GetData path={`course/${courseEle.id}/data/key`} rol='description' /></p>
-                                    <Button onClick={() => { navigate('/scoringpage'); } }> Change Student Points </Button>
-                                </Card>
-
-                                
-                            </>
-                            
-                        );
-                    
-                })}
-            </>
+        <Helmet>
+            <title>Khóa học của tôi | LMS-DEF-NM</title>
+        </Helmet>
 
         <>
-            {student.map((courseEle, index) => {
-                    
+        {student.map((courseEle, index) => {
+                    console.log(courseEle.id);
                     return (
                         <>
                             <Card
@@ -126,14 +108,10 @@ function GetData({ path, rol }) {
                                 }}
                                 hoverable
                                 key={index}>
-                                <p>Semester: {courseEle.semester}</p>
-                                <p>Status: {courseEle.status}</p>
-                                <p>Số lượng sinh viên đã đăng ký: {'students' in courseEle ? <>{courseEle.students.length}</> : <>0</>}</p>
-                                <p>{'students' in courseEle ? <> Sinh viên: <GetData path={`/users/${courseEle.students.id}`} rol='name' /></> : <>Chưa có giáo viên đăng ký dạy</>}</p>
-                                <p>{'teacher' in courseEle ? <> Giáo viên: <GetData path={`/users/${courseEle.teacher.id}`} rol='name' /></> : <>Chưa có giáo viên đăng ký dạy</>}</p>
-                                <p>Tên của data: <GetData path={`course/${courseEle.id}/data/key`} rol='name' /></p>
-                                <p>Mô tả: <GetData path={`course/${courseEle.id}/data/key`} rol='description' /></p>
-                                <Button onClick={() => { navigate('/scoringpage'); } }> Change Student Points </Button>
+                                
+                                <p> Qualified or not: <GetData path={`users/${courseEle.id}/mark/MarkRef`} rol='qualified' />  </p>
+                                <p>Final Score: <GetData path={`users/${courseEle.id}/mark/MarkRef`} rol='final' /></p>
+                                <Button onClick={() => { addElementToArray(`users/${courseEle.id}/mark/MarkRef`,'final','9')} }> Change Student Points </Button>
                             </Card>
 
                             
