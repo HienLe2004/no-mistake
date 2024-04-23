@@ -22,7 +22,7 @@ export default function Profile() {
         });
     }, []);
 
-    if(userData.role !== "teacher"){
+    if(userData.role === "student"){
     return <>
         <Helmet>
             <title>Thông tin cá nhân | LMS-DEF-NM</title>
@@ -43,7 +43,7 @@ export default function Profile() {
                     </tr>
                     <tr>
                         <th className="text-description">Ngày sinh</th>
-                        <td className="text-content">{userData.dateOfBirth}</td>
+                        <td className="text-content">{userData.dateOfBirth[0]}/{userData.dateOfBirth[1]}/{userData.dateOfBirth[2]}</td>
                     </tr>
                     <tr>
                         <th className="text-description">Giới tính</th>
@@ -63,7 +63,7 @@ export default function Profile() {
                     </tr>
                     <tr>
                         <th className="text-description">Tình trạng học vụ</th>
-                        <td className="text-content">{userData.status}</td>
+                        <td className="text-content">{(userData.status=="available")?"Đang học":"Tạm hoãn"}</td>
                     </tr>
                     <tr>
                         <th className="text-description">Số tín chỉ đăng ký</th>
@@ -81,7 +81,7 @@ export default function Profile() {
             </table>
         </div>
     </>}
-    if(userData.role !== "student"){
+    if(userData.role === "teacher"){
         return <>
             <Helmet>
                 <title>Thông tin cá nhân | LMS-DEF-NM</title>
@@ -102,7 +102,7 @@ export default function Profile() {
                         </tr>
                         <tr>
                             <th className="text-description">Ngày sinh</th>
-                            <td className="text-content">{userData.dateOfBirth}</td>
+                            <td className="text-content">{userData.dateOfBirth[0]}/{userData.dateOfBirth[1]}/{userData.dateOfBirth[2]}</td>
                         </tr>
                         <tr>
                             <th className="text-description">Giới tính</th>
@@ -114,7 +114,7 @@ export default function Profile() {
                         </tr>
                         <tr>
                             <th className="text-description">Học hàm - Học vị</th>
-                            <td className="text-content">{userData.degrees}</td>
+                            <td className="text-content">{userData.degrees[0]}-{userData.degrees[1]}-{userData.degrees[2]}</td>
                         </tr>
                         <tr>
                             <th className="text-description">Khoa</th>
