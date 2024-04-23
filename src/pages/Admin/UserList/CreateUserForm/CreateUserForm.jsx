@@ -3,7 +3,7 @@ import {useState} from 'react'
 import {createUserWithEmailAndPassword, getAuth} from 'firebase/auth'
 import {auth,db} from '../../../../../firebase.config'
 import {getDocs,collection,query,where,setDoc,doc} from 'firebase/firestore'
-import readUserDoc from '../../../../components/ConditionalUI'
+import {currentUser} from '../../../../components/ConditionalUI'
 import {firebaseConfig} from '../../../../../firebase.config'
 import {initializeApp} from 'firebase/app'
 const listDay = Array(31).fill().map((element,index)=>index+1);
@@ -16,6 +16,7 @@ const listFaculty = ["Khoa Điện - Điện tử", "Khoa Kỹ thuật Xây dự
                      "Khoa Môi trường và Tài nguyên", "Khác"]
 const listPosition = ["Trưởng khoa", "Phó khoa", "Quản lí hồ sơ", "Cố vấn học tập", "Giảng viên", "Trợ giảng", "Khác"]
 export default function CreateUserForm() {
+    //Create secondApp to prevent auto login when create new user sunccessfull
     const secondApp = initializeApp(firebaseConfig, "secondApp");
     const secondAuth = getAuth(secondApp);
     //User state for errorList
@@ -86,9 +87,7 @@ export default function CreateUserForm() {
         else {
             if (! await checkRoleID(form.roleID, form.role)) notiList.push("Mã số đã được sử dụng!");
         }
-        await readUserDoc(auth.currentUser.uid).then((role) => {
-            if (role !== "admin") notiList.push("Chỉ quản trị viên mới sử dụng được chức năng này!");
-        })
+        if (currentUser.role !== "admin") notiList.push("Chỉ quản trị viên mới sử dụng được chức năng này!");
         if (notiList.length===0) {
             await createUserWithEmailAndPassword(secondAuth, form.email, form.password).then((cred) => {
                 CreateUserDatabase(form, cred.user.uid);
@@ -251,10 +250,10 @@ const CreateUserDatabase = async (form, uid) => {
         status: "available",
     }
     if (form.role === 'admin') {
-        console.log("new admin uid " + uid);
+        //console.log("new admin uid " + uid);
     }
     else if (form.role === 'teacher') {
-        console.log("new teacher uid " + uid);
+        //console.log("new teacher uid " + uid);
         userData.courses = [];
         userData.deanClass = form.deanClass;
         userData.faculty = form.faculty;
@@ -267,7 +266,7 @@ const CreateUserDatabase = async (form, uid) => {
         userData.numberPostGraduate = parseInt(form.numberPostGraduate);
     }
     else if (form.role === 'student') {
-        console.log("new student uid " + uid);
+        //console.log("new student uid " + uid);
         userData.courses = [];
         userData.class = form.class;
         userData.ernedCredits = 0;
@@ -275,7 +274,7 @@ const CreateUserDatabase = async (form, uid) => {
         userData.gpa = 0;
         userData.faculty = form.faculty;
     }
-    console.log(userData);
+    //console.log(userData);
     await setDoc(userDocRef, userData);
 }
 

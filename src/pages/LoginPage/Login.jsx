@@ -1,9 +1,7 @@
-import Footer from "../../components/Footer/Footer"
-//import './auth'
 import './Login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../../firebase.config'
-import { useRef, useState,useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from "react-helmet-async"
 export default function Login() {
@@ -11,6 +9,7 @@ export default function Login() {
     const passwordRef = useRef();
     const navigate = useNavigate();
     const [errorList, setErrorList] = useState([]);
+    //Handle login, if successed then navigate to home page else display error
     const handleSubmit = async (e) => {
         e.preventDefault();
         let error = [];

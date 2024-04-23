@@ -3,12 +3,12 @@ import { collection, getDocs } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import './CourseList.css'
 import CreateCourseForm from './CreateCourseForm/CreateCourseForm'
-
+const listStatus = {'processing':"Đang hoạt động"}
 export default function CourseList() {
     function CourseCard({ data }) {
         return <>
             <div className='courseCard'>
-                <a href='/'>{data.name}</a>
+                <a href='/'>{data.name} - {listStatus[data.status]}</a>
             </div>
         </>
     }

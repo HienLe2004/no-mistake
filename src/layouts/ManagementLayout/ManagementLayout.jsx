@@ -1,15 +1,21 @@
 import {useEffect} from 'react'
-import {NavLink, Outlet} from 'react-router-dom'
+import {NavLink, Outlet, useNavigate} from 'react-router-dom'
 import {Helmet} from 'react-helmet-async'
 import './ManagementLayout.css'
+import {currentUser} from '../../components/ConditionalUI'
 export default function ManagementLayout() {
+    const navigate = useNavigate();
     //Handle comditional UI
     useEffect(() => {
         import('../../components/ConditionalUI').catch(err => {
             console.log(err);
         })
     }, [])
-    //Handle logout
+    //Handle admin page permission
+    if (currentUser.role !== 'admin') {
+        navigate('/');
+        return <></>
+    }
     return(
         <div className='admin-layout'>
             <Helmet>
