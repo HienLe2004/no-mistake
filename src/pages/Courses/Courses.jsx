@@ -1,4 +1,5 @@
 import './Courses.css'
+
 import { Helmet } from 'react-helmet-async'
 import { auth, db } from '../../../firebase.config'
 import { collection, onSnapshot, doc } from 'firebase/firestore'
