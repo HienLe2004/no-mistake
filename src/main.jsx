@@ -14,6 +14,7 @@ import Teaching from './pages/Teaching/Teaching.jsx'
 import ManagementLayout from './layouts/ManagementLayout/ManagementLayout.jsx'
 import UserList from './pages/Admin/UserList/UserList.jsx'
 import Schedule from './pages/Admin/Schedule/Schedule.jsx'
+import CourseList from './pages/Admin/CourseList/CourseList.jsx'
 import AddP from './pages/AddP/AddP.jsx'
 import ScoringPage from './pages/ScoringPage/ScoringPage.jsx'
 
@@ -60,12 +61,16 @@ const router = createBrowserRouter([
         element: <ManagementLayout />,
         children:[
           {
-            path: 'userlist/*',
+            path: 'userlist',
             element: <UserList />
           },
           {
             path: 'schedule',
             element: <Schedule />
+          },
+          {
+            path: 'courselist',
+            element: <CourseList />
           }
         ]
       }
