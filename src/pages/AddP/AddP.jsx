@@ -40,7 +40,7 @@ function GetData({ path, rol }) {
        const [student, setStudent] = useState([]);
         useEffect(() => {
                 const fetchdata = async () => {
-                    const docRef = doc(db, 'courses',);
+                    const docRef = doc(db, 'courses','Z1jHIReXAAremZ3ACDJL');
                     const docSnap = await getDoc(docRef);
                     let data = docSnap.data();
                     data.students.forEach(ref => {
