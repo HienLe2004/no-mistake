@@ -58,11 +58,10 @@ export default function RootLayOut() {
                         <img src={LogoBK} alt='logo' className="logo"></img>
                     </Link>
                     <NavLink to="/">Trang chủ</NavLink>
-
                     <NavLink to="myCourses" className="showStudent" style={{ display: "none" }}>Khóa học của tôi</NavLink>
-                    <NavLink to="dashboard" className="showUser" style={{ display: "none" }}>Bảng điều khiển</NavLink>
-                    <NavLink to="courses" className="showUser" style={{ display: "none" }}>Khóa học</NavLink>
-                    <NavLink to="profile" className="showUser" style={{ display: "none" }}>Cá nhân</NavLink>
+                    <NavLink to="dashboard" className="showStudent showTeacher" style={{ display: "none" }}>Bảng điều khiển</NavLink>
+                    <NavLink to="courses" className="showTeacher showStudent" style={{ display: "none" }}>Khóa học</NavLink>
+                    <NavLink to="profile" className="showTeacher showStudent" style={{ display: "none" }}>Cá nhân</NavLink>
                     <NavLink to="teaching" className="showTeacher" style={{ display: "none" }}>Giảng dạy</NavLink>
                     <NavLink to="admin/userlist" className="showAdmin" style={{ display: "none" }}>Quản lý</NavLink>
                 </div>

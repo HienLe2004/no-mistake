@@ -15,6 +15,7 @@ import ManagementLayout from './layouts/ManagementLayout/ManagementLayout.jsx'
 import UserList from './pages/Admin/UserList/UserList.jsx'
 import Schedule from './pages/Admin/Schedule/Schedule.jsx'
 import CourseList from './pages/Admin/CourseList/CourseList.jsx'
+import Announcement from './pages/Admin/Announcement/Announcement.jsx'
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
           {
             path: 'courselist',
             element: <CourseList />
+          },
+          {
+            path: 'announcement',
+            element: <Announcement />
           }
         ]
       }
