@@ -12,8 +12,7 @@ export default function ErrorPage() {
             <Helmet>
                 <title>Khóa học | LMS-DEF-NM</title>
             </Helmet>
-
-            <h1>  </h1>
+            
             <h1> Page Not Found!!! </h1>
             <h2> Opps! </h2>
             <p>Sorry, an unexpected error has occurred.</p>
