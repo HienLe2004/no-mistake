@@ -23,7 +23,7 @@ export default function CourseList() {
     }, [])
 
     return <>
-        <div className='courselist-layout'>
+        <div className='courselist-layout showAdmin'>
             <h1>Danh sách khóa học</h1>
             <div className="courselist">
                 {listCourseData.map((course) => {

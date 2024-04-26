@@ -15,8 +15,12 @@ import ManagementLayout from './layouts/ManagementLayout/ManagementLayout.jsx'
 import UserList from './pages/Admin/UserList/UserList.jsx'
 import Schedule from './pages/Admin/Schedule/Schedule.jsx'
 import CourseList from './pages/Admin/CourseList/CourseList.jsx'
+<<<<<<< HEAD
 import AddP from './pages/AddP/AddP.jsx'
 import ScoringPage from './pages/ScoringPage/ScoringPage.jsx'
+=======
+import Announcement from './pages/Admin/Announcement/Announcement.jsx'
+>>>>>>> 833a4566fb362b3b36b1d5860b12604e8319b757
 
 const router = createBrowserRouter([
   {
@@ -49,14 +53,6 @@ const router = createBrowserRouter([
         element: <Teaching />
       },
       {
-        path: 'AddP',
-        element: <AddP />
-      },
-      {
-        path: 'ScoringPage',
-        element: <ScoringPage />
-      },
-      {
         path: 'admin',
         element: <ManagementLayout />,
         children:[
@@ -71,6 +67,10 @@ const router = createBrowserRouter([
           {
             path: 'courselist',
             element: <CourseList />
+          },
+          {
+            path: 'announcement',
+            element: <Announcement />
           }
         ]
       }

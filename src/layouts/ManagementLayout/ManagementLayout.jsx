@@ -6,24 +6,25 @@ import {currentUser} from '../../components/ConditionalUI'
 export default function ManagementLayout() {
     const navigate = useNavigate();
     //Handle comditional UI
+    import('../../components/ConditionalUI').catch(err => {
+        console.log(err);
+    })
     useEffect(() => {
-        import('../../components/ConditionalUI').catch(err => {
-            console.log(err);
-        })
-    }, [])
-    //Handle admin page permission
-    if (currentUser.role !== 'admin') {
-        navigate('/');
-        return <></>
-    }
+        //Handle admin page permission
+        if (currentUser.role !== 'admin') {
+            navigate('/');
+        }
+    }, [currentUser.role])
+    
     return(
-        <div className='admin-layout'>
+        <div className='admin-layout showAdmin'>
             <Helmet>
                 <title>Trang quản lý | LMS-DEF-NM</title>
             </Helmet>
             <nav className='admin-nav'>
                 <NavLink to='userlist' className='showAdmin start'>Người dùng</NavLink>
                 <NavLink to='courselist' className='showAdmin'>Khóa học</NavLink>
+                <NavLink to='announcement' className='showAdmin'>Thông báo</NavLink>
                 <NavLink to='schedule' className='showAdmin end'>Lịch thi</NavLink>
             </nav>   
             <Outlet/>
