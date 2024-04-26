@@ -72,7 +72,6 @@ export default function Courses() {
             setCourses(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         }), []
     )
-
     //get information about the current user for check course
     const [information, setInformation] = useState(null)
     useEffect(() => {
@@ -131,6 +130,7 @@ export default function Courses() {
                             <>
                                 {
                                     information.courses.some((element) => {
+                                        console.log(element.id);
                                         return element.id === courseEle.id
                                     })
                                         ? <>

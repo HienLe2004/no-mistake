@@ -1,5 +1,7 @@
 import { useRouteError } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import './ErrorPage.css'
 export default function ErrorPage() {
     const error = useRouteError();
     console.log(error);
@@ -8,11 +10,14 @@ export default function ErrorPage() {
             <Helmet>
                 <title>Khóa học | LMS-DEF-NM</title>
             </Helmet>
-            <h1>Opps!</h1>
+
+            <h1> Page Not Found!!! </h1>
+            <h2>Opps!</h2>
             <p>Sorry, an unexpected error has occurred.</p>
             <p>
                 <i>{error.statusText || error.message}</i>
             </p>
+            <h3>Please return to <Link to = "/"> HomePage </Link>  </h3>
         </div>
     )
 }
