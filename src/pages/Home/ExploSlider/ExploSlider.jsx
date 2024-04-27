@@ -14,14 +14,6 @@ export default function ExploSlider() {
         })
     }, [])
     return <>
-    {/** 
-    <Helmet>
-        <script
-            src='/src/pages/Home/ExploSlider/app.js'
-            crossOrigin="anonymous"
-            async
-        ></script>
-    </Helmet>*/}
     <div className="carousel">
         <div className="list">
             <div className="item">
