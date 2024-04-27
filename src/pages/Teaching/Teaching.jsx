@@ -2,7 +2,8 @@ import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../../firebase.config';
 import { onAuthStateChanged } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
-import Schedule from './Schedule';
+import Schedule from './Schedule/Schedule';
+import {Helmet} from 'react-helmet-async'
 
 const generateRandomBlueColor = () => {
   const hue = Math.floor(Math.random() * 75) + 175;
@@ -31,6 +32,7 @@ export default function Teaching() {
           if (courseData) {
             subjects.push({
               name: courseData.name,
+              classNo: courseData.classNo,
               room: courseData.room,
               day: courseData.day,
               classStart: courseData.classStart,
@@ -50,7 +52,10 @@ export default function Teaching() {
     return () => unsubscribe();
   }, []);
   return (
-    <div>
+    <div>        
+      <Helmet>
+        <title>Giảng dạy | LMS-DEF-NM</title>
+      </Helmet>
       <h1 style={{ color: '#007bff', textAlign: 'center', padding: '20px' }}>
         LỊCH GIẢNG DẠY CỦA TÔI
       </h1>

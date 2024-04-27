@@ -1,5 +1,7 @@
 export default function Schedule() {
     return <>
-        <h1>Schedule</h1>
+        <div className="schedule-layout showAdmin">
+            <h1>Danh sách lịch kiểm tra và thi</h1>
+        </div>
     </>
 }

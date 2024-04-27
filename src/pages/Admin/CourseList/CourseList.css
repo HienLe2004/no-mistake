@@ -1,14 +1,14 @@
-.userlist-layout {
+.courselist-layout {
     justify-content: center;
     max-width: 1000px;
 }
 
-.userlist-layout h1 {
+.courselist-layout h1 {
     margin: 0 0 10px 0;
     text-align: center;
 }
 
-.userlist-layout .userlist {
+.courselist-layout .courselist {
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
@@ -17,7 +17,7 @@
     padding-bottom: 30px;
 }
 
-.userlist-layout .userlist .userCard {
+.courselist-layout .courselist .courseCard {
     display: flex;
     width: 400px;
     border: 2px solid rgb(0, 70, 120);
@@ -26,10 +26,10 @@
     align-items: center;
     padding: 10px;
 }
-.userlist-layout .userlist .userCard a{
+.courselist-layout .courselist .courseCard a{
     text-decoration: none;;
 }
-.userlist-layout button {
+.courselist-layout button {
     font-size: 18px;
     padding: 10px;
     border: 2px solid rgb(0, 70, 120);
@@ -38,6 +38,6 @@
     color: rgba(255, 255, 255, 0.9);
 }
 
-.userlist-layout button:hover {
+.courselist-layout button:hover {
     background-color: rgb(1, 125, 213);
 }

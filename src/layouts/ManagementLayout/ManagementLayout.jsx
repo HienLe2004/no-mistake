@@ -1,22 +1,30 @@
 import {useEffect} from 'react'
-import {NavLink, Outlet} from 'react-router-dom'
+import {NavLink, Outlet, useNavigate} from 'react-router-dom'
 import {Helmet} from 'react-helmet-async'
 import './ManagementLayout.css'
+import {currentUser} from '../../components/ConditionalUI'
 export default function ManagementLayout() {
+    const navigate = useNavigate();
     //Handle comditional UI
+    import('../../components/ConditionalUI').catch(err => {
+        console.log(err);
+    })
     useEffect(() => {
-        import('../../components/ConditionalUI').catch(err => {
-            console.log(err);
-        })
-    }, [])
-    //Handle logout
+        //Handle admin page permission
+        if (currentUser.role !== 'admin') {
+            navigate('/');
+        }
+    }, [currentUser.role])
+    
     return(
-        <div className='admin-layout'>
+        <div className='admin-layout showAdmin'>
             <Helmet>
                 <title>Trang quản lý | LMS-DEF-NM</title>
             </Helmet>
             <nav className='admin-nav'>
-                <NavLink to='userlist/1' className='showAdmin start'>Người dùng</NavLink>
+                <NavLink to='userlist' className='showAdmin start'>Người dùng</NavLink>
+                <NavLink to='courselist' className='showAdmin'>Khóa học</NavLink>
+                <NavLink to='announcement' className='showAdmin'>Thông báo</NavLink>
                 <NavLink to='schedule' className='showAdmin end'>Lịch thi</NavLink>
             </nav>   
             <Outlet/>

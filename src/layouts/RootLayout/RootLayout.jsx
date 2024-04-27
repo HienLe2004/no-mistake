@@ -64,7 +64,7 @@ export default function RootLayOut() {
                     <NavLink to="courses" className="showUser" style={{ display: "none" }}>Khóa học</NavLink>
                     <NavLink to="profile" className="showUser" style={{ display: "none" }}>Cá nhân</NavLink>
                     <NavLink to="teaching" className="showTeacher" style={{ display: "none" }}>Giảng dạy</NavLink>
-                    <NavLink to="admin" className="showAdmin" style={{ display: "none" }}>Quản lý</NavLink>
+                    <NavLink to="admin/userlist" className="showAdmin" style={{ display: "none" }}>Quản lý</NavLink>
                 </div>
                 <div className="right-nav">
                     <NavLink to="login" className="hideUser" style={{ display: "none" }}>Đăng nhập</NavLink>

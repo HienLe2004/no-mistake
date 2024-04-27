@@ -1,4 +1,5 @@
 import './Courses.css'
+
 import { Helmet } from 'react-helmet-async'
 import { auth, db } from '../../../firebase.config'
 import { collection, onSnapshot, doc } from 'firebase/firestore'
@@ -71,7 +72,6 @@ export default function Courses() {
             setCourses(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         }), []
     )
-
     //get information about the current user for check course
     const [information, setInformation] = useState(null)
     useEffect(() => {
@@ -130,6 +130,7 @@ export default function Courses() {
                             <>
                                 {
                                     information.courses.some((element) => {
+                                        console.log(element.id);
                                         return element.id === courseEle.id
                                     })
                                         ? <>

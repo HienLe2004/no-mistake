@@ -8,7 +8,7 @@ export default function UserList() {
     function UserCard({ data }) {
         return <>
             <div className='userCard'>
-                {data.name} - {data.role} - {data.email}
+                <a href='/'>{data.name} - {data.role} - {data.email}</a>
             </div>
         </>
     }
@@ -22,7 +22,7 @@ export default function UserList() {
         fetchListUserData();
     }, [])
     return <>
-        <div className='userlist-layout'>
+        <div className='userlist-layout showAdmin'>
             <h1>Danh sách người dùng</h1>
             <div className="userlist">
                 {listUserData.map((user) => {
