@@ -32,6 +32,7 @@
     align-items: center;
     justify-content: space-between;
     margin: 5px 0;
+    color: black;
 }
 .createUserForm .commonInfo .dateOfBirth select{
     padding: 5px 10px;
@@ -85,6 +86,7 @@
 .createUserForm .roleInfo .thesis label{
     align-items: center;
     gap: 10px;
+    color: black;
 }
 .createUserForm button{
     text-align: center;

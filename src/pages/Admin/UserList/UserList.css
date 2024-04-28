@@ -1,6 +1,7 @@
 .userlist-layout {
     justify-content: center;
     max-width: 1000px;
+    color:black
 }
 
 .userlist-layout h1 {
@@ -27,7 +28,8 @@
     padding: 10px;
 }
 .userlist-layout .userlist .userCard a{
-    text-decoration: none;;
+    text-decoration: none;
+    color: black;
 }
 .userlist-layout button {
     font-size: 18px;

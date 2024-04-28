@@ -27,7 +27,8 @@
     padding: 10px;
 }
 .courselist-layout .courselist .courseCard a{
-    text-decoration: none;;
+    text-decoration: none;
+    color: black;
 }
 .courselist-layout button {
     font-size: 18px;
