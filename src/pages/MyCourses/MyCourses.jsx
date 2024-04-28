@@ -5,6 +5,7 @@ import { storage } from "../../../firebase.config";
 import { getDoc, doc, getDocs, collection} from 'firebase/firestore'
 import { ref, getDownloadURL } from "firebase/storage";
 import { auth } from '../../../firebase.config'
+
 import './MyCourses.css'
 
 function getUnique(arr, index) {
@@ -24,20 +25,24 @@ export default function MyCourses() {
     function handleClick(ref) {
         setCourseRef(ref);
     }
-    function downloadData(doc) {
-        doc.files.map(data => (
-            getDownloadURL(ref(storage, 'HK232_LTNC_BTL_v0.1.pdf'))
-            .then((url) => {
-                const xhr = new XMLHttpRequest();
-                xhr.responseType = 'blob';
-                xhr.onload = (event) => {
-                    const blob = xhr.response;
-                };
-                xhr.open('GET', url);
-                xhr.send();
-            })
-        ))
+    function downloadData(dataname) {
+        getDownloadURL(ref(storage, 'gs://lms-nm-232.appspot.com/'+dataname+'.pdf'))
+        .then((url) => {
+            var link = document.createElement("a");
+            if (link.download !== undefined) {
+                link.setAttribute("href", url);
+                link.setAttribute("target", "_blank");
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        })
+        .catch((error) => {
+            // Handle any errors
+        });
     }
+
     useEffect(() => {
         if (courseref == null) {
             const unsub = auth.onAuthStateChanged((authObj) => {
@@ -70,7 +75,7 @@ export default function MyCourses() {
                     const querySnapshot = await getDocs(collection(db, "courses", courseid, "data"));
                     querySnapshot.forEach((doc) => {
                         let dd = doc.data();
-                        setCourseData(courseDatas => [...courseDatas, {id: previd, name: dd.name, description: dd.description, doc: dd }]);
+                        setCourseData(courseDatas => [...courseDatas, {id: previd, name: dd.name, description: dd.description, files: dd.files }]);
                         previd++;
                     });
                     
@@ -108,10 +113,14 @@ export default function MyCourses() {
             <div className="title">Tài liệu môn học</div>
             <div className="card-course-around">
                 {courseDatas.map(course => (
-                    <button onClick={() => downloadData(course.doc)} key={course.name} className="card-course-container" >
+                    <div key={course.name} className="card-course-container" >
                         <h1 className="card-course-title">{course.name}</h1>
                         <div className="card-course-description">{course.description}</div>
-                    </button>
+                        {course.files.map(filename => (
+                            <a className="card-course-filename" onClick={() => downloadData(filename)} key={filename}>{filename}</a>
+                        ))
+                        }
+                    </div>
                 ))}
             </div>
         </>

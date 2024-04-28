@@ -32,9 +32,8 @@
 }
 .card-title {
     margin: 0.5rem 5%;
+    color: black;
 }
-
-
 
 .card-course-around {
     display: flex;
@@ -53,15 +52,25 @@
     background-color: white;
     height: fit-content;
 }
-.card-course-container:hover {
-    background-color: lightblue;
-}
+
 .card-course-title {
     margin: 0.5rem 5%;
     justify-content: left;
+    color: black;
 }
 .card-course-description {
     margin: 0.5rem 5%;
     justify-content: left;
     font-size: 18px;
+    color: black;
+}
+.card-course-filename {
+    color: black;
+    margin: 0.5rem 5%;
+    justify-content: left;
+    font-size: 18px;
+}
+.card-course-filename:hover {
+    color:blue;
+    cursor: pointer;
 }
