@@ -19,7 +19,7 @@ export default function CreateUserForm() {
     //Create secondApp to prevent auto login when create new user sunccessfull
     const secondApp = initializeApp(firebaseConfig, "secondApp");
     const secondAuth = getAuth(secondApp);
-    //User state for errorList
+    //Use state for errorList
     const [errorList, setErrorList] = useState([]);
     //Use state for form
     const [form, setForm] = useState({

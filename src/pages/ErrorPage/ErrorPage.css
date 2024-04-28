@@ -10,8 +10,5 @@
   font-family: "Poppins";
   text-align: center;
   background-color: var(--secondary);
-}
-* {
   color: #fff;
-  margin: 0;
 }
