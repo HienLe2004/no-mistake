@@ -1,0 +1,111 @@
+.userInformation {
+    display: flex;
+    justify-content: center;
+}
+.userInformation form {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(0, 70, 120);
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 10px;
+}
+.userInformation .commonInfo{
+    width: 400px;
+}
+.userInformation .commonInfo label{
+    width: 100%;
+}
+.userInformation .commonInfo input {
+    box-sizing: border-box;
+    margin: 5px 0 20px;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+.userInformation .commonInfo .dateOfBirth {
+    box-sizing: border-box;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+    color: black;
+}
+.userInformation .commonInfo .dateOfBirth select{
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid;
+}
+.userInformation .role{
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0;
+}
+.userInformation .gender{
+    display: flex;
+    flex-direction: row;
+    margin:5px 0;
+}
+.userInformation .status select{
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid;
+    margin-left: 10px;
+}
+.userInformation ul{
+    margin-left: 10px;
+}
+.userInformation ul li{
+    list-style: none;
+    display: inline;
+    flex-direction: row;
+    padding: 10px;
+}
+.userInformation .roleInfo{
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.userInformation .roleInfo select{
+    border: 2px solid;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+}
+.userInformation .roleInfo label{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.userInformation .roleInfo input {
+    box-sizing: border-box;
+    margin: 5px 0;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+.userInformation .roleInfo .thesis label{
+    align-items: center;
+    gap: 10px;
+    color: black;
+}
+.userInformation button{
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid rgb(0, 70, 120);
+    background-color: rgb(0, 70, 120);
+    color: rgba(255, 255, 255, 0.9);
+}
+.userInformation button:hover{
+    background-color: rgb(1, 125, 213);
+}
+.userInformation .notiList{
+    display: flex;
+    flex-direction: column;
+}

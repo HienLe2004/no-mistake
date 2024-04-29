@@ -1,6 +1,6 @@
 import { useRouteError } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './ErrorPage.css'
 
 
@@ -19,7 +19,7 @@ export default function ErrorPage() {
             <p>
                 <i>{error.statusText || error.message}</i>
             </p>
-            <h3>Please return to <Link to = "/"> HomePage </Link>  </h3>
+            <h3>Please return to <NavLink to = "/" reloadDocument> HomePage </NavLink>  </h3>
         </div>
     )
 }

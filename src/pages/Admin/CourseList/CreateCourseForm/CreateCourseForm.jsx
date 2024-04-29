@@ -18,8 +18,7 @@ export default function CreateCourseForm() {
     const [subjectDuration, setSubjectDuration] = useState(0);
     const [listSelectedWeek, setListSelectedWeek] = useState([]);
     const [listSemester, setListSemester] = useState([]);
-    //Use state for list of error
-    const [listError, setListError] = useState([]);
+    //Use state for list of error const [listError, setListError] = useState([]);
     //Use state for form
     const [form, setForm] = useState({
         subject: "",
@@ -109,8 +108,9 @@ export default function CreateCourseForm() {
                 notiList.push("Tạo khóa học thất bại!");
             })
         }
-        setListError(notiList);
-        console.log(form);
+        let notiGroup = '';
+        notiList.forEach(noti => notiGroup += (noti + '\n'));
+        alert(notiGroup);
     }
     return <div className="createCourseForm">
         <form>
@@ -166,12 +166,12 @@ export default function CreateCourseForm() {
                 </select>    
             </label>
             <button className="confirm-button" onClick={checkForm}>Tạo khóa học</button>
-            {/* Form section for displaying errors */}
+            {/* Form section for displaying errors 
             <div className="notiList" style={{display:(listError.length > 0)?"flex":"none"}}>
                 {listError.map(error => {
                     return <p key={error}>{error}</p>
                 })}
-            </div>
+            </div>*/}
         </form>
     </div>
 }

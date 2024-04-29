@@ -6,21 +6,22 @@ import {getDocs,collection,query,where,setDoc,doc} from 'firebase/firestore'
 import {currentUser} from '../../../../components/ConditionalUI'
 import {firebaseConfig} from '../../../../../firebase.config'
 import {initializeApp} from 'firebase/app'
-const listDay = Array(31).fill().map((element,index)=>index+1);
-const listMonth = Array(12).fill().map((element,index)=>index+1);
-const listYear = Array(100).fill().map((element,index)=>index+1920);
-const listFaculty = ["Khoa Điện - Điện tử", "Khoa Kỹ thuật Xây dựng", "Khoa Cơ khí",
+
+export const listDay = Array(31).fill().map((element,index)=>index+1);
+export const listMonth = Array(12).fill().map((element,index)=>index+1);
+export const listYear = Array(100).fill().map((element,index)=>index+1920);
+export const listFaculty = ["Khoa Điện - Điện tử", "Khoa Kỹ thuật Xây dựng", "Khoa Cơ khí",
                      "Khoa Kỹ thuật Hóa học", "Khoa Khoa học và Kỹ thuật Máy tính",
                      "Khoa Công nghệ Vật liệu", "Khoa Khoa học Ứng dụng", "Khoa Kỹ thuật Giao thông",
                      "Khoa Quản lý Công Nghiệp", "Khoa Kỹ thuật Địa chất và Dầu khí",
                      "Khoa Môi trường và Tài nguyên", "Khác"]
-const listPosition = ["Trưởng khoa", "Phó khoa", "Quản lí hồ sơ", "Cố vấn học tập", "Giảng viên", "Trợ giảng", "Khác"]
+export const listPosition = ["Trưởng khoa", "Phó khoa", "Quản lí hồ sơ", "Cố vấn học tập", "Giảng viên", "Trợ giảng", "Khác"]
+
 export default function CreateUserForm() {
     //Create secondApp to prevent auto login when create new user sunccessfull
     const secondApp = initializeApp(firebaseConfig, "secondApp");
     const secondAuth = getAuth(secondApp);
-    //Use state for errorList
-    const [errorList, setErrorList] = useState([]);
+    //Use state for errorList const [errorList, setErrorList] = useState([]);
     //Use state for form
     const [form, setForm] = useState({
         //Common information
@@ -29,9 +30,9 @@ export default function CreateUserForm() {
         confirmPassword: "",
         name: "",
         phoneNumber: 0,
-        day: "",
-        month: "",
-        year: "",
+        day: listDay[0],
+        month: listMonth[0],
+        year: listYear[0],
         gender: "",
         role: "",
         roleID: "",
@@ -51,16 +52,16 @@ export default function CreateUserForm() {
         if (e.target.name === 'gender') {
             setForm(prev => ({
                 ...prev,
-                [e.target.name]: e.target.id
+                [e.target.name]: e.target.className
             }))
         }
         //Change role field to input id and modify roleID and faculty to fit with that role
         else if (e.target.name === 'role') {
-            const correctRoleID = document.querySelector(`#${e.target.id}ID`)
-            const correctFaculty = document.querySelector(`#${e.target.id}Faculty`)
+            const correctRoleID = document.querySelector(`.${e.target.className}ID`)
+            const correctFaculty = document.querySelector(`.${e.target.className}Faculty`)
             setForm(prev => ({
                 ...prev,
-                [e.target.name]: e.target.id,
+                [e.target.name]: e.target.className,
                 roleID: correctRoleID.value,
                 faculty: correctFaculty?.value,
             }))
@@ -105,7 +106,10 @@ export default function CreateUserForm() {
                 notiList.push("Email không hợp lệ hoặc đã có người sử dụng!");
             })
         }
-        setErrorList(notiList);
+        let notiGroup = '';
+        notiList.forEach(noti => notiGroup += (noti + '\n'));
+        alert(notiGroup);
+        //setErrorList(notiList);
     }
     //Function validates roleID
     const checkRoleID = async (roleID, role) => {
@@ -165,31 +169,31 @@ export default function CreateUserForm() {
             <div className='gender'>
                 <p>Giới tính:</p>
                 <ul>
-                    <li><label><input type='radio' name='gender' onChange={handleChange} id='male'/>Nam</label></li>
-                    <li><label><input type='radio' name='gender' onChange={handleChange} id='female'/>Nữ</label></li>
+                    <li><label><input type='radio' name='gender' onChange={handleChange} className='male'/>Nam</label></li>
+                    <li><label><input type='radio' name='gender' onChange={handleChange} className='female'/>Nữ</label></li>
                 </ul>
             </div>
             <div className='role'>
                 <p>Vai trò:</p>
                 <ul>
-                    <li><label><input type='radio' name='role' onChange={handleChange} id='admin'/>Quản trị viên</label></li>
-                    <li><label><input type='radio' name='role' onChange={handleChange} id='teacher'/>Giảng viên</label></li>
-                    <li><label><input type='radio' name='role' onChange={handleChange} id='student'/>Sinh viên</label></li>
+                    <li><label><input type='radio' name='role' onChange={handleChange} className='admin'/>Quản trị viên</label></li>
+                    <li><label><input type='radio' name='role' onChange={handleChange} className='teacher'/>Giảng viên</label></li>
+                    <li><label><input type='radio' name='role' onChange={handleChange} className='student'/>Sinh viên</label></li>
                 </ul>
             </div>
             {/* Form section for ADMIN */}
             <div className="roleInfo admin" style={{display:(form.role==='admin')?'flex':'none'}}>
                 <label>Mã số quản trị viên:
-                    <input type='text' name='roleID' onChange={handleChange} id='adminID'></input>
+                    <input type='text' name='roleID' onChange={handleChange} className='adminID'></input>
                 </label>
             </div>
             {/* Form section for TEACHER */}
             <div className="roleInfo teacher" style={{display:(form.role==='teacher')?'flex':'none'}}>
                 <label>Mã số giảng viên:
-                    <input type='text' name='roleID' onChange={handleChange} id='teacherID'></input>
+                    <input type='text' name='roleID' onChange={handleChange} className='teacherID'></input>
                 </label>
                 <label>Khoa trực thuộc:
-                    <select className='faculty' name='faculty' id='teacherFaculty' onChange={handleChange}>
+                    <select name='faculty' className='teacherFaculty' onChange={handleChange}>
                         {listFaculty.map((faculty)=>{
                             return <option key={faculty}>{faculty}</option>
                         })}
@@ -220,10 +224,10 @@ export default function CreateUserForm() {
             {/* Form section for STUDENT */}
             <div className="roleInfo student" style={{display:(form.role==='student')?'flex':'none'}}>
                 <label>Mã số sinh viên:
-                    <input type='text' name='roleID' onChange={handleChange} id='studentID'></input>
+                    <input type='text' name='roleID' onChange={handleChange} className='studentID'></input>
                 </label>
                 <label>Khoa trực thuộc:
-                    <select className='faculty' name='faculty' id='studentFaculty' onChange={handleChange}>
+                    <select name='faculty' className='studentFaculty' onChange={handleChange}>
                         {listFaculty.map((faculty)=>{
                             return <option key={faculty}>{faculty}</option>
                         })}
@@ -235,12 +239,12 @@ export default function CreateUserForm() {
             </div>
 
             <button className='confirmButton' onClick={checkForm}>Tạo người dùng</button>
-            {/* Form section for displaying errors */}
+            {/* Form section for displaying errors 
             <div className="notiList" style={{display:(errorList.length > 0)?"flex":"none"}}>
                 {errorList.map(error => {
                     return <p key={error}>{error}</p>
                 })}
-            </div>
+            </div>*/}
         </form>
     </div>
 }
