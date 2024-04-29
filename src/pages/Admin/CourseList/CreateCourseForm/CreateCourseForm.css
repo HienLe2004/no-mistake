@@ -39,7 +39,7 @@
     flex-direction: column;
 }
 .createCourseForm .listWeek {
-    margin-top: 10px;
+    margin: 10px 0;
     display: flex;
     grid-template-columns: auto auto auto;
     flex-wrap: wrap;

@@ -29,9 +29,9 @@ export default function CreateUserForm() {
         confirmPassword: "",
         name: "",
         phoneNumber: 0,
-        day: "1",
-        month: "1",
-        year: "1920",
+        day: "",
+        month: "",
+        year: "",
         gender: "",
         role: "",
         roleID: "",
@@ -77,21 +77,29 @@ export default function CreateUserForm() {
     const checkForm = async (e) => {
         e.preventDefault();
         let notiList = [];
-        if (form.confirmPassword !== form.password) notiList.push("Mật khẩu xác nhận không trùng khớp!");
-        if (form.password.length < 8) notiList.push("Vui lòng tạo mật khẩu trên 8 ký tự!");
-        if (form.name === "") notiList.push("Vui lòng điền đầy đủ họ và tên");
-        if (form.day === 0 || form.month === 0 || form.year === 0) notiList.push("Vui lòng điền đầy đủ ngày tháng năm sinh!");
-        if (form.gender === "") notiList.push("Vui lòng chọn giới tính người dùng!");
-        if (form.role === "") notiList.push("Vui lòng chọn vai trò của người dùng!");
-        if (form.roleID == "") notiList.push("Vui lòng nhập mã số người dùng!");
+        if (form.confirmPassword !== form.password)
+            notiList.push("Mật khẩu xác nhận không trùng khớp!");
+        if (form.password.length < 8)
+            notiList.push("Vui lòng tạo mật khẩu trên 8 ký tự!");
+        if (form.name === "")
+            notiList.push("Vui lòng điền đầy đủ họ và tên!");
+        if (form.day === 0 || form.month === 0 || form.year === 0)
+            notiList.push("Vui lòng điền đầy đủ ngày tháng năm sinh!");
+        if (form.gender === "")
+            notiList.push("Vui lòng chọn giới tính người dùng!");
+        if (form.role === "")
+            notiList.push("Vui lòng chọn vai trò của người dùng!");
+        if (form.roleID == "")
+            notiList.push("Vui lòng nhập mã số người dùng!");
         else {
-            if (! await checkRoleID(form.roleID, form.role)) notiList.push("Mã số đã được sử dụng!");
+            if (! await checkRoleID(form.roleID, form.role))
+                notiList.push("Mã số đã được sử dụng!");
         }
-        if (currentUser.role !== "admin") notiList.push("Chỉ quản trị viên mới sử dụng được chức năng này!");
+        if (currentUser.role !== "admin")
+            notiList.push("Chỉ quản trị viên mới sử dụng được chức năng này!");
         if (notiList.length===0) {
             await createUserWithEmailAndPassword(secondAuth, form.email, form.password).then((cred) => {
                 CreateUserDatabase(form, cred.user.uid);
-                console.log(auth.currentUser.email)
                 notiList.push("Tạo người dùng thành công!");
             }).catch(() => {
                 notiList.push("Email không hợp lệ hoặc đã có người sử dụng!");
@@ -236,7 +244,7 @@ export default function CreateUserForm() {
         </form>
     </div>
 }
-
+//Function creates user's database from form's data
 const CreateUserDatabase = async (form, uid) => {
     const userDocRef = doc(db, "users", uid);
     let userData = {
