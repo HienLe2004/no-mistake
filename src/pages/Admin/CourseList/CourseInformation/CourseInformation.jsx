@@ -176,14 +176,14 @@ export default function CourseInformation() {
                 </select> 
             </label>
             <p className='listWeek-container'>
-                Tuần học ({listSelectedWeek.length}/{subjectDuration}):
+                Tuần học ({listSelectedWeek?.length}/{subjectDuration}):
             </p>    
             <div className="listWeek">
                 <Select options={listWeek} isMulti 
                         className='listWeek-select' 
                         onChange={SelectWeek}
                         placeholder="Danh sách tuần học"
-                        defaultValue={form.week.map((element,index) => {
+                        defaultValue={form.week?.map((element,index) => {
                             return {value:element, label:element}
                         })}/>
             </div>

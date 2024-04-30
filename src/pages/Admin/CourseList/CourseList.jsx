@@ -11,7 +11,7 @@ export default function CourseList() {
     function CourseCard({cid, data }) {
         return <>
             <div className='courseCard'>
-                <NavLink to={cid}>{data.name} - {listStatus[data.status]}</NavLink>
+                <NavLink to={cid}>{data.name} - {data?.semester} - {data.classNo} - {listStatus[data.status]}</NavLink>
             </div>
         </>
     }
