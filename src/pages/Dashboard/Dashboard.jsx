@@ -5,6 +5,8 @@ import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../../firebase.config';
 import { onAuthStateChanged } from 'firebase/auth';
 import {Helmet} from 'react-helmet-async'
+import { currentUser } from '../../components/ConditionalUI';
+
 const generateRandomBlueColor = () => {
   const hue = Math.floor(Math.random() * 75) + 175;
   const saturation = Math.floor(Math.random() * 30) + 65;
@@ -67,12 +69,8 @@ export default function App() {
               classStart: courseData.classStart,
               classNum: courseData.classNum,
               week: courseData.week,
-              finalDate: courseData.finalDate,
-              finalRoom: courseData.finalRoom,
-              finalTime: courseData.finalTime,
-              middleDate: courseData.middleDate,
-              middleRoom: courseData.middleRoom,
-              middleTime: courseData.middleTime,
+              final: courseData.final && [courseData.final[0], courseData.final[1], courseData.final[2]],
+              middle: courseData.middle && [courseData.middle[0], courseData.middle[1], courseData.middle[2]],
             });
           }
         }
@@ -93,11 +91,13 @@ export default function App() {
         <title>Bảng điều khiển | LMS-DEF-NM</title>
       </Helmet>
       <ul>
-        <li><button onClick={() => handlePageChange('schedule')}>ClassSchedule</button></li>
+        <li>{currentUser.role === 'student' && (
+      <button onClick={() => handlePageChange('schedule')}>ClassSchedule</button>
+      )}</li>
         <li><button onClick={() => handlePageChange('exam')}>ExamSchedule</button></li>
       </ul>
 
-      {activePage === 'schedule' && (
+      {activePage === 'schedule' && currentUser.role === 'student' && (
         <div>
           <h1 style={{ color: '#007bff', textAlign: 'center', padding: '20px' }}>
             LỊCH HỌC CỦA TÔI
