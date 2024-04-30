@@ -1,9 +1,11 @@
+//Le Ngoc Hien
 import { db } from '../../../../firebase.config'
 import { collection, getDocs } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import './CourseList.css'
 import CreateCourseForm from './CreateCourseForm/CreateCourseForm'
-const listStatus = {'processing':"Đang hoạt động"}
+export const listStatus = {'processing':"Đang hoạt động", 'waiting':"Mở đăng ký",
+                    'unpublished':"Chưa mở", 'end':"Kết thúc"}
 export default function CourseList() {
     function CourseCard({ data }) {
         return <>

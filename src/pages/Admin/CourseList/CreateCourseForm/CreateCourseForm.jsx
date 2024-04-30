@@ -1,3 +1,4 @@
+//Le Ngoc Hien
 import './CreateCourseForm.css'
 import {db} from '../../../../../firebase.config'
 import {getDocs, collection, doc, getDoc, addDoc, query, where} from 'firebase/firestore'
@@ -79,10 +80,12 @@ export default function CreateCourseForm() {
     //Function handles change of form
     const handleChange = (e) => {
         if (e.target.name === 'subject') {
+            const index = e.target.selectedIndex;
+            const text = e.nativeEvent.target[index].text;
             setForm((prev)=>({
                 ...prev,
-                [e.target.name]: doc(db, 'subjects/' + e.target.key),
-                [this.name]: e.target.value
+                [e.target.name]: doc(db, 'subjects/' + e.target.value),
+                ['name']: text
             }))
         }
         else {
@@ -117,7 +120,7 @@ export default function CreateCourseForm() {
             <label className='subject'>Môn học:
                 <select name='subject' onChange={handleChange}>
                     {listSubject.map((subject) => {
-                        return <option key={subject.id}>{subject.data().name}</option>
+                        return <option key={subject.id} value={subject.id}>{subject.data().name}</option>
                     })}
                 </select>    
             </label>
@@ -235,5 +238,8 @@ const CreateCourseDatabase = async (form) => {
         students:[],
         status: 'unpublished'
     };
-    await addDoc(coursesCollectionRef, courseData);
+    await addDoc(coursesCollectionRef, courseData).then(async docRef => {
+        const dataCollectionRef = collection(docRef, 'data');
+        await addDoc(dataCollectionRef,{});
+    });
 }

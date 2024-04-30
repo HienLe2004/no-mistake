@@ -43,7 +43,7 @@ export default function Profile() {
                     </tr>
                     <tr>
                         <th className="text-description">Ngày sinh</th>
-                        <td className="text-content">{userData.dateOfBirth[0]}/{userData.dateOfBirth[1]}/{userData.dateOfBirth[2]}</td>
+                        <td className="text-content">{userData.dateOfBirth?.day}/{userData.dateOfBirth?.month}/{userData.dateOfBirth?.year}</td>
                     </tr>
                     <tr>
                         <th className="text-description">Giới tính</th>
@@ -63,7 +63,8 @@ export default function Profile() {
                     </tr>
                     <tr>
                         <th className="text-description">Tình trạng học vụ</th>
-                        <td className="text-content">{(userData.status=="available")?"Đang học":"Tạm hoãn"}</td>
+                        <td className="text-content">{(userData.status=="available")?"Đang học":
+                                            ((userData.status=='freezed')?"Tạm hoãn":"Tốt nghiệp")}</td>
                     </tr>
                     <tr>
                         <th className="text-description">Số tín chỉ đăng ký</th>
@@ -102,7 +103,7 @@ export default function Profile() {
                         </tr>
                         <tr>
                             <th className="text-description">Ngày sinh</th>
-                            <td className="text-content">{userData.dateOfBirth[0]}/{userData.dateOfBirth[1]}/{userData.dateOfBirth[2]}</td>
+                            <td className="text-content">{userData.dateOfBirth?.day}/{userData.dateOfBirth?.month}/{userData.dateOfBirth?.year}</td>
                         </tr>
                         <tr>
                             <th className="text-description">Giới tính</th>
@@ -127,6 +128,11 @@ export default function Profile() {
                         <tr>
                             <th className="text-description">Lớp chủ nhiệm</th>
                             <td className="text-content">{userData.deanClass}</td>
+                        </tr>
+                        <tr>
+                            <th className="text-description">Tình trạng giảng dạy</th>
+                            <td className="text-content">{(userData.status=="available")?"Đang giảng dạy":
+                                            ((userData.status=='freezed')?"Tạm hoãn":"Kết thúc")}</td>
                         </tr>
                         <tr>
                             <th className="text-description">Số luận văn tốt nghiệp đã hướng dẫn</th>

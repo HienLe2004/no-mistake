@@ -1,6 +1,7 @@
+//Le Ngoc Hien
 import './UserInformation.css'
 import {useParams} from 'react-router-dom'
-import {auth,db} from '../../../../../firebase.config'
+import {db} from '../../../../../firebase.config'
 import {doc, getDoc, updateDoc, getDocs, query, collection, where} from 'firebase/firestore'
 import { useState, useEffect } from 'react'
 import {listDay, listFaculty, listMonth, listPosition, listYear} from '../CreateUserForm/CreateUserForm'
