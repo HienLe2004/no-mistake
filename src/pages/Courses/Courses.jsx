@@ -19,6 +19,8 @@ export default function Courses() {
         return <>
             <div className='courseCard'>
                 <p>{data?.name}-{data?.subject?.id}</p>
+                <p>Trạng thái: {listStatus[data?.status]}</p>
+                <p>Số lượng đăng ký: {data?.students?.length}/{data?.capacity}</p>
             </div>
         </>
     }

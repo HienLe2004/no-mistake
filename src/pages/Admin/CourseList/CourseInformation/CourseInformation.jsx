@@ -1,16 +1,16 @@
 //Le Ngoc Hien
-import './CreateCourseForm.css'
+import './CourseInformation.css'
+import {useParams} from 'react-router-dom'
+import {useState, useEffect} from 'react'
 import {db} from '../../../../../firebase.config'
-import {getDocs, collection, doc, getDoc, addDoc, query, where} from 'firebase/firestore'
-import {currentUser} from '../../../../components/ConditionalUI'
-import { useState, useEffect } from 'react'
 import Select from 'react-select'
-export const listDay = ['Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm',
-                 'Thứ sáu', 'Thứ bảy', 'Chủ nhật'];
-export const listWeek = Array(52).fill().map((element,index)=>{
-    return {value:index+1,label:index+1}});
-export const listCapacity = Array(400).fill().map((element,index)=>index+1);
-export default function CreateCourseForm() {
+import {doc, getDoc, updateDoc, getDocs, query, collection, where} from 'firebase/firestore'
+import {listCapacity,listDay,listWeek,
+    GetListBlock,GetListRoom,GetListSemester,GetListSubject} from '../CreateCourseForm/CreateCourseForm'
+import {listStatus} from '../CourseList'
+import {currentUser} from '../../../../components/ConditionalUI'
+export default function CourseInformation() {
+    const {cid} = useParams();
     //Use state for list of form data
     const [listSubject, setListSubject] = useState([]);
     const [listBlock, setListBlock] = useState([]);
@@ -20,42 +20,55 @@ export default function CreateCourseForm() {
     const [subjectDuration, setSubjectDuration] = useState(0);
     const [listSelectedWeek, setListSelectedWeek] = useState([]);
     const [listSemester, setListSemester] = useState([]);
-    //Use state for list of error const [listError, setListError] = useState([]);
-    //Use state for form
-    const [form, setForm] = useState({
-        subject: "",
-        name: "",
-        block: "H1",
-        room: "",
-        classNum: 0,
-        classStart: 1,
-        day: listDay[0],
-        week: [],
-        semester: "",
-        capacity: 1
-    })
+    const [loading, setLoading] = useState(true);
+    const [courseData, setCourseData] = useState();
+    const [form, setForm] = useState({});
+    useEffect(() => {
+        const fetchCourseData = async () => {
+            const data = await getCourseData(cid);
+            setCourseData(data);
+            setForm({
+                subject: data.data().subject,
+                name: data.data().name,
+                capacity: data.data().capacity,
+                classNum: data.data().classNum,
+                classStart: data.data().classStart,
+                status: data.data().status,
+                block: data.data().room.slice(0,2),
+                room: data.data().room.slice(3),
+                day: data.data().day,
+                semester: data.data().semester,
+                week: data.data().week,
+            })
+            setListSelectedWeek(data.data().week);
+            setSubjectDuration(data.data().week?.length);
+            console.log(data.data());
+        }
+        fetchCourseData();
+    },[cid])
     //Function handles fetching initial data from firestore
     useEffect(() => {
         const fetchLists = async () => {
             const listSub = await GetListSubject();
             setListSubject(listSub);
-            form.subject = doc(db, 'subjects/' + listSub[0].id);
-            form.name = listSub[0].data().name;
+            //form.subject = doc(db, 'subjects/' + listSub[0].id);
+            //form.name = listSub[0].data().name;
             const listBlo = await GetListBlock();
             setListBlock(listBlo);
-            form.block = listBlo[0].id;
+            //form.block = listBlo[0].id;
             const listSem = await GetListSemester();
             setListSemester(listSem);
-            form.semester = listSem[0].id;
+            //form.semester = listSem[0].id;
         }
-        fetchLists();
+        fetchLists().then(() => setLoading(false));
     },[])
     //Function handles list room based on selected block
     useEffect(() => {
         const fetchList = async () => {
-            const list = await GetListRoom(form.block);
-            setListRoom(list);
-            form.room = list[0];
+            if (form.block) {
+                const list = await GetListRoom(form.block);
+                setListRoom(list);
+            }
         }
         fetchList();
     },[form.block])
@@ -97,60 +110,68 @@ export default function CreateCourseForm() {
             }))
         }
     }
-    //Function validates form
-    const checkForm = async (e) => {
+    const checkForm = async(e) => {
         e.preventDefault();
         let notiList = [];
-        if (form.week.length !== subjectDuration)
-            notiList.push("Vui lòng nhập đúng số lượng tuần học!");
+        if (form?.capacity < courseData?.data().students?.length) 
+            notiList.push(`Vui lòng nhập số lượng lớn hơn hoặc bằng số sinh viên đã đăng ký! (${courseData?.data().students?.length})`)
+        if (form?.week?.length !== courseData?.data()?.week?.length)
+            notiList.push(`Vui lòng nhập đúng số lượng tuần học! (${courseData?.data()?.week?.length}})`);
         if (currentUser.role !== "admin")
             notiList.push("Chỉ quản trị viên mới sử dụng được chức năng này!");
         if (notiList.length===0) {
-            await CreateCourseDatabase(form).then(() => {
-                notiList.push("Tạo khóa học thành công!");
+            await UpdateCourseDatabase(form, cid).then(() => {
+                notiList.push("Cập nhật khóa học thành công!");
             }).catch((err) => {
                 console.log(err.message);
-                notiList.push("Tạo khóa học thất bại!");
+                notiList.push("Cập nhật khóa học thất bại!");
             })
         }
         let notiGroup = '';
         notiList.forEach(noti => notiGroup += (noti + '\n'));
         alert(notiGroup);
     }
-    return <div className="createCourseForm">
+    if (loading) return;
+    return <div className="courseInformation" key={courseData?.id}>
         <form>
             <label className='subject'>Môn học:
-                <select name='subject' onChange={handleChange}>
+                <select name='subject' onChange={handleChange}
+                    defaultValue={form.subject?.id}>
                     {listSubject.map((subject) => {
+                        console.log(subject.id);
                         return <option key={subject.id} value={subject.id}>{subject.data().name}</option>
                     })}
                 </select>    
             </label>
             <label className='block'>Tòa học:
-                <select name='block' onChange={handleChange}>
+                <select name='block' onChange={handleChange}
+                    defaultValue={form.block}>
                     {listBlock.map((block) => {
-                        return <option key={block.id}>{block.id}</option>
+                        return <option key={block.id} value={block.id}>{block.id}</option>
                     })}
                 </select>    
             </label>
             <label className='room'>Phòng học:
-                <select name='room' onChange={handleChange}>
+                <select name='room' onChange={handleChange}
+                    defaultValue={form.room}>
                     {listRoom.map((room) => {
-                        return <option key={room}>{room}</option>
+                        return <option key={room} value={room}>{room}</option>
                     })}
                 </select>    
             </label>
             <label className='classStart'>Tiết bắt đầu:
-                <select name='clastStart' onChange={handleChange}>
+                <select name='clastStart' onChange={handleChange}
+                    defaultValue={form.classStart}>
                     {listClassStart.map((index) => {
                         return <option key={index}>{index}</option>
                     })}
                 </select> 
             </label>
             <label className='day'>Ngày học:
-                <select name='day' onChange={handleChange}>
+                <select name='day' onChange={handleChange}
+                    defaultValue={form.day}>
                     {listDay.map((index) => {
-                        return <option key={index}>{index}</option>
+                        return <option key={index} value={index}>{index}</option>
                     })}
                 </select> 
             </label>
@@ -161,82 +182,48 @@ export default function CreateCourseForm() {
                 <Select options={listWeek} isMulti 
                         className='listWeek-select' 
                         onChange={SelectWeek}
-                        placeholder="Danh sách tuần học"/>
+                        placeholder="Danh sách tuần học"
+                        defaultValue={form.week.map((element,index) => {
+                            return {value:element, label:element}
+                        })}/>
             </div>
             <label className='semester'>Học kì:
-                <select name='semester' onChange={handleChange}>
+                <select name='semester' onChange={handleChange}
+                    defaultValue={form.semester}>
                     {listSemester.map((semester) => {
                         return <option key={semester.id}>{semester.id}</option>
                     })}
                 </select>    
             </label>
             <label className='capacity'>Số lượng:
-                <select name='capacity' onChange={handleChange}>
+                <select name='capacity' onChange={handleChange}
+                    defaultValue={form.capacity}>
                     {listCapacity.map((capacity) => {
                         return <option key={capacity}>{capacity}</option>
                     })}
                 </select>    
             </label>
-            <button className="confirm-button" onClick={checkForm}>Tạo khóa học</button>
-            {/* Form section for displaying errors 
-            <div className="notiList" style={{display:(listError.length > 0)?"flex":"none"}}>
-                {listError.map(error => {
-                    return <p key={error}>{error}</p>
-                })}
-            </div>*/}
+            <label className='status'>Trạng thái:
+                <select name='status' onChange={handleChange}
+                    defaultValue={form.status}>
+                    {Object.keys(listStatus).map((key) => {
+                        return <option key={key} value={key}>{listStatus[key]}</option>
+                    })}
+                </select>    
+            </label>
+            <button className="confirm-button" onClick={checkForm}>Cập nhật</button>
         </form>
-    </div>
+    </div>    
 }
-//Function gets collection of subjects from firestore
-export const GetListSubject = async () => {
-    let listsubject = [];
-    const subjects = await getDocs(collection(db, 'subjects')).then((docs) => {
-        docs.forEach((doc) => listsubject.push(doc));
-    })
-    return (listsubject);
+//Function gets course's data from firestore
+const getCourseData = async (cid) => {
+    const courseDocRef = doc(db, 'courses', cid);
+    return await getDoc(courseDocRef);
 }
-//Function gets collection of blocks from firestore
-export const GetListBlock = async () => {
-    let listblock = [];
-    const blocks = await getDocs(collection(db, 'blocks')).then((docs) => {
-        docs.forEach((doc) => listblock.push(doc));
-    })
-    return (listblock);
-}
-//Function gets array of room from block document
-export const GetListRoom = async (block) => {
-    let listroom = [];
-    if (!block) return listroom;
-    //console.log('get list room at block '+block);
-    const rooms = await getDoc(doc(db, 'blocks', block)).then(blockDoc => {
-        listroom = blockDoc.data().rooms;
-    });
-    return (listroom);
-}
-//Function gets array of semester from firestore those are currently available (time dependent)
-export const GetListSemester = async () => {
-    let listsemester = [];
-    const blocks = await getDocs(collection(db, 'semesters')).then((docs) => {
-        docs.forEach((doc) => {
-            const semesterEnd = new Date(doc.data().end['year'],
-                                        doc.data().end['month'],
-                                        doc.data().end['day']);
-            const currentDate = new Date();
-            if (semesterEnd.getTime() > currentDate.getTime())
-                listsemester.push(doc) 
-        });
-    })
-    return (listsemester);
-}
-//Function creates course from form's data
-const CreateCourseDatabase = async (form) => {
-    const coursesCollectionRef = collection(db, 'courses');
-    const q = query(coursesCollectionRef, where('subject', '==', form.subject), 
-                    where('semester', '==', form.semester));
-    const querySnapshot = await getDocs(q);
-    const classID = querySnapshot.size + 1;
+//Function creates course's database from form's data
+const UpdateCourseDatabase = async (form, cid) => {
+    const courseDocRef = doc(db, "courses", cid);
     let courseData = {
-        classNo: 'L'+('0'+classID).slice(-2),
         classNum: form.classNum,
         classStart: form.classStart,
         week: form.week,
@@ -246,12 +233,8 @@ const CreateCourseDatabase = async (form) => {
         semester: form.semester,
         subject: form.subject,
         capacity: form.capacity,
-        teacher:null,
-        students:[],
-        status: 'unpublished'
-    };
-    await addDoc(coursesCollectionRef, courseData).then(async docRef => {
-        const dataCollectionRef = collection(docRef, 'data');
-        await addDoc(dataCollectionRef,{});
-    });
+        status: form.status
+    }
+    //console.log(userData);
+    await updateDoc(courseDocRef, courseData);
 }

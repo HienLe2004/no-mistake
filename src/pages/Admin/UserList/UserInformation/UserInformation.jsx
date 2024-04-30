@@ -261,7 +261,7 @@ export default function UserInformation() {
         </form>
     </div>
 }
-
+//Function gets user's data from firestore
 const getUserData = async(uid) => {
     const userDocRef = doc(db, 'users', uid);
     return await getDoc(userDocRef);

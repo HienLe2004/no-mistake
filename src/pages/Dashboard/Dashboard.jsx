@@ -5,7 +5,6 @@ import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../../firebase.config';
 import { onAuthStateChanged } from 'firebase/auth';
 import {Helmet} from 'react-helmet-async'
-
 const generateRandomBlueColor = () => {
   const hue = Math.floor(Math.random() * 75) + 175;
   const saturation = Math.floor(Math.random() * 30) + 65;

@@ -1,0 +1,70 @@
+.courseInformation {
+    display: flex;
+    justify-content: center;
+}
+.courseInformation form {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(0, 70, 120);
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+}
+.courseInformation label{
+    box-sizing: border-box;
+    display: flex;
+    border-radius: 10px;
+    width: 100%;
+    align-items: center;
+    margin: 0;
+}
+.courseInformation input {
+    box-sizing: border-box;
+    margin: 5px 0 20px;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+.courseInformation select{
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid;
+}
+.courseInformation .listWeek-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.courseInformation .listWeek {
+    margin: 10px 0;
+    display: flex;
+    grid-template-columns: auto auto auto;
+    flex-wrap: wrap;
+    gap: 0;
+}
+.courseInformation .listWeek .listWeek-select{
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.courseInformation .listWeek .week:hover {
+    background-color: rgb(1, 125, 213);
+}
+.courseInformation .confirm-button{
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid rgb(0, 70, 120);
+    background-color: rgb(0, 70, 120);
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.9);
+}
+.courseInformation button:hover{
+    background-color: rgb(1, 125, 213);
+}
+.courseInformation .notiList{
+    display: flex;
+    flex-direction: column;
+}
