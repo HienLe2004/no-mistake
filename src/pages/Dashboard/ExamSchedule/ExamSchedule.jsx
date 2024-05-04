@@ -31,12 +31,12 @@ const ExamSchedule = ({ subjects }) => {
             <td>{subject.code}</td>
             <td>{subject.name}</td>
             <td>{subject.classNo}</td>
-            <td>{subject.middle[0]}</td>
-            <td>{subject.middle[1]}</td>
-            <td>{subject.middle[2]}</td>
-            <td>{subject.final[0]}</td>
-            <td>{subject.final[1]}</td>
-            <td>{subject.final[2]}</td>
+            <td>{subject.middle?.day}/{subject.middle?.month}</td>
+            <td>{subject.middle?.hour}g{('0'+subject.middle?.minute).slice(-2)}</td>
+            <td>{subject.middleRoom}</td>
+            <td>{subject.final?.day}/{subject.final?.month}</td>
+            <td>{subject.final?.hour}g{('0'+subject.final?.minute).slice(-2)}</td>
+            <td>{subject.finalRoom}</td>
           </tr>
         ))}
       </tbody>

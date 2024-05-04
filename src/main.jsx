@@ -18,6 +18,7 @@ import CourseList from './pages/Admin/CourseList/CourseList.jsx'
 import Announcement from './pages/Admin/Announcement/Announcement.jsx'
 import UserInformation from './pages/Admin/UserList/UserInformation/UserInformation.jsx'
 import CourseInformation from './pages/Admin/CourseList/CourseInformation/CourseInformation.jsx'
+import ScheduleInformation from './pages/Admin/Schedule/ScheduleInformation/ScheduleInformation.jsx'
 
 const router = createBrowserRouter([
   {
@@ -65,7 +66,13 @@ const router = createBrowserRouter([
           },
           {
             path: 'schedule',
-            element: <Schedule />
+            element: <Schedule />,
+            children: [
+              {
+                path: ':cid',
+                element: <ScheduleInformation/>
+              }
+            ]
           },
           {
             path: 'courselist',
