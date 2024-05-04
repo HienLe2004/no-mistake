@@ -69,8 +69,12 @@ export default function App() {
               classStart: courseData.classStart,
               classNum: courseData.classNum,
               week: courseData.week,
-              final: courseData.final && [courseData.final[0], courseData.final[1], courseData.final[2]],
-              middle: courseData.middle && [courseData.middle[0], courseData.middle[1], courseData.middle[2]],
+              middleDay: courseData.middleDay,
+              middleTime: courseData.middleTime,
+              middleRoom: courseData.middleRoom,
+              finalDay: courseData.finalDay,
+              finalTime: courseData.finalTime,
+              finalRoom: courseData.finalRoom,
             });
           }
         }
