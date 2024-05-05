@@ -5,7 +5,7 @@ import { storage } from "../../../firebase.config";
 import { getDoc, doc, getDocs, collection} from 'firebase/firestore'
 import { ref, getDownloadURL } from "firebase/storage";
 import { auth } from '../../../firebase.config'
-
+import CourseImage from '../../assets/course-image.png'
 import './MyCourses.css'
 
 function getUnique(arr, index) {
@@ -97,7 +97,7 @@ export default function MyCourses() {
             <div className="card-around">
                 {uniquecourse.map(course => (
                     <button onClick={() => handleClick(course.reference)} key={course.id} className="card-container" >
-                        <img src="https://picsum.photos/250/100" className="card-img"/>
+                        <img src={CourseImage} alt='CourseImage' className="card-img"/>
                         <h1 className="card-title">{course.name}</h1>
                     </button>
                 ))}
@@ -117,7 +117,7 @@ export default function MyCourses() {
                         <h1 className="card-course-title">{course.name}</h1>
                         <div className="card-course-description">{course.description}</div>
                         {course.files.map(filename => (
-                            <a className="card-course-filename" onClick={() => downloadData(filename)} key={filename}>{filename}</a>
+                            <a className="card-course-filename" onClick={() => downloadData(filename)} key={filename}>- {filename}</a>
                         ))
                         }
                     </div>
