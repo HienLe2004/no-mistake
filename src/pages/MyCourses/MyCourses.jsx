@@ -62,8 +62,7 @@ const getCourseList = async () => {
     })
     return listCourse;
 }
-const getCourseDoc = async (courseRef) => {
-    console.log(courseRef.id);
+export const getCourseDoc = async (courseRef) => {
     let cDoc = null;
     const courseDoc = await getDoc(doc(db, 'courses', courseRef.id)).then((doc)=>{
         cDoc = doc;
