@@ -86,6 +86,14 @@ export default function Courses() {
                     errorList += 'Mở lớp cho khóa học thành công!';
                     setSignUpCourse(true);
                 })
+                await data?.students.forEach(studentRef => {
+                    updateDoc(studentRef, {
+                        courses: arrayUnion(studentRef)
+                    })
+                })
+                await updateDoc(data?.teacher, {
+                    courses: arrayUnion(data?.teacher)
+                })
             }
             alert(errorList);
         }

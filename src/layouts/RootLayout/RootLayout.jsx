@@ -53,7 +53,7 @@ export default function RootLayOut() {
                         <img src={LogoBK} alt='logo' className="logo"></img>
                     </Link>
                     <NavLink to="/">Trang chủ</NavLink>
-                    <NavLink to="myCourses" className="showStudent" 
+                    <NavLink to="myCourses" className="showStudent showTeacher" 
                         style={{ display: "none" }}>Khóa học của tôi</NavLink>
                     <NavLink to="dashboard" className="showTeacher showStudent"
                         style={{ display: "none" }}>Bảng điều khiển</NavLink>
