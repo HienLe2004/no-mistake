@@ -19,6 +19,7 @@ import Announcement from './pages/Admin/Announcement/Announcement.jsx'
 import UserInformation from './pages/Admin/UserList/UserInformation/UserInformation.jsx'
 import CourseInformation from './pages/Admin/CourseList/CourseInformation/CourseInformation.jsx'
 import ScheduleInformation from './pages/Admin/Schedule/ScheduleInformation/ScheduleInformation.jsx'
+import CourseData from './pages/MyCourses/CourseData/CourseData.jsx'
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
         path: 'myCourses',
         element: <MyCourses />
       },
+      {
+        path:':cid',
+        element: <CourseData />
+      }
+      ,
       {
         path: 'dashboard',
         element: <Dashboard />
