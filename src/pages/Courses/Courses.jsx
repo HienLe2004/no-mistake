@@ -88,11 +88,11 @@ export default function Courses() {
                 })
                 await data?.students.forEach(studentRef => {
                     updateDoc(studentRef, {
-                        courses: arrayUnion(studentRef)
+                        courses: arrayUnion(doc(db,'courses',courseDocRef.id))
                     })
                 })
                 await updateDoc(data?.teacher, {
-                    courses: arrayUnion(data?.teacher)
+                    courses: arrayUnion(doc(db,'courses',courseDocRef.id))
                 })
             }
             alert(errorList);
