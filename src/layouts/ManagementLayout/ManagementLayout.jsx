@@ -6,10 +6,6 @@ import './ManagementLayout.css'
 import {currentUser} from '../../components/ConditionalUI'
 export default function ManagementLayout() {
     const navigate = useNavigate();
-    //Handle comditional UI
-    import('../../components/ConditionalUI').catch(err => {
-        console.log(err);
-    })
     useEffect(() => {
         //Handle admin page permission
         if (currentUser.role !== 'admin') {

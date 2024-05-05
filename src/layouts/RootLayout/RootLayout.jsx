@@ -30,12 +30,6 @@ export default function RootLayOut() {
     useEffect(() => {
         homeInfo.current.style.display = (window.location.pathname === '/') ? "block" : "none";
     }, [location])
-    //Handle comditional UI
-    useEffect(() => {
-        import('../../components/ConditionalUI').catch(err => {
-            console.log(err);
-        })
-    }, [])
     //Handle logout
     const handleLogout = async (e) => {
         try {

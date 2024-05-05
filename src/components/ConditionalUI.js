@@ -21,7 +21,6 @@ auth.onAuthStateChanged(user => {
             currentUser.role=role;
             if (role == "student") {
                 showStudent.forEach(el => {
-                    
                     el.style.display = "flex";
                 })
             }
@@ -35,7 +34,7 @@ auth.onAuthStateChanged(user => {
                     el.style.display = "flex";
                 })
             }
-            console.log('user ' + user.email + ' role ' + role);
+            //console.log('user ' + user.email + ' role ' + role);
         })
     }
     else {
