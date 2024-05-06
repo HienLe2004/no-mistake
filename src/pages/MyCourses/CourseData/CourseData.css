@@ -1,36 +1,43 @@
+.courseDoc {
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
 .courseDoc .courseData {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     margin-bottom: 30px;
+    width: 100%;
 }
 .courseDoc .courseData .courseSection {
     width: 90%;
+    min-height: 60px;
     border: 2px solid rgb(0, 70, 120);
     border-radius: 10px;
     background-color: aliceblue;
     padding: 10px;
     align-items: center;
+    align-content: center;
+}
+.courseDoc .courseData .courseSection .sectionHeader{
+    display: flex;
+    justify-content: space-between;
 }
 .courseDoc .courseData .courseSection .sectionButton{
     display: flex;
     flex-direction: column;
     background-color: black;
-    position: absolute;
-    right: 5%;
 }
 .courseDoc .courseData .courseSection .sectionButton button{
     width: 100px;
     align-items: center;
 }
-.courseDoc .courseData .courseSection > .sectionTitle{
+.courseDoc .courseData .courseSection .sectionHeader > .sectionTitle{
     font-size: 2rem;
-    margin-bottom: 10px;
-}
-.courseDoc .courseData .courseSection > .sectionTitle{
-    font-size: 2rem;
-    margin-bottom: 10px;
 }
 .courseDoc .courseData .courseSection > .sectionDescription{
     display: flex;
@@ -59,4 +66,22 @@
 }
 .courseDoc .courseData .courseSection .addDocumentForm{
     justify-content: center;
+}
+.courseDoc .courseData .courseSection .deleteDocument{
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.courseDoc .courseData .courseSection .deleteDocument .confirmButton{
+    justify-content: center;
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.courseDoc .courseData .courseSection .deleteDocument button{
+    border-radius: 10px;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
 }
