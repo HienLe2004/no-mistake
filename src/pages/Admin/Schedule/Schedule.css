@@ -1,6 +1,7 @@
 .schedule-layout {
     justify-content: center;
     max-width: 1000px;
+    min-height: 80vh;
 }
 
 .schedule-layout h1 {

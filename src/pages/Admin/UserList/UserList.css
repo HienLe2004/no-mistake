@@ -1,7 +1,8 @@
 .userlist-layout {
     justify-content: center;
     max-width: 1000px;
-    color:black
+    color:black;
+    min-height: 60vh;
 }
 
 .userlist-layout h1 {
