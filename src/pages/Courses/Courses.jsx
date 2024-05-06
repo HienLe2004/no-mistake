@@ -4,7 +4,7 @@ import { auth, db } from '../../../firebase.config'
 import { collection, onSnapshot, doc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { readTeacherData, addElementToArray, readUserDoc1, deleteElementInArray, updateField, deleteOneField } from '../../useAll/UseAll'
-import { Card, Button } from 'antd'
+import { Card, Button, Space } from 'antd'
 
 //thay đổi đường dẫn course bằng việc thay course => courses
 //getdata of person with rol and path
@@ -31,14 +31,14 @@ function handleSubmit(path, field, val, courseID, role) {
         //update courses for student
         addElementToArray(path, field, val)
         //add student to course
-        addElementToArray(`course/${courseID}`, 'students', `users/${auth.currentUser.uid}`)
+        addElementToArray(`courses/${courseID}`, 'students', `users/${auth.currentUser.uid}`)
         console.log('check')
         alert('Đăng ký môn học thành công')
     }
     else if (role === 'teacher') {
         //update courses for teacher
         addElementToArray(path, field, val)
-        updateField(`course/${courseID}`, 'teacher', `users/${auth.currentUser.uid}`)
+        updateField(`courses/${courseID}`, 'teacher', `users/${auth.currentUser.uid}`)
         alert('Đăng ký dạy thành công')
     }
 }
@@ -49,7 +49,7 @@ function deleteStudent(pathUser, fieldUser, valUser, pathCourse, fieldCourse, va
     deleteElementInArray(pathUser, fieldUser, valUser)
     //xóa student trong danh sách course
     deleteElementInArray(pathCourse, fieldCourse, valCourse)
-    alert('Hủy môn học thành công')
+    alert('Hủy đăng ký thành công')
 }
 /* End for deletet a student */
 
@@ -59,7 +59,7 @@ function deleteTeacher(pathUser, fieldUser, valUser, pathCourse, fieldDelete) {
     deleteElementInArray(pathUser, fieldUser, valUser)
     //xóa giảng viên dạy trong khóa học
     deleteOneField(pathCourse, fieldDelete)
-    alert('Hủy dạy thành công')
+    alert('Hủy đăng ký thành công')
 }
 
 export default function Courses() {
@@ -67,7 +67,7 @@ export default function Courses() {
     //infor about inside
     const [course, setCourses] = useState([])
     useEffect(() =>
-        onSnapshot(collection(db, 'course'), (snapshot) => {
+        onSnapshot(collection(db, 'courses'), (snapshot) => {
             setCourses(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         }), []
     )
@@ -114,18 +114,29 @@ export default function Courses() {
                             fontSize: '1rem'
                         }}
                         hoverable
-                        key={index}>
-                        <p>Semester: {courseEle.semester}</p>
-                        <p>Status: {courseEle.status}</p>
-                        <p>Số lượng sinh viên đã đăng ký: {'students' in courseEle ? <>{courseEle.students.length}</> : <>0</>}</p>
-                        <p>{'teacher' in courseEle ? <>Giáo viên: <GetData path={`/users/${courseEle.teacher.id}`} rol='name' /></> : <>Chưa có giáo viên đăng ký dạy</>}</p>
-                        <p>Tên của data: <GetData path={`course/${courseEle.id}/data/key`} rol='name' /></p>
-                        <p>Mô tả: <GetData path={`course/${courseEle.id}/data/key`} rol='description' /></p>
+                        key={courseEle.id}>
+                        <p key={courseEle.id + '0'}>Semester: {courseEle.semester} </p>
+                        {/* <p key={courseEle.id + '1'}>Status: {courseEle.status}</p> */}
+                        {/* thiếu subjects*/}
+                        <p key={courseEle.id + '2'}>Số lượng sinh viên đã đăng ký: {'students' in courseEle ? <>{courseEle.students.length}</> : <>0</>}</p>
+                        <p key={courseEle.id + '3'}>{'teacher' in courseEle ? <>
+                            {courseEle.teacher !== null ?
+                                <>
+                                    Giáo viên: <GetData path={`/users/${courseEle.teacher.id}`} rol='name' key={courseEle.id + '15'} />
+                                </>
+                                : <>Chưa có giáo viên đăng ký dạy</>}</>
+                            : <>Chưa có giáo viên đăng ký dạy</>}
+                        </p>
+                        <p key={courseEle.id + '4'}>Tuần bắt đầu học: {courseEle.classStart}</p>
+                        <p key={courseEle.id + '5'}>Phòng học: {courseEle.room}</p>
+                        <p key={courseEle.id + '6'}>Số lớp: {courseEle.classNum}</p>
 
+                        {/* <p key={courseEle.id + '7'}>Tên của data: <GetData path={`courses/${courseEle.id}/data/key`} rol='name' key={courseEle.id + '17'} /></p> */}
+                        <p key={courseEle.id + '8'}>Mô tả: <GetData path={`courses/${courseEle.id}/data/key`} rol='description' key={courseEle.id + '18'} /></p>
                         {role === 'admin' ?
-                            <>
+                            <p key={courseEle.id + '14'}>
                                 admin
-                            </>
+                            </p>
                             :
                             <>
                                 {
@@ -133,20 +144,20 @@ export default function Courses() {
                                         return element.id === courseEle.id
                                     })
                                         ? <>
-                                            <p>Tình trạng:
+                                            <p key={courseEle.id + '9'}>Tình trạng:&nbsp;
                                                 {role === 'student' ?
                                                     <>
-                                                        đang học
+                                                        đã đăng ký<br />
                                                         {/* <div></div> */}
-                                                        <Button type="primary" onClick={() => deleteStudent(`users/${auth.currentUser.uid}`, `courses`, `/course/${courseEle.id}`,
-                                                            `course/${courseEle.id}`, 'students', `users/${auth.currentUser.uid}`)}>Hủy môn học</Button>
+                                                        <Button type="primary" key={courseEle.id + '10'} onClick={() => deleteStudent(`users/${auth.currentUser.uid}`, `courses`, `/courses/${courseEle.id}`,
+                                                            `courses/${courseEle.id}`, 'students', `users/${auth.currentUser.uid}`)}>Hủy đăng ký</Button>
                                                     </> :
                                                     (role === 'teacher' ?
                                                         <>
-                                                            Đang dạy
+                                                            đã đăng ký<br />
                                                             {/* <div></div> */}
-                                                            <Button type="primary" onClick={() => deleteTeacher(`users/${auth.currentUser.uid}`, `courses`, `/course/${courseEle.id}`,
-                                                                `course/${courseEle.id}`, 'teacher')}>Hủy dạy</Button>
+                                                            <Button type="primary" key={courseEle.id + '11'} onClick={() => deleteTeacher(`users/${auth.currentUser.uid}`, `courses`, `/courses/${courseEle.id}`,
+                                                                `courses/${courseEle.id}`, 'teacher')}>Hủy đăng ký</Button>
                                                         </> :
                                                         <>role: admin</>
                                                     )
@@ -157,14 +168,14 @@ export default function Courses() {
                                         <>
                                             {role === 'student' ?
                                                 <>
-                                                    <Button type="primary" onClick={() => handleSubmit(`users/${auth.currentUser.uid}`, 'courses', `/course/${courseEle.id}`, courseEle.id, role)} >Đăng ký học</Button>
+                                                    <Button type="primary" key={courseEle.id + '12'} onClick={() => handleSubmit(`users/${auth.currentUser.uid}`, 'courses', `/courses/${courseEle.id}`, courseEle.id, role)}>Đăng ký</Button>
                                                 </>
                                                 :
                                                 (role === 'teacher' ?
                                                     <>
                                                         {'teacher' in courseEle ? <> Đã có giáo viên giảng dạy</> :
                                                             <>
-                                                                <Button type="primary" onClick={() => handleSubmit(`users/${auth.currentUser.uid}`, 'courses', `/course/${courseEle.id}`, courseEle.id, role)}>Đăng ký dạy</Button>
+                                                                <Button type="primary" key={courseEle.id + '13'} onClick={() => handleSubmit(`users/${auth.currentUser.uid}`, 'courses', `/courses/${courseEle.id}`, courseEle.id, role)}>Đăng ký</Button>
                                                             </>
                                                         }
                                                     </> :
