@@ -72,7 +72,7 @@ async function getCoursesForUser(userId) {
   const userRef = doc(db, 'users', userId);
   const userDoc = await getDoc(userRef);
   if (userDoc.exists) {
-    return userDoc.data().coursesArray;
+    return userDoc.data().courses;
   } else {
     console.log('No such document!');
     return [];

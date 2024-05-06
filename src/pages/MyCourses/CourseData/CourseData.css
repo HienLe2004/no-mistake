@@ -15,18 +15,26 @@
 }
 .courseDoc .courseData .courseSection .sectionButton{
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
     background-color: black;
-}
-.courseDoc .courseData .courseSection .sectionButton .editButton{
-    width: 100px;
     position: absolute;
-    margin-right: 10px;
+    right: 5%;
+}
+.courseDoc .courseData .courseSection .sectionButton button{
+    width: 100px;
     align-items: center;
 }
 .courseDoc .courseData .courseSection > .sectionTitle{
     font-size: 2rem;
     margin-bottom: 10px;
+}
+.courseDoc .courseData .courseSection > .sectionTitle{
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+.courseDoc .courseData .courseSection > .sectionDescription{
+    display: flex;
+    flex-direction: column;
 }
 .courseDoc .courseData .courseSection .editForm{
     justify-content: center;
@@ -48,4 +56,7 @@
 }
 .courseDoc .courseData .courseSection .courseEditForm .sectionDescription input{
     width: 50%;
+}
+.courseDoc .courseData .courseSection .addDocumentForm{
+    justify-content: center;
 }
