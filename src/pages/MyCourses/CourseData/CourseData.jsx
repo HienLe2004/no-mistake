@@ -329,7 +329,7 @@ export default function CourseData() {
                             {propsOrder.map((prop,i) => {
                                 return <td key={i} style={{padding:"0"}}>
                                 <input className={index} type='number'
-                                    defaultValue={studentMarks[index]['mark'][prop].toString()}
+                                    defaultValue={studentMarks[index]['mark'][prop]?.toString()}
                                     style={{width:"100%",boxSizing:"border-box",border:"none",padding:"10px"}}
                                     name={prop} onChange={handleChange}/>
                                 </td>
