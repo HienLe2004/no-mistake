@@ -65,7 +65,7 @@ export default function CreateCourseForm() {
             return obj.data().name === form.name
         })
         if (currentSubject) {
-            setListClassStart(Array(13 - isNaN(currentSubject.data()?.classNum)?0:currentSubject.data()?.classNum)
+            setListClassStart(Array(13 - (isNaN(currentSubject.data()?.classNum)?0:currentSubject.data()?.classNum))
             .fill().map((element,index)=>index+1));
             setSubjectDuration(currentSubject.data().duration);
             form.classNum = currentSubject.data().classNum;
