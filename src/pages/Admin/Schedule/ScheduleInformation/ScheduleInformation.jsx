@@ -14,7 +14,7 @@ export default function ScheduleInformation() {
     const [listRoom, setListRoom] = useState([]);
     const [loading, setLoading] = useState(true);
     const [courseData, setCourseData] = useState();
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState({middleBlock:"H1", finalBlock:"H1"});
     useEffect(() => {
         const fetchCourseData = async () => {
             const data = await getCourseData(cid);
@@ -27,7 +27,6 @@ export default function ScheduleInformation() {
                 finalBlock: data.data().finalRoom?.slice(0,2),
                 finalRoom: data.data().finalRoom?.slice(3),
             })
-            console.log(data.data());
         }
         fetchCourseData();
     },[cid])
@@ -45,6 +44,7 @@ export default function ScheduleInformation() {
             if (form.middleBlock) {
                 const list = await GetListRoom(form.middleBlock);
                 setListRoom(list);
+                form.middleRoom = list[0];
             }
         }
         fetchList();
@@ -55,6 +55,7 @@ export default function ScheduleInformation() {
             if (form.finalBlock) {
                 const list = await GetListRoom(form.finalBlock);
                 setListRoom(list);
+                form.finalRoom = list[0];
             }
         }
         fetchList();
@@ -184,14 +185,16 @@ export default function ScheduleInformation() {
                 </select>
             </label>
             <label className='finalBlock'>Tòa thi cuối kì:
-                <select name='finalBlock' onChange={handleChange}>
+                <select name='finalBlock' onChange={handleChange}
+                    defaultValue={form.finalBlock}>
                     {listBlock.map((block) => {
                         return <option key={block.id}>{block.id}</option>
                     })}
                 </select>    
             </label>
             <label className='finalRoom'>Phòng thi cuối kì:
-                <select name='finalRoom' onChange={handleChange}>
+                <select name='finalRoom' onChange={handleChange}
+                    defaultValue={form.finalRoom}>
                     {listRoom.map((room) => {
                         return <option key={room}>{room}</option>
                     })}
