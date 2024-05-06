@@ -226,17 +226,16 @@ const getCourseData = async (cid) => {
 const UpdateCourseDatabase = async (form, cid) => {
     const courseDocRef = doc(db, "courses", cid);
     let courseData = {
-        classNum: form.classNum,
-        classStart: form.classStart,
+        classNum: parseInt(form.classNum),
+        classStart: parseInt(form.classStart),
         week: form.week,
         day: form.day,
         name: form.name,
         room: form.block + '-' + form.room,
         semester: form.semester,
         subject: form.subject,
-        capacity: form.capacity,
+        capacity: parseInt(form.capacity),
         status: form.status
     }
-    console.log(courseData);
     await updateDoc(courseDocRef, courseData);
 }

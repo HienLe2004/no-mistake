@@ -141,7 +141,7 @@ export default function CreateCourseForm() {
                 </select>    
             </label>
             <label className='classStart'>Tiết bắt đầu:
-                <select name='clastStart' onChange={handleChange}>
+                <select name='classStart' onChange={handleChange}>
                     {listClassStart.map((index) => {
                         return <option key={index}>{index}</option>
                     })}
