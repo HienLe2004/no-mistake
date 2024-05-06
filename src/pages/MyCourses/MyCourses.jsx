@@ -32,12 +32,12 @@ export default function MyCourses() {
             }
             fetchData();
         },[])
-        return <button className="card-container">
-            <img src={CourseImage} alt='CourseImage' className="card-img"/>
-            <Link className="card-title" to={'/' + courseData?.id} relative="route">
-                <h1>{courseData?.data().name}</h1>
-            </Link>
-        </button>
+        return <Link to={'/' + courseData?.id} relative="route">
+            <button className="card-container">
+                <img src={CourseImage} alt='CourseImage' className="card-img"/>
+                <h1 className="card-title">{courseData?.data().name}</h1>
+            </button>
+        </Link>
     }
     if (loading) return <h1>Đang tải...</h1>;
     return <>
