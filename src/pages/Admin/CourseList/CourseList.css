@@ -1,0 +1,44 @@
+.courselist-layout {
+    justify-content: center;
+    max-width: 1000px;
+}
+
+.courselist-layout h1 {
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+.courselist-layout .courselist {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    row-gap:20px;
+    padding-bottom: 30px;
+}
+
+.courselist-layout .courselist .courseCard {
+    display: flex;
+    width: 400px;
+    border: 2px solid rgb(0, 70, 120);
+    border-radius: 10px;
+    background-color: aliceblue;
+    align-items: center;
+    padding: 10px;
+}
+.courselist-layout .courselist .courseCard a{
+    text-decoration: none;
+    color: black;
+}
+.courselist-layout button {
+    font-size: 18px;
+    padding: 10px;
+    border: 2px solid rgb(0, 70, 120);
+    border-radius: 10px;
+    background-color: rgb(0, 70, 120);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.courselist-layout button:hover {
+    background-color: rgb(1, 125, 213);
+}

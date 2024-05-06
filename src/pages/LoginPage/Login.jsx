@@ -1,17 +1,20 @@
-import Footer from "../../components/Footer/Footer"
-//import './auth'
+//Le Ngoc Hien
 import './Login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../../firebase.config'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from "react-helmet-async"
 export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
+    const [errorList, setErrorList] = useState([]);
+    //Handle login, if successed then navigate to home page else display error
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let error = [];
+        setErrorList(error);
         try {
             const email = emailRef.current.value;
             const password = passwordRef.current.value;
@@ -22,11 +25,13 @@ export default function Login() {
             navigate("/");
         }
         catch (err) {
+            error.push("Đăng nhập không thành công!");
             console.log("login failed");
             emailRef.current.value = '';
             passwordRef.current.value = '';
             //console.error(err);
         }
+        setErrorList(error);
     }
     return <>
         <Helmet>
@@ -44,6 +49,7 @@ export default function Login() {
                     </label>
                     <button type="submit" className="login-button">Đăng nhập</button>
                     <a href="#" target="_blank" className="forgot-password">Quên mật khẩu?</a>
+                    <p style={{display:(errorList==[])?"none":"flex"}}>{errorList}</p>
                 </form>
             </section>
         </div>

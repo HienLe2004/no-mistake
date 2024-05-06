@@ -1,3 +1,4 @@
+//Le Ngoc Hien
 import { NavLink, Outlet, Link, useLocation, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../components/Footer/Footer';
@@ -17,8 +18,9 @@ const slides = [
 ];*/
 const containerStyles = {
     width: "100%",
-    height: "94vh",
+    height: "90vh",
     margin: "0 auto",
+    display: "flex"
 };
 
 export default function RootLayOut() {
@@ -28,17 +30,12 @@ export default function RootLayOut() {
     useEffect(() => {
         homeInfo.current.style.display = (window.location.pathname === '/') ? "block" : "none";
     }, [location])
-    //Handle comditional UI
-    useEffect(() => {
-        import('../../components/ConditionalUI').catch(err => {
-            console.log(err);
-        })
-    }, [])
     //Handle logout
     const handleLogout = async (e) => {
         try {
+            const uid = auth.currentUser.email;
             await auth.signOut();
-            console.log("logout successed");
+            console.log("logout successed " + uid);
         }
         catch (err) {
             console.log("logout failed");
@@ -56,26 +53,21 @@ export default function RootLayOut() {
                         <img src={LogoBK} alt='logo' className="logo"></img>
                     </Link>
                     <NavLink to="/">Trang chủ</NavLink>
-
-                    <NavLink to="myCourses" className="showStudent" style={{ display: "none" }}>Khóa học của tôi</NavLink>
-                    <NavLink to="dashboard" className="showUser" style={{ display: "none" }}>Bảng điều khiển</NavLink>
-                    <NavLink to="courses" className="showUser" style={{ display: "none" }}>Khóa học</NavLink>
-                    <NavLink to="profile" className="showUser" style={{ display: "none" }}>Cá nhân</NavLink>
-                    <NavLink to="teaching" className="showTeacher" style={{ display: "none" }}>Giảng dạy</NavLink>
+                    <NavLink to="myCourses" className="showStudent showTeacher" 
+                        style={{ display: "none" }}>Khóa học của tôi</NavLink>
+                    <NavLink to="dashboard" className="showTeacher showStudent"
+                        style={{ display: "none" }}>Bảng điều khiển</NavLink>
+                    <NavLink to="courses" className="showUser"
+                        style={{ display: "none" }}>Khóa học</NavLink>
+                    <NavLink to="profile" className="showTeacher showStudent"
+                        style={{ display: "none" }}>Cá nhân</NavLink>
+                    <NavLink to="teaching" className="showTeacher"
+                        style={{ display: "none" }}>Giảng dạy</NavLink>
+                    <NavLink to="admin/userlist" className="showAdmin"
+                        style={{ display: "none" }}>Quản lý</NavLink>
                 </div>
-                {/* <div className="right-nav"> */}
-                {/* <NavLink to="login" className="hideUser" style={{ display: "none" }}>Đăng nhập</NavLink> */}
-                {/* <NavLink to="login" onClick={handleLogout} className="showUser" style={{ display: "none" }}>Đăng xuất</NavLink> */}
-                {/* <NavLink to="myCourses" className="showStudent" style={{ display: "none" }}>Khóa học của tôi</NavLink> */}
-                {/* <NavLink to="dashboard" className="showUser" style={{ display: "none" }}>Bảng điều khiển</NavLink> */}
-                {/* <NavLink to="courses" className="showUser" style={{ display: "none" }}>Khóa học</NavLink> */}
-                {/* <NavLink to="profile" className="showUser" style={{ display: "none" }}>Cá nhân</NavLink> */}
-                {/* <NavLink to="teaching" className="showTeacher" style={{ display: "none" }}>Giảng dạy</NavLink> */}
-
-                {/* </div> */}
                 <div className="right-nav">
                     <NavLink to="login" className="hideUser" style={{ display: "none" }}>Đăng nhập</NavLink>
-                    <NavLink to="admin" className="showAdmin" style={{ display: "none" }}>Quản lý</NavLink>
                     <NavLink to="/" onClick={handleLogout} className="showUser" style={{ display: "none" }}>Đăng xuất</NavLink>
                 </div>
             </nav>

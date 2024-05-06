@@ -41,7 +41,6 @@ export default function Profile() {
         });
     }, []);
 
-
     const [courses, setCourses] = useState([])
     useEffect(() =>
         onSnapshot(collection(db, `users/${auth.currentUser.uid}/mark`), (snapshot) => {
@@ -49,7 +48,7 @@ export default function Profile() {
         }), []
     )
 
-    if (userData.role !== "teacher") {
+    if (userData.role === "student") {
         return <>
             <Helmet>
                 <title>Thông tin cá nhân | LMS-DEF-NM</title>
@@ -70,7 +69,7 @@ export default function Profile() {
                         </tr>
                         <tr>
                             <th className="text-description">Ngày sinh</th>
-                            <td className="text-content">{userData.dateOfBirth['day']}/{userData.dateOfBirth['month']}/{userData.dateOfBirth['year']}</td>
+                            <td className="text-content">{userData.dateOfBirth?.day}/{userData.dateOfBirth?.month}/{userData.dateOfBirth?.year}</td>
                         </tr>
                         <tr>
                             <th className="text-description">Giới tính</th>
@@ -81,6 +80,7 @@ export default function Profile() {
                             <td className="text-content">{userData.phoneNumber}</td>
                         </tr>
                         <tr>
+
                             <th className="text-description">Khoa</th>
                             <td className="text-content">{userData.faculty}</td>
                         </tr>
@@ -108,7 +108,6 @@ export default function Profile() {
                 </table>
             </div>
             {/* Điểm số */}
-
             <div className="box-around">
                 <table className="table">
                     <tbody>
@@ -137,7 +136,7 @@ export default function Profile() {
             </div>
         </>
     }
-    if (userData.role !== "student") {
+    if (userData.role === "teacher") {
         return <>
             <Helmet>
                 <title>Thông tin cá nhân | LMS-DEF-NM</title>
@@ -158,7 +157,7 @@ export default function Profile() {
                         </tr>
                         <tr>
                             <th className="text-description">Ngày sinh</th>
-                            <td className="text-content">{userData.dateOfBirth}</td>
+                            <td className="text-content">{userData.dateOfBirth?.day}/{userData.dateOfBirth?.month}/{userData.dateOfBirth?.year}</td>
                         </tr>
                         <tr>
                             <th className="text-description">Giới tính</th>
@@ -170,7 +169,7 @@ export default function Profile() {
                         </tr>
                         <tr>
                             <th className="text-description">Học hàm - Học vị</th>
-                            <td className="text-content">{userData.degrees}</td>
+                            <td className="text-content">{userData.degrees[0]}-{userData.degrees[1]}-{userData.degrees[2]}</td>
                         </tr>
                         <tr>
                             <th className="text-description">Khoa</th>
@@ -183,6 +182,11 @@ export default function Profile() {
                         <tr>
                             <th className="text-description">Lớp chủ nhiệm</th>
                             <td className="text-content">{userData.deanClass}</td>
+                        </tr>
+                        <tr>
+                            <th className="text-description">Tình trạng giảng dạy</th>
+                            <td className="text-content">{(userData.status == "available") ? "Đang giảng dạy" :
+                                ((userData.status == 'freezed') ? "Tạm hoãn" : "Kết thúc")}</td>
                         </tr>
                         <tr>
                             <th className="text-description">Số luận văn tốt nghiệp đã hướng dẫn</th>

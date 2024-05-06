@@ -1,0 +1,50 @@
+.courses-layout {
+    justify-content: center;
+    align-items: center;
+}
+
+.courses-layout h1 {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.courses-layout .courseCards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: 20px;
+    padding: 0 30px;
+}
+
+.courses-layout .courseCards .courseCard {
+    width: 300px;
+    border: 2px solid rgb(0, 70, 120);
+    border-radius: 10px;
+    background-color: aliceblue;
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 10px;
+    justify-content: stretch;
+}
+
+.courses-layout .courseCards .courseCard p {
+    width: 100%;
+}
+
+.courses-layout .courseCards .courseCard .buttonGroup {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.courses-layout .courseCards .courseCard .buttonGroup button {
+    font-size: 18px;
+    padding: 10px;
+    border: 2px solid rgb(0, 70, 120);
+    border-radius: 10px;
+    background-color: rgb(0, 70, 120);
+    color: rgba(255, 255, 255, 0.9);
+}

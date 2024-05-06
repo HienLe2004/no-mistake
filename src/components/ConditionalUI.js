@@ -1,12 +1,15 @@
+//Le Ngoc Hien
 import { auth, db } from '../../firebase.config'
 import { getDoc, doc } from 'firebase/firestore'
-
+import { useState } from 'react';
+export const currentUser = {role:''};
 auth.onAuthStateChanged(user => {
     let showUser = document.querySelectorAll('.showUser');
     let hideUser = document.querySelectorAll('.hideUser');
     let showStudent = document.querySelectorAll('.showStudent');
     let showTeacher = document.querySelectorAll('.showTeacher');
     let showAdmin = document.querySelectorAll('.showAdmin');
+    
     if (user) {
         showUser.forEach(el => {
             el.style.display = "flex";
@@ -15,6 +18,7 @@ auth.onAuthStateChanged(user => {
             el.style.display = "none";
         })
         readUserDoc(user.uid).then(role => {
+            currentUser.role=role;
             if (role == "student") {
                 showStudent.forEach(el => {
                     el.style.display = "flex";
@@ -30,10 +34,11 @@ auth.onAuthStateChanged(user => {
                     el.style.display = "flex";
                 })
             }
-            console.log('user ' + user.email + ' role ' + role);
+            //console.log('user ' + user.email + ' role ' + role);
         })
     }
     else {
+        currentUser.role = "";
         showUser.forEach(el => {
             el.style.display = "none";
         })
@@ -62,3 +67,4 @@ async function readUserDoc(uid) {
     }
     return null;
 }
+export default readUserDoc

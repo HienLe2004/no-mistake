@@ -2,3 +2,11 @@
     margin: 0;
     padding: 0;
 }
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: rgb(0, 0, 181);
+}

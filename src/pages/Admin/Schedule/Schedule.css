@@ -1,0 +1,33 @@
+.schedule-layout {
+    justify-content: center;
+    max-width: 1000px;
+}
+
+.schedule-layout h1 {
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+.schedule-layout .schedule {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row;
+    row-gap: 20px;
+    padding-bottom: 30px;
+}
+
+.schedule-layout .schedule .courseCard {
+    display: flex;
+    width: 200px;
+    border: 2px solid rgb(0, 70, 120);
+    border-radius: 10px;
+    background-color: aliceblue;
+    align-items: center;
+    padding: 10px;
+}
+.schedule-layout .schedule .courseCard a{
+    text-decoration: none;
+    color: black;
+}
