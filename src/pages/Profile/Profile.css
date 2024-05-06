@@ -1,6 +1,7 @@
 .box-around {
     min-height: 72vh;
 }
+
 .table {
     margin-top: 10px;
     margin-left: auto;
@@ -14,9 +15,11 @@
     border-collapse: collapse;
     border-spacing: 0 0;
 }
+
 .head-table {
     background-color: rgb(249, 249, 249);
 }
+
 .head-table-text {
     text-align: center;
     background-color: #0c6aaa;
@@ -27,6 +30,7 @@
     vertical-align: top;
     border-top: 1px solid rgb(221, 221, 221);
 }
+
 .text-description {
     width: 40%;
     text-align: left;
@@ -37,6 +41,7 @@
     border-top: 1px solid rgb(221, 221, 221);
     box-sizing: border-box;
 }
+
 .text-content {
     text-align: left;
     padding: 8px;

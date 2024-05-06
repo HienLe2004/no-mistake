@@ -35,6 +35,7 @@ export default function UserList() {
             <button className='createUserButton'
                 onClick={() => { setHitCreateUser(!hitCreateUser) }}
                 style={{ backgroundColor: (hitCreateUser) ? "rgb(1, 125, 213)" : "rgb(0, 70, 120)" }}>Tạo người dùng mới</button>
+            <p></p>
         </div>
         <div className="formContainer" style={{ display: (hitCreateUser) ? "flex" : "none" }}>
             <CreateUserForm />

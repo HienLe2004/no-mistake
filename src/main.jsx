@@ -20,6 +20,7 @@ import UserInformation from './pages/Admin/UserList/UserInformation/UserInformat
 import CourseInformation from './pages/Admin/CourseList/CourseInformation/CourseInformation.jsx'
 import ScheduleInformation from './pages/Admin/Schedule/ScheduleInformation/ScheduleInformation.jsx'
 import CourseData from './pages/MyCourses/CourseData/CourseData.jsx'
+import Course from './pages/Courses/Course.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,14 +34,14 @@ const router = createBrowserRouter([
       },
       {
         path: 'courses',
-        element: <Courses />
+        element: <Course />
       },
       {
         path: 'myCourses',
         element: <MyCourses />
       },
       {
-        path:':cid',
+        path: ':cid',
         element: <CourseData />
       }
       ,
@@ -59,14 +60,14 @@ const router = createBrowserRouter([
       {
         path: 'admin',
         element: <ManagementLayout />,
-        children:[
+        children: [
           {
             path: 'userlist',
             element: <UserList />,
-            children:[
+            children: [
               {
                 path: ':uid',
-                element: <UserInformation/>
+                element: <UserInformation />
               }
             ]
           },
@@ -76,7 +77,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: ':cid',
-                element: <ScheduleInformation/>
+                element: <ScheduleInformation />
               }
             ]
           },
@@ -86,7 +87,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: ':cid',
-                element: <CourseInformation/>
+                element: <CourseInformation />
               }
             ]
           },

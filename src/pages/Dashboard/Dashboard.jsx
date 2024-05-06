@@ -4,7 +4,7 @@ import ExamSchedule from './ExamSchedule/ExamSchedule';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../../firebase.config';
 import { onAuthStateChanged } from 'firebase/auth';
-import {Helmet} from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { currentUser } from '../../components/ConditionalUI';
 
 const generateRandomBlueColor = () => {
@@ -94,8 +94,8 @@ export default function App() {
       </Helmet>
       <ul>
         <li>{currentUser.role === 'student' && (
-      <button onClick={() => handlePageChange('schedule')}>ClassSchedule</button>
-      )}</li>
+          <button onClick={() => handlePageChange('schedule')}>ClassSchedule</button>
+        )}</li>
         <li><button onClick={() => handlePageChange('exam')}>ExamSchedule</button></li>
       </ul>
 

@@ -1,10 +1,10 @@
 //Le Ngoc Hien
 import './Courses.css'
-import {currentUser} from '../../components/ConditionalUI'
-import {auth, db} from '../../../firebase.config'
-import {useState,useEffect} from 'react'
-import {getDocs, collection, query, where, getDoc, updateDoc, doc, arrayUnion, arrayRemove} from 'firebase/firestore'
-import {listStatus} from '../Admin/CourseList/CourseList'
+import { currentUser } from '../../components/ConditionalUI'
+import { auth, db } from '../../../firebase.config'
+import { useState, useEffect } from 'react'
+import { getDocs, collection, query, where, getDoc, updateDoc, doc, arrayUnion, arrayRemove } from 'firebase/firestore'
+import { listStatus } from '../Admin/CourseList/CourseList'
 export default function Courses() {
     //Loading list of course
     const [listCourse, setListCourse] = useState([]);
@@ -15,9 +15,9 @@ export default function Courses() {
             setListCourse(list);
         }
         fetchListCourse().then(() => setLoading(false));
-    },[])
+    }, [])
     //CourseCard template
-    function CourseCard({data, courseDocRef}) {
+    function CourseCard({ data, courseDocRef }) {
         //Get course's information
         let listClass = data?.classStart.toString();
         for (let i = 1; i < data?.classNum; i++) {
@@ -28,7 +28,7 @@ export default function Courses() {
         const endWeek = data?.week[data?.week?.length - 1];
         for (let i = startWeek; i <= endWeek; i++) {
             if (i === startWeek) listWeek += i;
-            else if (data?.week?.includes(i)) listWeek += ('|'+i);
+            else if (data?.week?.includes(i)) listWeek += ('|' + i);
             else listWeek += ("|-");
         }
         const [teacher, setTeacher] = useState("NULL");
@@ -44,7 +44,7 @@ export default function Courses() {
         //Use state for check if user has signed in course of not
         const [signUpCourse, setSignUpCourse] = useState(false);
         useEffect(() => {
-            const courseChange = async() => {
+            const courseChange = async () => {
                 const signedIn = await checkSignUpCourse(data);
                 setSignUpCourse(signedIn);
             }
@@ -58,7 +58,7 @@ export default function Courses() {
                 errorList += 'Chức năng này chỉ dành cho quản trị viên!\n';
             }
             if (errorList === "") {
-                await updateDoc(doc(db,'courses',courseDocRef.id)   , {
+                await updateDoc(doc(db, 'courses', courseDocRef.id), {
                     status: 'waiting'
                 }).then(() => {
                     errorList += 'Mở đăng ký khóa học thành công!';
@@ -72,7 +72,7 @@ export default function Courses() {
             let errorList = "";
             if (data?.teacher == null) {
                 errorList += 'Khóa học này chưa có giáo viên giảng dạy!!\n';
-            } 
+            }
             if (data?.students.length == 0) {
                 errorList += 'Khóa học này chưa có sinh viên đăng ký!\n';
             }
@@ -80,7 +80,7 @@ export default function Courses() {
                 errorList += 'Chức năng này chỉ dành cho quản trị viên!\n';
             }
             if (errorList == "") {
-                await updateDoc(doc(db,'courses',courseDocRef.id), {
+                await updateDoc(doc(db, 'courses', courseDocRef.id), {
                     status: 'processing'
                 }).then(() => {
                     errorList += 'Mở lớp cho khóa học thành công!';
@@ -88,11 +88,11 @@ export default function Courses() {
                 })
                 await data?.students.forEach(studentRef => {
                     updateDoc(studentRef, {
-                        courses: arrayUnion(doc(db,'courses',courseDocRef.id))
+                        courses: arrayUnion(doc(db, 'courses', courseDocRef.id))
                     })
                 })
                 await updateDoc(data?.teacher, {
-                    courses: arrayUnion(doc(db,'courses',courseDocRef.id))
+                    courses: arrayUnion(doc(db, 'courses', courseDocRef.id))
                 })
             }
             alert(errorList);
@@ -104,7 +104,7 @@ export default function Courses() {
                 errorList += 'Chức năng này chỉ dành cho quản trị viên!\n';
             }
             if (errorList == "") {
-                await updateDoc(doc(db,'courses',courseDocRef.id), {
+                await updateDoc(doc(db, 'courses', courseDocRef.id), {
                     status: 'unpublished'
                 }).then(() => {
                     errorList += 'Hủy lớp cho khóa học thành công!';
@@ -132,7 +132,7 @@ export default function Courses() {
                         errorList += 'Khóa học đã đầy!';
                     }
                     else {
-                        await updateDoc(doc(db,'courses',courseDocRef.id)   , {
+                        await updateDoc(doc(db, 'courses', courseDocRef.id), {
                             students: arrayUnion(doc(db, 'users', auth.currentUser.uid))
                         }).then(() => {
                             errorList += 'Đăng ký học thành công!';
@@ -151,12 +151,12 @@ export default function Courses() {
                         errorList += 'Đã có giảng viên đăng ký khóa học này!';
                     }
                     else {
-                        await updateDoc(doc(db,'courses',courseDocRef.id), {
+                        await updateDoc(doc(db, 'courses', courseDocRef.id), {
                             teacher: doc(db, 'users', auth.currentUser.uid)
                         }).then(() => {
                             errorList += 'Đăng ký dạy thành công!\n';
                             setSignUpCourse(true);
-                            getDoc(doc(db,'users',auth.currentUser.uid)).then(doc => {
+                            getDoc(doc(db, 'users', auth.currentUser.uid)).then(doc => {
                                 setTeacher(doc.data().name);
                             })
                         })
@@ -178,7 +178,7 @@ export default function Courses() {
                 });
                 if (!signUp) errorList += 'Bạn chưa đăng ký khóa học này!';
                 else {
-                    await updateDoc(doc(db,'courses',courseDocRef.id), {
+                    await updateDoc(doc(db, 'courses', courseDocRef.id), {
                         students: arrayRemove(doc(db, 'users', auth.currentUser.uid))
                     }).then(() => {
                         errorList += 'Hủy đăng ký học thành công!\n';
@@ -190,7 +190,7 @@ export default function Courses() {
                 let signUp = (data?.teacher) && (data?.teacher.id === auth.currentUser.uid);
                 if (!signUp) errorList += 'Bạn chưa đăng ký khóa học này!';
                 else {
-                    await updateDoc(doc(db,'courses',courseDocRef.id), {
+                    await updateDoc(doc(db, 'courses', courseDocRef.id), {
                         teacher: null
                     }).then(() => {
                         errorList += 'Hủy đăng ký dạy thành công!\n';
@@ -212,41 +212,51 @@ export default function Courses() {
                 <p>Trạng thái: {listStatus[data?.status]}</p>
                 <p>Số lượng sinh viên đăng ký: {data?.students?.length}/{data?.capacity}</p>
                 <p>Giảng viên đăng ký: {teacher}</p>
-                <p style={{display:(['teacher','student'].includes(currentUser.role))?"flex":"none"}}>
-                    Trạng thái đăng ký: {(signUpCourse)?"Đã đăng ký":"Chưa đăng ký"}</p>
+                <p style={{ display: (['teacher', 'student'].includes(currentUser.role)) ? "flex" : "none" }}>
+                    Trạng thái đăng ký: {(signUpCourse) ? "Đã đăng ký" : "Chưa đăng ký"}</p>
                 <div className="buttonGroup">
-                    <button style={{display:(currentUser.role=='admin'
-                        && data?.status==='unpublished')?"flex":"none"}}
+                    <button style={{
+                        display: (currentUser.role == 'admin'
+                            && data?.status === 'unpublished') ? "flex" : "none"
+                    }}
                         onClick={openSignUpCourse}>
                         Mở đăng ký</button>
-                    <button style={{display:(currentUser.role=='admin'
-                        && data?.status==='waiting')?"flex":"none"}}
+                    <button style={{
+                        display: (currentUser.role == 'admin'
+                            && data?.status === 'waiting') ? "flex" : "none"
+                    }}
                         onClick={openCourse}>
                         Mở lớp</button>
-                    <button style={{display:(currentUser.role=='admin'
-                        && data?.status==='waiting')?"flex":"none"}}
+                    <button style={{
+                        display: (currentUser.role == 'admin'
+                            && data?.status === 'waiting') ? "flex" : "none"
+                    }}
                         onClick={cancelCourse}>
                         Hủy lớp</button>
-                    <button style={{display:(['teacher','student'].includes(currentUser.role) 
-                        && !signUpCourse)?"flex":"none"}}
+                    <button style={{
+                        display: (['teacher', 'student'].includes(currentUser.role)
+                            && !signUpCourse) ? "flex" : "none"
+                    }}
                         onClick={signUp}>
                         Đăng ký</button>
-                    <button style={{display:(['teacher','student'].includes(currentUser.role) 
-                        && signUpCourse)?"flex":"none"}}
+                    <button style={{
+                        display: (['teacher', 'student'].includes(currentUser.role)
+                            && signUpCourse) ? "flex" : "none"
+                    }}
                         onClick={signOut}>
                         Hủy đăng ký</button>
                 </div>
             </div>
         </>
     }
-    if (loading) return <h1 style={{textAlign:"center"}}>Đang tải...</h1>
+    if (loading) return <h1 style={{ textAlign: "center" }}>Đang tải...</h1>
     return <div className="courses-layout">
         <h1>Danh sách các khóa học</h1>
         <div className="courseCards">
             {listCourse.map(course => {
                 return <CourseCard key={course?.id}
-                        data={course?.data()}
-                        courseDocRef={course}/>
+                    data={course?.data()}
+                    courseDocRef={course} />
             })}
         </div>
     </div>
@@ -260,7 +270,7 @@ const getListCourse = async () => {
         q = courseCollectionRef;
     }
     else if (['teacher', 'student'].includes(currentUser.role)) {
-        q = query(courseCollectionRef, where('status','==','waiting'))
+        q = query(courseCollectionRef, where('status', '==', 'waiting'))
     }
     let list = []
     if (q) {
