@@ -42,7 +42,7 @@ export default function CourseInformation() {
             })
             setListSelectedWeek(data.data().week);
             setSubjectDuration(data.data().week?.length);
-            console.log(data.data());
+            //console.log(data.data());
         }
         fetchCourseData();
     },[cid])
@@ -138,7 +138,7 @@ export default function CourseInformation() {
                 <select name='subject' onChange={handleChange}
                     defaultValue={form.subject?.id}>
                     {listSubject.map((subject) => {
-                        console.log(subject.id);
+                        //console.log(subject.id);
                         return <option key={subject.id} value={subject.id}>{subject.data().name}</option>
                     })}
                 </select>    

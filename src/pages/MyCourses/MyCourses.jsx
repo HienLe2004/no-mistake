@@ -11,7 +11,6 @@ import './MyCourses.css'
 export default function MyCourses() {
     const [courseList, setCourseList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const location = useLocation();
     useEffect(() => {
         const fetchData = async () => {
             await getCourseList().then((list) => {
@@ -32,10 +31,12 @@ export default function MyCourses() {
             }
             fetchData();
         },[])
-        return <Link to={'/' + courseData?.id} relative="route">
+        return <Link to={'/' + courseData?.id} relative="route" style={{textDecoration:"none"}}>
             <button className="card-container">
                 <img src={CourseImage} alt='CourseImage' className="card-img"/>
-                <h1 className="card-title">{courseData?.data().name}</h1>
+                <h1 className="card-title">
+                    {courseData?.data().name}_{courseData?.data().classNo}_{courseData?.data().semester}
+                </h1>
             </button>
         </Link>
     }

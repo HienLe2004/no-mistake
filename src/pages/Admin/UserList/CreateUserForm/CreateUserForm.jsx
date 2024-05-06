@@ -3,7 +3,7 @@ import './CreateUserForm.css'
 import {useState} from 'react'
 import {createUserWithEmailAndPassword, getAuth} from 'firebase/auth'
 import {auth,db} from '../../../../../firebase.config'
-import {getDocs,collection,query,where,setDoc,doc} from 'firebase/firestore'
+import {getDocs,collection,query,where,setDoc,doc,addDoc} from 'firebase/firestore'
 import {currentUser} from '../../../../components/ConditionalUI'
 import {firebaseConfig} from '../../../../../firebase.config'
 import {initializeApp} from 'firebase/app'
@@ -287,7 +287,5 @@ const CreateUserDatabase = async (form, uid) => {
         userData.gpa = 0;
         userData.faculty = form.faculty;
     }
-    //console.log(userData);
-    await setDoc(userDocRef, userData);
 }
 

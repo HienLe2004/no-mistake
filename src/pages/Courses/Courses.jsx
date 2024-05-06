@@ -3,11 +3,12 @@ import './Courses.css'
 import { currentUser } from '../../components/ConditionalUI'
 import { auth, db } from '../../../firebase.config'
 import { useState, useEffect } from 'react'
-import { getDocs, collection, query, where, getDoc, updateDoc, doc, arrayUnion, arrayRemove } from 'firebase/firestore'
+import { getDocs, collection, query, where, getDoc, updateDoc, setDoc, addDoc, doc, arrayUnion, arrayRemove } from 'firebase/firestore'
 import { listStatus } from '../Admin/CourseList/CourseList'
 export default function Courses() {
     //Loading list of course
     const [listCourse, setListCourse] = useState([]);
+    const [reload, setReload] = useState(false);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const fetchListCourse = async () => {
@@ -15,7 +16,7 @@ export default function Courses() {
             setListCourse(list);
         }
         fetchListCourse().then(() => setLoading(false));
-    }, [])
+    }, [reload])
     //CourseCard template
     function CourseCard({ data, courseDocRef }) {
         //Get course's information
@@ -31,6 +32,8 @@ export default function Courses() {
             else if (data?.week?.includes(i)) listWeek += ('|' + i);
             else listWeek += ("|-");
         }
+        const [defaultMark,setDefaultMark] = useState({});
+        
         const [teacher, setTeacher] = useState("NULL");
         const handleTeacherName = async () => {
             if (data?.teacher != null) {
@@ -45,6 +48,15 @@ export default function Courses() {
             const courseChange = async () => {
                 const signedIn = await checkSignUpCourse(data);
                 setSignUpCourse(signedIn);
+
+                await getDoc(data?.subject).then(subjectDoc => {
+                    subjectDoc.data().props.forEach(prop => {
+                        setDefaultMark(prev => ({
+                            ...prev,
+                            [prop]: null
+                        }))
+                    })
+                })
             }
             handleTeacherName();
             courseChange();
@@ -88,12 +100,22 @@ export default function Courses() {
                     updateDoc(studentRef, {
                         courses: arrayUnion(doc(db, 'courses', courseDocRef.id))
                     })
+                    const markCourseRef = doc(db, `users/${studentRef.id}/mark/${courseDocRef.id}`);
+                    
+                    setDoc(markCourseRef, {
+                        mark: defaultMark,
+                        final: null,
+                        qualified: null,
+                        course: doc(db, `course/${courseDocRef.id}`)
+                    });
                 })
                 await updateDoc(data?.teacher, {
                     courses: arrayUnion(doc(db, 'courses', courseDocRef.id))
                 })
             }
             alert(errorList);
+            setReload(!reload);
+            setLoading(true);
         }
         //Function cancels course for admin
         const cancelCourse = async () => {
@@ -110,6 +132,8 @@ export default function Courses() {
                 })
             }
             alert(errorList);
+            setReload(!reload);
+            setLoading(true);
         }
         //Function for student, teacher sign in course
         const signUp = async () => {
@@ -162,6 +186,8 @@ export default function Courses() {
                 }
             }
             alert(errorList);
+            setReload(!reload);
+            setLoading(true);
         }
         //Function for student, teacher sign out course
         const signOut = async () => {
