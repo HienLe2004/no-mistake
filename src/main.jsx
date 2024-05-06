@@ -20,7 +20,6 @@ import UserInformation from './pages/Admin/UserList/UserInformation/UserInformat
 import CourseInformation from './pages/Admin/CourseList/CourseInformation/CourseInformation.jsx'
 import ScheduleInformation from './pages/Admin/Schedule/ScheduleInformation/ScheduleInformation.jsx'
 import CourseData from './pages/MyCourses/CourseData/CourseData.jsx'
-import Course from './pages/Courses/Course.jsx'
 
 const router = createBrowserRouter([
   {
@@ -34,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'courses',
-        element: <Course />
+        element: <Courses />
       },
       {
         path: 'myCourses',

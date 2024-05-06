@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { NavLink } from 'react-router-dom';
 import './ErrorPage.css'
 
-
 export default function ErrorPage() {
     const error = useRouteError();
     console.log(error);
@@ -12,7 +11,6 @@ export default function ErrorPage() {
             <Helmet>
                 <title>Khóa học | LMS-DEF-NM</title>
             </Helmet>
-            
             <h1> Page Not Found!!! </h1>
             <h2> Opps! </h2>
             <p>Sorry, an unexpected error has occurred.</p>
