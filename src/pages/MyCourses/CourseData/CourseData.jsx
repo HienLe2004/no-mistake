@@ -161,7 +161,8 @@ export default function CourseData() {
                 {fileList.map((file,index) => {
                     return <div className="documentLink">
                         <a href={file.url} key={index}>{file.name}</a>
-                        <button onClick={()=>{deleteFile(file.name)}}>Xóa</button>
+                        <button onClick={()=>{deleteFile(file.name)}}
+                            style={{display:(auth.currentUser.uid === teacher.id)?"flex":"none"}}>Xóa</button>
                     </div>
                 })}
             </div>
@@ -294,8 +295,9 @@ export default function CourseData() {
                 return <CourseSection key={course.id} sectionDoc={course}/>
             })}
         </div>
-        <button onClick={createSection} className='createSection'
-            style={{display:(auth.currentUser.uid === teacher.id)?"flex":"none"}}>
+        <button className='createSection'
+            style={{display:(auth.currentUser.uid === teacher.id)?"flex":"none"}}
+            onClick={createSection}>
                 Tạo mục mới
         </button>
         <button className='updateMark'
