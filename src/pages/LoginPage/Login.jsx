@@ -9,29 +9,25 @@ export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
-    const [errorList, setErrorList] = useState([]);
     //Handle login, if successed then navigate to home page else display error
     const handleSubmit = async (e) => {
         e.preventDefault();
         let error = [];
-        setErrorList(error);
         try {
             const email = emailRef.current.value;
             const password = passwordRef.current.value;
             await signInWithEmailAndPassword(auth, email, password);
-            console.log("login successed");
             emailRef.current.value = '';
             passwordRef.current.value = '';
             navigate("/");
         }
         catch (err) {
             error.push("Đăng nhập không thành công!");
-            console.log("login failed");
             emailRef.current.value = '';
             passwordRef.current.value = '';
             //console.error(err);
         }
-        setErrorList(error);
+        if (error.length !== 0) alert(error);
     }
     return <>
         <Helmet>
@@ -49,7 +45,6 @@ export default function Login() {
                     </label>
                     <button type="submit" className="login-button">Đăng nhập</button>
                     <a href="#" target="_blank" className="forgot-password">Quên mật khẩu?</a>
-                    <p style={{display:(errorList==[])?"none":"flex"}}>{errorList}</p>
                 </form>
             </section>
         </div>

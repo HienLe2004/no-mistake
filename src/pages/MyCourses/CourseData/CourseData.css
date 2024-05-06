@@ -1,9 +1,10 @@
 .courseDoc {
-    align-items: center;
-    align-content: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
+}
+.courseDoc .title{
+    margin-top: 30px;
 }
 .courseDoc .courseData {
     display: flex;
@@ -12,6 +13,7 @@
     gap: 10px;
     margin-bottom: 30px;
     width: 100%;
+    min-height: 60vh;
 }
 .courseDoc .courseData .courseSection {
     width: 90%;
@@ -66,6 +68,7 @@
 }
 .courseDoc .courseData .courseSection .addDocumentForm{
     justify-content: center;
+    text-align: center;
 }
 .courseDoc .courseData .courseSection .deleteDocument{
     text-align: center;
@@ -84,4 +87,52 @@
     color: white;
     padding: 10px;
     cursor: pointer;
+}
+.courseDoc .createSection, .updateMark {
+    align-self: center;
+    width: 80%;
+    padding: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 2px solid rgb(0, 70, 120);
+    background-color: rgb(0, 70, 120);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: bold;
+}
+.courseDoc .createSection:hover, .updateMark:hover {
+    background-color: rgb(1, 125, 213);
+}
+.courseDoc .markTable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.courseDoc .markTable .updateButton{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.courseDoc .markTable table {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
+    background-color: aliceblue;
+}
+.courseDoc .markTable .updateMarkButton {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 2px solid rgb(0, 70, 120);
+    background-color: rgb(0, 70, 120);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: bold;
+}
+.courseDoc .markTable .updateMarkButton:hover {
+    background-color: rgb(1, 125, 213);
+}
+.waitingPage{
+    min-height: 80vh;
 }

@@ -12,14 +12,44 @@ export default function CourseData() {
     const [loading, setLoading] = useState(true);
     const [reload, setReload] = useState(true);
     const [teacher, setTeacher] = useState();
+    const [showMarkTable, setShowMarkTable] = useState(false);
+    const [students, setStudents] = useState([]);
+    const [studentMarks, setStudentMarks] = useState([]);
+    const [studentMarkUpdate, setStudentMarkUpdate] = useState([]);
+    const [subjectMark, setSubjectMark] = useState({});
+    const [propsOrder, setPropsOrder] = useState([]);
     //Get course's data 
     useEffect(() => {
         const fetchData = async () => {
-            await getDoc(doc(db,'courses',cid)).then(async (doc) => {
-                setCourseDoc(doc); 
-                await getDoc(doc.data().teacher).then(teacherDoc => {
+            await getDoc(doc(db,'courses',cid)).then(async (courseDoc) => {
+                setCourseDoc(courseDoc);
+                let sList = [], smList = [], smuList = [];
+                await courseDoc.data().students.forEach(student => {
+                    getDoc(student).then(studentDoc => {
+                        sList.push(studentDoc)
+                        getDoc(doc(db, `users/${studentDoc.id}/mark/${cid}`)).then(markDoc => {
+                            smList.push(markDoc.data());
+                            smuList.push(markDoc.data().mark);
+                        })
+                    })
+                });
+                setStudentMarks(smList);
+                setStudentMarkUpdate(smuList);
+                setStudents(sList);
+                await getDoc(courseDoc.data().teacher).then(teacherDoc => {
                     setTeacher(teacherDoc);
                 })
+                let propList = [];
+                await getDoc(courseDoc.data().subject).then(subjectDoc => {
+                    subjectDoc.data().props.map((prop,index) => {
+                        setSubjectMark((prev) => ({
+                            ...prev,
+                            [prop]: subjectDoc.data().coefficients[index]
+                        }));
+                        propList.push(prop);
+                    });
+                })
+                setPropsOrder(propList);
                 await getDocs(query(collection(db,'courses/'+cid+'/data'), orderBy('order'))).then(docs => {
                     let list = [];
                     docs.forEach(doc => list.push(doc));
@@ -90,7 +120,7 @@ export default function CourseData() {
                 let fList = [];
                 await list.items.forEach(item => {
                     getDownloadURL(item).then((url) => {
-                        console.log(item.name);
+                        //console.log(item.name);
                         fList.push({url:url, name:item.name});
                     })
                 })
@@ -193,7 +223,7 @@ export default function CourseData() {
             return;
         }
         const lowestOrder = courseData[courseData.length - 1]?.data().order;
-        console.log(lowestOrder);
+        //console.log(lowestOrder);
         let list = courseData;
         addDoc(collection(db, `courses/${cid}/data/`), {
             title: '',
@@ -207,7 +237,54 @@ export default function CourseData() {
             setReload(!reload);
         })
     }
-    if (loading) return <h1>Đang tải...</h1>;
+    //Function handles showing mark table
+    const toggleShowMarkTable = () => {
+        if (auth.currentUser.uid !== teacher.id) return;
+        setShowMarkTable(!showMarkTable);
+    }
+    //Function handles updating mark
+    const updateMark = () => {
+        //console.log(studentMarkUpdate);
+        let errorList = [];
+        students.forEach((student, index) => {
+            //console.log(student.id + " " + index);
+            //console.log(studentMarkUpdate[index]);
+            let finalR = null, temp = 0, qualifiedR = null;
+            for (const prop of Object.keys(studentMarkUpdate[index])) {
+                if (studentMarkUpdate[index][prop] == null) {
+                    temp =-1;
+                    break;
+                }
+                temp += studentMarkUpdate[index][prop] * subjectMark[prop];
+            }
+            finalR = (temp === -1)?null:Number((temp).toFixed(2));
+            if (isNaN(finalR)) {
+                finalR = null;
+                qualifiedR = null;
+            }
+            else {
+                qualifiedR = (finalR >= 4);
+            }
+            updateDoc(doc(db, `users/${student.id}/mark/${cid}`), {
+                final: finalR,
+                mark: studentMarkUpdate[index],
+                qualified: qualifiedR
+            }).catch((err) => {errorList.push(err.message)}); 
+        })
+        if (errorList.length == 0) {
+            setLoading(true);
+            setReload(!reload);
+            alert("Cập nhật điểm thành công!\n");
+        }
+    }
+    //Function handles change of mark
+    const handleChange = async (e) => {
+        //console.log(e.target.className+" "+ e.target.name + " " + e.target.value);
+        let stuMark = studentMarkUpdate;
+        stuMark[e.target.className][e.target.name] = parseFloat(e.target.value);
+        setStudentMarkUpdate(stuMark);
+    }
+    if (loading) return <h1 className='waitingPage'>Đang tải...</h1>;
     return <div className="courseDoc">
         <h1 className="title">
             {courseDoc.data().name}_{teacher?.data().name}_{courseDoc.data().classNo}_{courseDoc.data().semester}
@@ -217,6 +294,53 @@ export default function CourseData() {
                 return <CourseSection key={course.id} sectionDoc={course}/>
             })}
         </div>
-        <button onClick={createSection} style={{display:(auth.currentUser.uid === teacher.id)?"flex":"none"}}>Tạo mục mới</button>
+        <button onClick={createSection} className='createSection'
+            style={{display:(auth.currentUser.uid === teacher.id)?"flex":"none"}}>
+                Tạo mục mới
+        </button>
+        <button className='updateMark'
+            style={{display:(auth.currentUser.uid === teacher.id)?"flex":"none"}}
+            onClick={toggleShowMarkTable}>
+                Cập nhật điểm
+        </button>
+        <div className="markTable"
+            style={{display:(showMarkTable)?"block":"none"}}>
+            <h1 className="title">
+                Bảng điểm
+            </h1>
+            <table>
+                <thead>
+                    <tr>
+                    <th>MSSV</th>
+                    <th>Họ và tên</th>
+                    <th>Email</th>
+                    {Object.keys(subjectMark).map(prop => {
+                        return <th key={prop}>{prop} ({subjectMark[prop]})</th>
+                    })}
+                    <th>Tổng kết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {students.map((student,index) => {
+                        return <tr key={index}>
+                            <td>{student.data().roleID}</td>
+                            <td>{student.data().name}</td>
+                            <td>{student.data().email}</td>
+                            {propsOrder.map((prop,i) => {
+                                return <td key={i} style={{padding:"0"}}>
+                                <input className={index} type='number' defaultValue={studentMarks[index]['mark'][prop].toString()}
+                                    style={{width:"100%",boxSizing:"border-box",border:"none",padding:"10px"}}
+                                    name={prop} onChange={handleChange}/>
+                                </td>
+                            })}
+                            <td>{studentMarks[index]['final']}</td>
+                        </tr>
+                    })}
+                </tbody>
+            </table>
+            <div className="updateButton">
+                <button className='updateMarkButton' onClick={updateMark}>Cập nhật</button>
+            </div>
+        </div>
     </div>
 }

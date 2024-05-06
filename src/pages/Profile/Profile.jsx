@@ -44,7 +44,6 @@ export default function Profile() {
     const [courses, setCourses] = useState([])
     useEffect(() =>
         onSnapshot(collection(db, `users/${auth.currentUser.uid}/mark`), (snapshot) => {
-            console.log(snapshot.docs[0].data());
             setCourses(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         }), []
     )

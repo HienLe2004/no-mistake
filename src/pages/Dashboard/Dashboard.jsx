@@ -6,6 +6,7 @@ import { auth, db } from '../../../firebase.config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Helmet } from 'react-helmet-async'
 import { currentUser } from '../../components/ConditionalUI';
+import './Dashboard.css'
 
 const generateRandomBlueColor = () => {
   const hue = Math.floor(Math.random() * 75) + 175;
@@ -89,7 +90,7 @@ export default function App() {
   }, []);
 
   return (
-    <div>
+    <div className='dashboard'>
       <Helmet>
         <title>Bảng điều khiển | LMS-DEF-NM</title>
       </Helmet>

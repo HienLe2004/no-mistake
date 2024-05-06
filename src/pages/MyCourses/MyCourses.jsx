@@ -41,7 +41,7 @@ export default function MyCourses() {
         </Link>
     }
     if (loading) return <h1>Đang tải...</h1>;
-    return <>
+    return <div className="myCourses">
         <Helmet>
             <title>Khóa học của tôi | LMS-DEF-NM</title>
         </Helmet>
@@ -52,7 +52,7 @@ export default function MyCourses() {
             })}
         </div>
         <Outlet/>
-    </>
+    </div>
 }
 
 const getCourseList = async () => {
