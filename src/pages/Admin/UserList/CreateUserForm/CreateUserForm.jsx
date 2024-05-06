@@ -287,5 +287,6 @@ const CreateUserDatabase = async (form, uid) => {
         userData.gpa = 0;
         userData.faculty = form.faculty;
     }
+    await setDoc(userDocRef, userData);
 }
 
