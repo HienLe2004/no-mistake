@@ -104,6 +104,7 @@ export default function CourseInformation() {
             }))
         }
         else {
+            console.log(e.target.name + " " + e.target.value);
             setForm((prev)=>({
                 ...prev,
                 [e.target.name]: e.target.value
@@ -120,6 +121,7 @@ export default function CourseInformation() {
         if (currentUser.role !== "admin")
             notiList.push("Chỉ quản trị viên mới sử dụng được chức năng này!");
         if (notiList.length===0) {
+            console.log(form);
             await UpdateCourseDatabase(form, cid).then(() => {
                 notiList.push("Cập nhật khóa học thành công!");
             }).catch((err) => {
@@ -160,7 +162,7 @@ export default function CourseInformation() {
                 </select>    
             </label>
             <label className='classStart'>Tiết bắt đầu:
-                <select name='clastStart' onChange={handleChange}
+                <select name='classStart' onChange={handleChange}
                     defaultValue={form.classStart}>
                     {listClassStart.map((index) => {
                         return <option key={index}>{index}</option>
@@ -235,6 +237,6 @@ const UpdateCourseDatabase = async (form, cid) => {
         capacity: form.capacity,
         status: form.status
     }
-    //console.log(userData);
+    console.log(courseData);
     await updateDoc(courseDocRef, courseData);
 }
