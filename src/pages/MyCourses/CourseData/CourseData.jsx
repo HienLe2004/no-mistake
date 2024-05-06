@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { auth, db, storage } from '../../../../firebase.config'
 import { getDoc, doc, updateDoc, setDoc, collection, query, orderBy, getDocs} from 'firebase/firestore'
-import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytes, listAll, getDownloadURL, deleteObject } from 'firebase/storage'
 import { currentUser } from '../../../components/ConditionalUI'
 export default function CourseData() {
     const {cid} = useParams();
@@ -63,6 +63,17 @@ export default function CourseData() {
                 alert("Tải tệp lên thành công!\n");
             })
         }
+        //Function handles deleting file
+        const deleteFile = (fileName) => {
+            if (auth.currentUser.uid !== teacher.id && currentUser.role !== 'admin') {
+                alert("Bạn không có tải lên nội dung này!\n");
+                return;
+            }
+            deleteObject(ref(storage, `${cid}/${sectionDoc.id}/teacher/${fileName}`)).then(() => {
+                alert("Xóa tệp thành công!\n");
+            })
+            console.log(fileName);
+        }
         //Get files of section
         const fileListRef = ref(storage, `${cid}/${sectionDoc.id}/teacher/`);
         useEffect(() => {
@@ -91,7 +102,10 @@ export default function CourseData() {
             <div className="sectionDescription" style={{display:(showSection)?"flex":"none"}}>
                 <p className='description'>{showedDescription}</p>
                 {fileList.map((file,index) => {
-                    return <a href={file.url} key={index}>{file.name}</a>
+                    return <div className="documentLink">
+                        <a href={file.url} key={index}>{file.name}</a>
+                        <button onClick={()=>{deleteFile(file.name)}}>Xóa</button>
+                    </div>
                 })}
             </div>
             <div className="editForm" style={{display:(showEdit)?"flex":"none"}}>
