@@ -27,7 +27,7 @@ const ExamSchedule = ({ subjects }) => {
       <tbody>
         {subjects.map((subject, index) => (
           <tr key={index}>
-            <td>{subject.subject?.id}</td>
+            <td>{subject.code}</td>
             <td>{subject.name}</td>
             <td>{subject.classNo}</td>
             <td>{subject.middle?.day}/{subject.middle?.month}</td>

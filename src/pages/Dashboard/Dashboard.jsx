@@ -61,7 +61,7 @@ export default function App() {
           const courseData = await getCourseData(courseRef);
           if (courseData) {
             subjects.push({
-              code: courseData.code,
+              code: courseData.subject.id,
               name: courseData.name,
               classNo: courseData.classNo,
               room: courseData.room,
