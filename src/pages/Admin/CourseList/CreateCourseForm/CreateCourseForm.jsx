@@ -248,7 +248,11 @@ const CreateCourseDatabase = async (form) => {
         capacity: form.capacity,
         teacher:null,
         students:[],
-        status: 'unpublished'
+        status: 'unpublished',
+        final: {day:0,month:0,hour:0,minute:0},
+        middle: {day:0,month:0,hour:0,minute:0},
+        finalRoom: null,
+        middleRoom: null
     };
     await addDoc(coursesCollectionRef, courseData).then(async docRef => {
         const dataCollectionRef = collection(docRef, 'data');

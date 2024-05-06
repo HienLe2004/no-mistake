@@ -13,10 +13,10 @@ export default function Schedule() {
                     <div>Học kỳ: {data?.semester}</div>
                     <div>Số lớp: {data.classNo}</div>
                     <div>Ngày thi GK: {data.middle?.day}/{data.middle?.month}</div>
-                    <div>Giờ thi GK: {data.middle?.hour}g{('0'+data.middle?.minute).slice(-2)}</div>
+                    <div>Giờ thi GK: {data.middle?.hour}g{('0'+data.middle?.minute)?.slice(-2)}</div>
                     <div>Phòng thi GK: {data.middleRoom}</div>
                     <div>Ngày thi CK: {data.final?.day}/{data.final?.month}</div>
-                    <div>Giờ thi CK: {data.final?.hour}g{('0'+data.final?.minute).slice(-2)}</div>
+                    <div>Giờ thi CK: {data.final?.hour}g{('0'+data.final?.minute)?.slice(-2)}</div>
                     <div>Phòng thi CK: {data.finalRoom}</div>
                 </div>
             </NavLink>

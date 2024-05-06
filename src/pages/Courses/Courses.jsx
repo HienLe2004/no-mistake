@@ -33,11 +33,9 @@ export default function Courses() {
         }
         const [teacher, setTeacher] = useState("NULL");
         const handleTeacherName = async () => {
-            console.log('name change');
             if (data?.teacher != null) {
                 await getTeacherName(data.teacher).then((name) => {
                     setTeacher(name);
-                    console.log("new teacher " + name);
                 })
             }
         }

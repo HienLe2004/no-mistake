@@ -2,7 +2,7 @@ import './ScheduleInformation.css'
 import {useParams} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import {db} from '../../../../../firebase.config'
-import {doc, getDoc, updateDoc, getDocs, query, collection, where} from 'firebase/firestore'
+import {doc, getDoc, updateDoc, getDocs, query, collection, where, addDoc} from 'firebase/firestore'
 import {currentUser} from '../../../../components/ConditionalUI'
 export const listHour = Array(24).fill().map((element,index)=>index);
 export const listMinute = Array(60).fill().map((element,index)=>index);
@@ -21,11 +21,11 @@ export default function ScheduleInformation() {
             setCourseData(data);
             setForm({
                 middle: data.data().middle,
-                middleBlock: data.data().middleRoom.slice(0,2),
-                middleRoom: data.data().middleRoom.slice(3),
+                middleBlock: data.data().middleRoom?.slice(0,2),
+                middleRoom: data.data().middleRoom?.slice(3),
                 final: data.data().final,
-                finalBlock: data.data().finalRoom.slice(0,2),
-                finalRoom: data.data().finalRoom.slice(3),
+                finalBlock: data.data().finalRoom?.slice(0,2),
+                finalRoom: data.data().finalRoom?.slice(3),
             })
             console.log(data.data());
         }
