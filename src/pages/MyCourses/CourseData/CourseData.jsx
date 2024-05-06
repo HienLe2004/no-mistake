@@ -328,7 +328,8 @@ export default function CourseData() {
                             <td>{student.data().email}</td>
                             {propsOrder.map((prop,i) => {
                                 return <td key={i} style={{padding:"0"}}>
-                                <input className={index} type='number' defaultValue={studentMarks[index]['mark'][prop].toString()}
+                                <input className={index} type='number'
+                                    defaultValue={studentMarks[index]['mark'][prop].toString()}
                                     style={{width:"100%",boxSizing:"border-box",border:"none",padding:"10px"}}
                                     name={prop} onChange={handleChange}/>
                                 </td>
