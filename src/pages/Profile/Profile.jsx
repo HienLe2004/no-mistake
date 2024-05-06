@@ -44,6 +44,7 @@ export default function Profile() {
     const [courses, setCourses] = useState([])
     useEffect(() =>
         onSnapshot(collection(db, `users/${auth.currentUser.uid}/mark`), (snapshot) => {
+            console.log(snapshot.docs[0].data());
             setCourses(snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })));
         }), []
     )
@@ -122,15 +123,19 @@ export default function Profile() {
                             <th className="text-description" style={{ textAlign: 'center', width: '20%' }}> Đánh giá</th>
                         </tr>
                         {courses.length >= 1 &&
-                            courses.map((courseEle, index) => (
-                                <tr key={courseEle.id + '0'}>
-                                    <td className="text-content" style={{ textAlign: 'center' }}><GetData path={courseEle.courses.path} rol='name' key={courseEle.id + '1'} /></td>
-                                    <td className="text-content" style={{ textAlign: 'center' }}>BT: {courseEle.markT['BT']}, BTL: {courseEle.markT['BTL']}, Thi: {courseEle.markT['Thi']}</td>
+                            courses.map((courseEle, index) => {
+                                let listProp = "";
+                                Object.keys(courseEle.mark).forEach((prop) => {
+                                    listProp += prop + ":" + courseEle.mark[prop] + ' ';
+                                });
+                                return <tr key={courseEle.id + '0'}>
+                                    <td className="text-content" style={{ textAlign: 'center' }}>{courseEle.name}</td>
+                                    <td className="text-content" style={{ textAlign: 'center' }}>{listProp}</td>
                                     <td className="text-content" style={{ textAlign: 'center' }}>{courseEle.final}</td>
-                                    <td className="text-content" style={{ textAlign: 'center' }}>{courseEle.qualified === false ? <>Chưa qua môn</> : <>Qua môn</>}</td>
+                                    <td className="text-content" style={{ textAlign: 'center' }}>{(courseEle.qualified === null)?"null":(courseEle.qualified===false)?"Chưa qua môn": "Qua môn"}</td>
                                 </tr>
-                            )
-                            )}
+                            }
+                        )}
                     </tbody>
                 </table>
             </div>

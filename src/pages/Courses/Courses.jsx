@@ -106,7 +106,8 @@ export default function Courses() {
                         mark: defaultMark,
                         final: null,
                         qualified: null,
-                        course: doc(db, `course/${courseDocRef.id}`)
+                        course: doc(db, `course/${courseDocRef.id}`),
+                        name: courseDocRef.data().name
                     });
                 })
                 await updateDoc(data?.teacher, {
