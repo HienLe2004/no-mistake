@@ -217,6 +217,6 @@ export default function CourseData() {
                 return <CourseSection key={course.id} sectionDoc={course}/>
             })}
         </div>
-        <button onClick={createSection}>Tạo mục mới</button>
+        <button onClick={createSection} style={{display:(auth.currentUser.uid === teacher.id)?"flex":"none"}}>Tạo mục mới</button>
     </div>
 }

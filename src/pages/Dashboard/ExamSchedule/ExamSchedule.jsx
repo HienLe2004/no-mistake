@@ -5,7 +5,6 @@ const ExamSchedule = ({ subjects }) => {
   if (!subjects) {
     return <p>No subjects found. Please check your data source.</p>;
   }
-
   return (
     <table className="exam-table">
       <thead>
@@ -28,10 +27,10 @@ const ExamSchedule = ({ subjects }) => {
       <tbody>
         {subjects.map((subject, index) => (
           <tr key={index}>
-            <td>{subject.code}</td>
+            <td>{subject.subject?.id}</td>
             <td>{subject.name}</td>
             <td>{subject.classNo}</td>
-             <td>{subject.middle?.day}/{subject.middle?.month}</td>
+            <td>{subject.middle?.day}/{subject.middle?.month}</td>
             <td>{subject.middle?.hour}g{('0'+subject.middle?.minute).slice(-2)}</td>
             <td>{subject.middleRoom}</td>
             <td>{subject.final?.day}/{subject.final?.month}</td>
