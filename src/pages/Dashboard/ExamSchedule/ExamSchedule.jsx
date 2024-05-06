@@ -9,6 +9,7 @@ const ExamSchedule = ({ subjects }) => {
     <table className="exam-table">
       <thead>
         <tr>
+          <th rowSpan="2">HỌC KỲ</th>
           <th rowSpan="2">MÃ MH</th>
           <th rowSpan="2">TÊN MH</th>
           <th rowSpan="2">NHÓM</th>
@@ -27,6 +28,7 @@ const ExamSchedule = ({ subjects }) => {
       <tbody>
         {subjects.map((subject, index) => (
           <tr key={index}>
+            <td>{subject.semester}</td>
             <td>{subject.code}</td>
             <td>{subject.name}</td>
             <td>{subject.classNo}</td>
