@@ -5,8 +5,8 @@ import {getDocs, collection, doc, getDoc, addDoc, query, where} from 'firebase/f
 import {currentUser} from '../../../../components/ConditionalUI'
 import { useState, useEffect } from 'react'
 import Select from 'react-select'
-export const listDay = ['Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm',
-                 'Thứ sáu', 'Thứ bảy', 'Chủ nhật'];
+export const listDay = ['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm',
+                 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'];
 export const listWeek = Array(52).fill().map((element,index)=>{
     return {value:index+1,label:index+1}});
 export const listCapacity = Array(400).fill().map((element,index)=>index+1);
