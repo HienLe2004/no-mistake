@@ -3,20 +3,26 @@
 Lộc
 +  Giao diện trang chủ
 +  Giao diện khóa học của tôi
+  
 Phước Hiền
 +  Làm slide
 +  Trang cá nhân của giảng viên, sinh viên
+
 Mẫn
 +  Làm slide
+
 Mạnh
 +  Trang error
+
 Đoàn
 +  Trang đăng ký môn
 +  Hiển thị thông tin điểm sinh viên
+
 Hào
 +  Trang lịch học, lịch kiểm tra/thi của sinh viên
 +  Trang lịch giảng dạy của giảng viên
 +  Trang cập nhật lịch kiểm tra/thi của admin
+
 Ngọc Hiền
 +  Phân công công việc
 +  Kiến trúc hệ thống
