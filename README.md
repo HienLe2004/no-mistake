@@ -1,42 +1,26 @@
 # Learning management system - No mistake -232
-
-Thiết kế trang chủ - Lộc
-
-Authetication Firebase
-Backend trang login - PHien
-Tạo hệ thống đăng nhập và phân quyền người dùng
-
-Làm class môn học - Mẫn.
-
-Làm class user -> class giảng viên + class sinh viên + class admin - Mạnh + Đoàn.
-
-Làm chức năng hệ thống - Hào
-
-Database: Cloud firestore.
-Người làm cấu trúc và chức năng phải biết sử dụng cloud firestore để lấy dữ liệu xuống và xử lý
-
-
-Note:
-code xong cần check local: npm run dev
-,tải lên git:
-+ git init
-+ git add .
-+ git commit -m "message"
-  (git pull nếu có conflict)
-+ git push -u origin main
-
-Nhiệm vụ:
-+ Phân quyền hệ thống khi đăng nhập
-+ Tùy chỉnh web tương ứng với quyền đăng nhập
-+ Trang thông tin sinh viên
-+ Trang thông tin giảng viên
-+ Trang đăng ký lớp học cho sinh viên và giảng viên
-+ Trang hiển thị lịch giảng dạy của giảng viên (page-Teaching - K.Hao - started 16th April)
-+ Trang hiển thị khóa học hiện tại của sinh viên
-+ Trang hiển thị thông tin khóa học
-+ Chức năng thêm xóa sửa file, thông tin khóa học của giảng viên
-+ Chức năng tạo chỗ nộp bài + deadline của giảng viên cho sinh viên
-+ Chức năng chấm điểm và cập nhật thông tin điểm của giảng viên cho sinh viên
-+ Chức năng lên lịch thi của giảng viên cho khóa học
-+ Trang hiển thị lịch thi của sinh viên
-+ Trang hiển thị điểm các khóa học của sinh viên
+7/5/2024 (8.3)
+Lộc
++  Giao diện trang chủ
++  Giao diện khóa học của tôi
+Phước Hiền
++  Làm slide
++  Trang cá nhân của giảng viên, sinh viên
+Mẫn
++  Làm slide
+Mạnh
++  Trang error
+Đoàn
++  Trang đăng ký môn
++  Hiển thị thông tin điểm sinh viên
+Hào
++  Trang lịch học, lịch kiểm tra/thi của sinh viên
++  Trang lịch giảng dạy của giảng viên
++  Trang cập nhật lịch kiểm tra/thi của admin
+Ngọc Hiền
++  Phân công công việc
++  Kiến trúc hệ thống
++  Trang dăng nhập, đăng xuất
++  Trang quản lý mở dăng ký/mở lớp/hủy lớp khóa học
++  Trang quản lý của admin (cập nhật/tạo người dùng, khóa học)
++  Trang thông tin khóa học (tạo/xóa/sửa nội dung khóa học và cập nhật điểm cho giảng viên) 
